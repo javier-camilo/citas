@@ -1,8 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using SOFTWARE.Contexto;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+
+//obtener la cadena de conexion
+var connectionString=builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<TodoContext>(p=>p.UseSqlServer(connectionString));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

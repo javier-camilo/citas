@@ -7,15 +7,19 @@ using System.Threading.Tasks;
 
 namespace SOFTWARE.Models
 {
-    public class Poblacion
+    public class Solicitante
     {
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
-        public string? Nombre { get; set; }
 
-        public int Prioridad { get; set; }
-        
+        public string Identificacion { get; set; }
+
+        public string Nombre { get; set; }
+
+        public string Correo { get; set; }
+
+        public int Consentimiento { get; set; }
     }
 }
