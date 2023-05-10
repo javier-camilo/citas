@@ -1,8 +1,23 @@
-<h1 mat-dialog-title>Confirmación</h1>
-<div mat-dialog-content>
-    <p>{{mensaje}}</p>
+<h1 mat-dialog-title>
+  <div class="text-center">
+      {{data.name}}
+  </div>
+</h1>
+
+<div mat-dialog-content> 
+  
+  <div class="text-justify">
+      
+  <span [innerHTML]="data.descripcion"></span>
+
+  
+  </div>
 </div>
-<div mat-dialog-actions>
-    <button mat-button (click)="confirmado()" cdkFocusInitial>Sí</button>
-    <button mat-button (click)="cerrarDialogo()">No</button>
+
+
+<div class="text-center" style="margin-top: 20px;">
+      
+  <button mat-button mat-dialog-close="true">Aceptar</button>
+  <button mat-button mat-dialog-close="false" *ngIf="data.EsMensaje!=='true'">Cancelar</button>
+
 </div>

@@ -1,0 +1,22 @@
+<mat-card class="contact-card">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre Motivo</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Editar/Eliminar</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let motivo of motivos; index as i ">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ motivo.nombre }} </td>
+      <td>{{ motivo.descripcion }}</td>
+      <td style="text-align: justify;"><a routerLink='/edicionMotivo'>Seleccionar</a></td>
+    </tr>
+  </tbody>
+</table>
+</mat-card>

@@ -32,6 +32,9 @@ import { MatInputModule } from '@angular/material/input';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from './dialogo-confirmacion/dialogo-confirmacion.component';
+import { RegistrarMotivoComponent } from './Administrador/gestionMotivo/registrar-motivo/registrar-motivo.component';
+import { ConsultarMotivoComponent } from './Administrador/gestionMotivo/consultar-motivo/consultar-motivo.component';
+import { EdicionMotivoComponent } from './Administrador/gestionMotivo/edicion-motivo/edicion-motivo.component';
 
 
 
@@ -52,7 +55,10 @@ import { DialogoConfirmacionComponent } from './dialogo-confirmacion/dialogo-con
     ConsultarhorarioComponent,
     GenrarreporteComponent,
     AtenderCitaComponent,
-    ReportesComponent
+    ReportesComponent,
+    RegistrarMotivoComponent,
+    ConsultarMotivoComponent,
+    EdicionMotivoComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -77,7 +83,10 @@ import { DialogoConfirmacionComponent } from './dialogo-confirmacion/dialogo-con
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'citas', component: CitasComponent },
+      { path: 'edicionMotivo', component: EdicionMotivoComponent},
       { path: 'estadoCola', component: EstadoColaComponent},
+      { path: 'registrarMotivo', component: RegistrarMotivoComponent},
+      { path: 'consultarMotivo', component: ConsultarMotivoComponent}
     ]),
     BrowserAnimationsModule
   ],

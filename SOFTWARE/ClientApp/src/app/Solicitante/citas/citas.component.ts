@@ -32,21 +32,10 @@ export class CitasComponent implements OnInit {
 
 
   mostrarDialogo(): void {
-    this.dialogo
-      .open(DialogoConfirmacionComponent, {
-        data: `¿esta seguro, que todo esta correcto?`
-      })
-      .afterClosed()
-      .subscribe((confirmado: Boolean) => {
-        if (confirmado) {
-          alert("registrado exitoso");
-        } else {
-          alert("vale, realice la correcion");
-        }
-      });
+    this.dialogo.open(DialogoConfirmacionComponent, {data: {name:"Señor Usuario", descripcion: "guardado exitoso", EsMensaje: "true"}});
   }
 
- 
+
 
 
 

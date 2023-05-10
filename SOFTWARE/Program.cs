@@ -14,6 +14,7 @@ builder.Services.AddDbContext<TodoContext>(p=>p.UseSqlServer(connectionString));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -26,6 +27,11 @@ if (!app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(Options =>{
+    Options.WithOrigins("https://localhost:44422");
+    Options.AllowAnyMethod();
+    Options.AllowAnyHeader();
+});
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();

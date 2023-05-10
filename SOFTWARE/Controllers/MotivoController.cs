@@ -34,7 +34,7 @@ namespace SOFTWARE.Controllers
 
         // GET: api/Motivo/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Motivo>> GetMotivo(long id)
+        public async Task<ActionResult<Motivo>> GetMotivo(int id)
         {
           if (_context.Motivo == null)
           {
@@ -53,7 +53,7 @@ namespace SOFTWARE.Controllers
         // PUT: api/Motivo/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMotivo(long id, Motivo motivo)
+        public async Task<IActionResult> PutMotivo(int id, Motivo motivo)
         {
             if (id != motivo.Id)
             {
@@ -98,7 +98,7 @@ namespace SOFTWARE.Controllers
 
         // DELETE: api/Motivo/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMotivo(long id)
+        public async Task<IActionResult> DeleteMotivo(int id)
         {
             if (_context.Motivo == null)
             {
@@ -116,7 +116,7 @@ namespace SOFTWARE.Controllers
             return NoContent();
         }
 
-        private bool MotivoExists(long id)
+        private bool MotivoExists(int id)
         {
             return (_context.Motivo?.Any(e => e.Id == id)).GetValueOrDefault();
         }
