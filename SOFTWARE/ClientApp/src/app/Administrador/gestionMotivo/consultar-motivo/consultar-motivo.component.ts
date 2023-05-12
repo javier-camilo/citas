@@ -13,11 +13,13 @@ export class ConsultarMotivoComponent implements OnInit {
   searchText:string;
   motivos:Motivo[];
   loading:boolean;
+  displayedColumns: string[] = ['nombre', 'descripcion', 'editar/eliminar'];
 
   constructor(private motivoService:MotivoService) { }
 
   ngOnInit(): void {
 
+    
     this.searchText="";
     this.loading=true;
     this.motivoService.get("motivoComponent").subscribe(result=>{this.motivos=result; this.loading=false;}

@@ -23,8 +23,34 @@ export class RegistrarMotivoComponent implements OnInit {
 
   guardar(): void{
     
-    this.motivoService.post(this.motivo).subscribe();
+      
+    let ref = this.dialog.open(DialogoConfirmacionComponent, {data: {name:"Guardar", descripcion:"¿desea Registrar Los Datos?"}});
 
+      ref.afterClosed().subscribe(result => {
+        this.respuesta=result;
+        this.add(this.respuesta);
+      })
+
+
+  }
+
+  add(resultado:string){
+
+    
+    if (resultado=="true") {
+
+      this.motivoService.post(this.motivo).subscribe();
+      this.limpiar();
+    } 
+
+
+  }
+
+  limpiar(){
+    
+    this.motivo.nombre="";
+    
+    this.motivo.descripcion="";
   }
 
 

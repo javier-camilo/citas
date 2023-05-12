@@ -35,6 +35,7 @@ import { DialogoConfirmacionComponent } from './dialogo-confirmacion/dialogo-con
 import { RegistrarMotivoComponent } from './Administrador/gestionMotivo/registrar-motivo/registrar-motivo.component';
 import { ConsultarMotivoComponent } from './Administrador/gestionMotivo/consultar-motivo/consultar-motivo.component';
 import { EdicionMotivoComponent } from './Administrador/gestionMotivo/edicion-motivo/edicion-motivo.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 
@@ -69,6 +70,7 @@ import { EdicionMotivoComponent } from './Administrador/gestionMotivo/edicion-mo
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
+    MatTableModule,
     MatInputModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -83,7 +85,7 @@ import { EdicionMotivoComponent } from './Administrador/gestionMotivo/edicion-mo
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'citas', component: CitasComponent },
-      { path: 'edicionMotivo', component: EdicionMotivoComponent},
+      { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent},
       { path: 'estadoCola', component: EstadoColaComponent},
       { path: 'registrarMotivo', component: RegistrarMotivoComponent},
       { path: 'consultarMotivo', component: ConsultarMotivoComponent}
