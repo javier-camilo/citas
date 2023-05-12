@@ -44,7 +44,7 @@ export class MotivoService {
               {
 
               if(operacion==="motivoComponent")
-              this.handleErrorService.log('Datos de la areas recibido');
+              this.handleErrorService.log('Datos de los motivos recibido');
 
               }
           ),

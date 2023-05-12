@@ -36,6 +36,9 @@ import { RegistrarMotivoComponent } from './Administrador/gestionMotivo/registra
 import { ConsultarMotivoComponent } from './Administrador/gestionMotivo/consultar-motivo/consultar-motivo.component';
 import { EdicionMotivoComponent } from './Administrador/gestionMotivo/edicion-motivo/edicion-motivo.component';
 import {MatTableModule} from '@angular/material/table';
+import { RegistrarPoblacionComponent } from './Administrador/gestionPoblacion/registrar-poblacion/registrar-poblacion.component';
+import { ConsultarPoblacionComponent } from './Administrador/gestionPoblacion/consultar-poblacion/consultar-poblacion.component';
+import { EditarPoblacionComponent } from './Administrador/gestionPoblacion/editar-poblacion/editar-poblacion.component';
 
 
 
@@ -59,7 +62,10 @@ import {MatTableModule} from '@angular/material/table';
     ReportesComponent,
     RegistrarMotivoComponent,
     ConsultarMotivoComponent,
-    EdicionMotivoComponent
+    EdicionMotivoComponent,
+    RegistrarPoblacionComponent,
+    ConsultarPoblacionComponent,
+    EditarPoblacionComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -85,6 +91,9 @@ import {MatTableModule} from '@angular/material/table';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'citas', component: CitasComponent },
+      { path: 'registrarPoblacion', component: RegistrarPoblacionComponent},
+      { path: 'consultarPoblacion', component: ConsultarPoblacionComponent},
+      { path: 'edicionPoblacion/:codigoPoblacion', component: EditarPoblacionComponent},
       { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent},
       { path: 'estadoCola', component: EstadoColaComponent},
       { path: 'registrarMotivo', component: RegistrarMotivoComponent},
