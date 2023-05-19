@@ -20,6 +20,8 @@ namespace SOFTWARE.Models
 
         public string Correo { get; set; }
 
+        public string Telefono { get; set; }
+
         public int Consentimiento { get; set; }
     }
 }

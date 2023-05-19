@@ -1,0 +1,39 @@
+<mat-card class="contact-card">
+
+  <form class="example-form">
+    
+    <mat-form-field class="example-full-width">
+      <mat-label>Filtro</mat-label>
+      <input matInput placeholder="Identificacion o nombre" [(ngModel)]="searchText">
+    </mat-form-field>
+
+  </form>
+  
+  <table class="table table-striped" *ngIf="solicitantes && solicitantes.length">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Identificacion</th>
+        <th scope="col">Nombre Completo</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Editar/Eliminar</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let solicitante of solicitantes | filtroPoblacion:searchText ; index as i ">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ solicitante.identificacion }} </td>
+        <td>{{ solicitante.nombre }} </td>
+        <td>{{ solicitante.correo }} </td>
+        <td>{{ solicitante.telefono }} </td>
+        <td style="text-align: justify;"> <a routerLink='/areaEdicion/{{solicitante.id}}'>Seleccionar</a></td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</mat-card>

@@ -90,6 +90,11 @@ namespace SOFTWARE.Controllers
           {
               return Problem("Entity set 'TodoContext.Solicitantes'  is null.");
           }
+
+           if (ValidarRegistro(solicitante.Identificacion))
+          {
+              return Problem("ya existe el registro");
+          }
             _context.Solicitantes.Add(solicitante);
             await _context.SaveChangesAsync();
 
@@ -114,6 +119,21 @@ namespace SOFTWARE.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        private bool ValidarRegistro(string identificacion){
+
+            
+            var listadoSolicitante = _context.Solicitantes.ToList();
+            foreach (var item in listadoSolicitante)
+            {
+                if(item.Identificacion.Equals(identificacion)){
+                    return true;
+                }
+
+            }
+
+            return false;
         }
 
         private bool SolicitanteExists(long id)

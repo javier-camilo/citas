@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class PoblacionServiceService {
 
-  
+
 
   baseUrl: string;
 
@@ -52,6 +52,45 @@ export class PoblacionServiceService {
         );
   }
 
+  getId(id: string, operacionLLamado?:string): Observable<Poblacion> {
+    const url = `${this.baseUrl + 'api/Poblacion'}/${id}`;
+      return this.http.get<Poblacion>(url, httpOptions)
+      .pipe(
+        tap(_ =>
+
+          {
+
+              if(operacionLLamado==null){
+
+                  this.handleErrorService.log('se consulto la poblacion con codigo = '+ id)
+
+              }
+
+          }
+
+          ),
+        catchError(this.handleErrorService.handleError<Poblacion>('Buscar poblacion', undefined))
+      );
+  }
+
+
+  delete(poblacion: Poblacion| string): Observable<string> {
+    const id = typeof poblacion === 'string' ? poblacion : poblacion.id;
+    return this.http.delete(this.baseUrl + 'api/Poblacion/'+ id, {responseType: 'text'} )
+    .pipe(
+      tap(_ => this.handleErrorService.log("Poblacion Elimianda")),
+      catchError(this.handleErrorService.handleError<string>('Elimiar poblcion', undefined))
+    );
+  }
+
+  put(poblacion: Poblacion): Observable<any> {
+    const url = `${this.baseUrl}api/Poblacion/${poblacion.id}`;
+    return this.http.put(url, poblacion,  {responseType: 'text'} )
+    .pipe(
+      tap(_=> this.handleErrorService.log("se edito la poblacion correctamente")),
+      catchError(this.handleErrorService.handleError<any>('Editar poblacion'))
+    );
+  }
 
 
 }

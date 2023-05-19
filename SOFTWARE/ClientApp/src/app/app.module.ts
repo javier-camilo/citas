@@ -39,6 +39,11 @@ import {MatTableModule} from '@angular/material/table';
 import { RegistrarPoblacionComponent } from './Administrador/gestionPoblacion/registrar-poblacion/registrar-poblacion.component';
 import { ConsultarPoblacionComponent } from './Administrador/gestionPoblacion/consultar-poblacion/consultar-poblacion.component';
 import { EditarPoblacionComponent } from './Administrador/gestionPoblacion/editar-poblacion/editar-poblacion.component';
+import { RegsitroSolicitanteComponent } from './Solicitante/gestionSolicitante/regsitro-solicitante/regsitro-solicitante.component';
+import { ConsultaSolicitanteComponent } from './Solicitante/gestionSolicitante/consulta-solicitante/consulta-solicitante.component';
+import { FiltroPoblacionPipe } from './pipes/filtro-poblacion.pipe';
+import { FiltroMotivoPipe } from './pipes/filtro-motivo.pipe';
+import { FiltroEdadPipe } from './pipes/filtro-edad.pipe';
 
 
 
@@ -65,7 +70,12 @@ import { EditarPoblacionComponent } from './Administrador/gestionPoblacion/edita
     EdicionMotivoComponent,
     RegistrarPoblacionComponent,
     ConsultarPoblacionComponent,
-    EditarPoblacionComponent
+    EditarPoblacionComponent,
+    RegsitroSolicitanteComponent,
+    ConsultaSolicitanteComponent,
+    FiltroPoblacionPipe,
+    FiltroMotivoPipe,
+    FiltroEdadPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -90,7 +100,8 @@ import { EditarPoblacionComponent } from './Administrador/gestionPoblacion/edita
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'citas', component: CitasComponent },
+      { path: 'citas', component: RegsitroSolicitanteComponent },
+      { path: 'consultaSolicitante', component: ConsultaSolicitanteComponent},
       { path: 'registrarPoblacion', component: RegistrarPoblacionComponent},
       { path: 'consultarPoblacion', component: ConsultarPoblacionComponent},
       { path: 'edicionPoblacion/:codigoPoblacion', component: EditarPoblacionComponent},

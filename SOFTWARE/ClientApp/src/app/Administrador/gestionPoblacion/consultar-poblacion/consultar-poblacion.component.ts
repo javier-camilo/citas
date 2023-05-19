@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Poblacion } from 'src/app/Modelo/poblacion';
 import { PoblacionServiceService } from 'src/app/servicios/poblacion-service.service';
 
@@ -9,7 +10,7 @@ import { PoblacionServiceService } from 'src/app/servicios/poblacion-service.ser
 })
 export class ConsultarPoblacionComponent implements OnInit {
 
-  searchText:string;
+  dataSource:any;
   poblacion:Poblacion[];
   loading:boolean;
   displayedColumns: string[] = ['nombre', 'prioridad', 'editar/eliminar'];
@@ -18,10 +19,16 @@ export class ConsultarPoblacionComponent implements OnInit {
 
   ngOnInit(): void {
       
-    this.searchText="";
     this.loading=true;
-    this.poblacionService.get("poblacionComponent").subscribe(result=>{this.poblacion=result; this.loading=false;}
+    this.poblacionService.get("poblacionComponent").subscribe(result=>{this.poblacion=result; this.loading=false;
+      this.dataSource = new MatTableDataSource(this.poblacion)}
       );
   }
+
+  
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
+  }  
 
 }

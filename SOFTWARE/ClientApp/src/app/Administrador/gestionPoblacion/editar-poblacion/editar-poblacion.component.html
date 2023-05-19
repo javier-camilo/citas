@@ -3,25 +3,25 @@
 
   <div class="contenedor">
 
-    <h1>Edicion de motivos</h1>
+    <h1>Edicion de poblacion</h1>
 
 
     <mat-form-field>
       <input matInput [(ngModel)]="poblacion.nombre" type="text" placeholder="Ingrese el nombre">
     </mat-form-field>
-  
+
     <mat-form-field>
         <input matInput [(ngModel)]="poblacion.prioridad" type="number" placeholder="Ingrese la prioridad">
     </mat-form-field>
-    
-    <div>
-      
-    <button mat-raised-button color="primary" style="margin-right: 20px;">Editar</button>
-  
-    <button mat-raised-button color="primary">Eliminar</button>
 
-    
-    
+    <div>
+
+    <button mat-raised-button color="primary" style="margin-right: 20px;" (click)="confirmar('1')">Editar</button>
+
+    <button mat-raised-button color="primary" (click)="confirmar('2')">Eliminar</button>
+
+
+
     </div>
 
   </div>

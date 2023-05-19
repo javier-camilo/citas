@@ -1,5 +1,4 @@
 import { OnInit } from '@angular/core';
-import {Solicitante} from '../model/solicitante';
 import {Component} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
