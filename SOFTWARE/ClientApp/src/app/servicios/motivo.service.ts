@@ -22,7 +22,7 @@ export class MotivoService {
 
   constructor(private http: HttpClient,
     private handleErrorService: HandleHttpErrorService) {
-      this.baseUrl='https://localhost:7240/';
+      this.baseUrl='https://citasweb.azurewebsites.net/';
 
   }
 
@@ -59,15 +59,15 @@ export class MotivoService {
         tap(_ =>
 
           {
-            
+
               if(operacionLLamado==null){
-                
+
                   this.handleErrorService.log('se consulto el motivo = '+ id)
 
               }
-              
+
           }
-          
+
           ),
         catchError(this.handleErrorService.handleError<Motivo>('Buscar motivo', undefined))
       );

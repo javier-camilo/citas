@@ -11,9 +11,9 @@ import { DialogoConfirmacionComponent } from '../dialogo-confirmacion/dialogo-co
 
 export class HandleHttpErrorService {
 
-    
+
   constructor(private dialog:MatDialog) { }
-  
+
   public handleError<T>(operation = 'operation', result?:T) {
     return (error: any): Observable<T> => {
      if (error.status == '500') {
@@ -32,8 +32,11 @@ export class HandleHttpErrorService {
   }
 
   private mostrarError500(error: any) {
-    console.error(error);
+
+    var message="verifique todos los campos";
+    this.dialog.open(DialogoConfirmacionComponent, {data: {name:"Señor Usuario, hubo un error", descripcion: message, EsMensaje: "true"}});
+    console.log(error);
   }
-  
+
 
 }

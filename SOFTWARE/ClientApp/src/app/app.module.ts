@@ -44,6 +44,7 @@ import { ConsultaSolicitanteComponent } from './Solicitante/gestionSolicitante/c
 import { FiltroPoblacionPipe } from './pipes/filtro-poblacion.pipe';
 import { FiltroMotivoPipe } from './pipes/filtro-motivo.pipe';
 import { FiltroEdadPipe } from './pipes/filtro-edad.pipe';
+import { LoginComponent } from './gestionUsuarios/login/login.component';
 
 
 
@@ -75,7 +76,8 @@ import { FiltroEdadPipe } from './pipes/filtro-edad.pipe';
     ConsultaSolicitanteComponent,
     FiltroPoblacionPipe,
     FiltroMotivoPipe,
-    FiltroEdadPipe
+    FiltroEdadPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -108,7 +110,8 @@ import { FiltroEdadPipe } from './pipes/filtro-edad.pipe';
       { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent},
       { path: 'estadoCola', component: EstadoColaComponent},
       { path: 'registrarMotivo', component: RegistrarMotivoComponent},
-      { path: 'consultarMotivo', component: ConsultarMotivoComponent}
+      { path: 'consultarMotivo', component: ConsultarMotivoComponent},
+      { path: 'login', component: LoginComponent}
     ]),
     BrowserAnimationsModule
   ],

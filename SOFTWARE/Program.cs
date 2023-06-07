@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SOFTWARE.Contexto;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +32,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseCors(Options =>{
     Options.WithOrigins("https://localhost:44422");
+    Options.WithOrigins("https://citasweb.azurewebsites.net");
     Options.AllowAnyMethod();
     Options.AllowAnyHeader();
 });

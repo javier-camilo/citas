@@ -1,8 +1,13 @@
 
-<mat-form-field>
-  <mat-label>Buscar</mat-label>
-  <input matInput (keyup)="filtrar($event)" placeholder="buscar">
-</mat-form-field>
+
+<mat-card class="contact-card">
+  <div class="contenedor">
+    <mat-form-field>
+      <mat-label>filtrar por:</mat-label>
+      <input matInput (keyup)="filtrar($event)" placeholder="Nombre o descripcion">
+    </mat-form-field>
+  </div>
+</mat-card>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

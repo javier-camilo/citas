@@ -5,7 +5,7 @@
 namespace SOFTWARE.Migrations
 {
     /// <inheritdoc />
-    public partial class migracionInicial : Migration
+    public partial class primersubida : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace SOFTWARE.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Descripcion = table.Column<int>(type: "int", nullable: false)
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,11 +47,31 @@ namespace SOFTWARE.Migrations
                     Identificacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Consentimiento = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Solicitantes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Turno",
+                columns: table => new
+                {
+                    Numero = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Motivo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Asistencia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DescripcionOperacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContratistaAtendio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RefTiempo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RefSolicitante = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaFinalizacion = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Turno", x => x.Numero);
                 });
         }
 
@@ -66,6 +86,9 @@ namespace SOFTWARE.Migrations
 
             migrationBuilder.DropTable(
                 name: "Solicitantes");
+
+            migrationBuilder.DropTable(
+                name: "Turno");
         }
     }
 }
