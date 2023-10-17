@@ -1,51 +1,45 @@
+
 <mat-card class="contact-card">
 
-  <mat-card-header>
-    <mat-card-title>Solicitud de Citas</mat-card-title>
-  </mat-card-header>
-
-
-  <mat-card-content>
-
-      <form class="example-form">
-
-          <mat-form-field class="example-full-width">
-            <mat-label>Identificacion</mat-label>
-            <input matInput [formControl]="identificacionFormControl">
-            <mat-error *ngIf="identificacionFormControl.hasError('required')">
-              la identificacion es: <strong>requerida</strong>
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="example-full-width">
-            <mat-label>nombre</mat-label>
-            <input matInput [formControl]="nombreFormControl">
-            <mat-error *ngIf="nombreFormControl.hasError('required')">
-              el nombre es: <strong>requerido</strong>
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field class="example-full-width">
-            <mat-label>Digita tu email</mat-label>
-            <input matInput placeholder="pat@example.com" [formControl]="email" required>
-            <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
-
-      </form>
-
-
-
-</mat-card-content>
-
-
-<mat-card-content>
-  <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="mostrarDialogo()">
-    <mat-icon>save</mat-icon>
+  
+  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
   </button>
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Datos del solicitante</ng-template>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="datos del turno">
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field>
+          <mat-label>Datos del turno</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Regresar</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>listo</ng-template>
+      <p>Se han registrado los datos correctamente</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
 
- 
-</mat-card-content>
-
-
+  
 </mat-card>
-

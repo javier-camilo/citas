@@ -27,7 +27,6 @@ namespace SOFTWARE.Models
         public string RefSolicitante { get; set; }
 
         public string FechaFinalizacion { get; set; }
-
         
     }
 }

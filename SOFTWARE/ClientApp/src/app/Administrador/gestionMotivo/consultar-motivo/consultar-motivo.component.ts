@@ -24,7 +24,6 @@ export class ConsultarMotivoComponent implements OnInit {
     this.motivoService.get("motivoComponent").subscribe(result=>{this.motivos=result; this.loading=false;
       this.dataSource = new MatTableDataSource(this.motivos);}
       );
-
   }
 
   filtrar(event: Event) {

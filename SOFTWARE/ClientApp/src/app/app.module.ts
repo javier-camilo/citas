@@ -45,6 +45,7 @@ import { FiltroPoblacionPipe } from './pipes/filtro-poblacion.pipe';
 import { FiltroMotivoPipe } from './pipes/filtro-motivo.pipe';
 import { FiltroEdadPipe } from './pipes/filtro-edad.pipe';
 import { LoginComponent } from './gestionUsuarios/login/login.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 
@@ -83,6 +84,7 @@ import { LoginComponent } from './gestionUsuarios/login/login.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     MatToolbarModule,
+    MatStepperModule,
     MatSidenavModule,
     MatListModule,
     BrowserAnimationsModule,
@@ -101,6 +103,7 @@ import { LoginComponent } from './gestionUsuarios/login/login.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
+      { path: 'registroDatos', component: CitasComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'citas', component: RegsitroSolicitanteComponent },
       { path: 'consultaSolicitante', component: ConsultaSolicitanteComponent},

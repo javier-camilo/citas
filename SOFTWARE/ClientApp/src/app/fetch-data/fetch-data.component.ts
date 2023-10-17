@@ -1,23 +1,33 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { TurnoService } from '../servicios/turno.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { Turno } from '../Modelo/turno';
 
 @Component({
   selector: 'app-fetch-data',
   templateUrl: './fetch-data.component.html'
 })
 export class FetchDataComponent {
-  public forecasts: WeatherForecast[] = [];
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<WeatherForecast[]>(baseUrl + 'weatherforecast').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
+
+  dataSource:any;
+  turnos:Turno[];
+  loading:boolean;
+  displayedColumns: string[] = ['numero', 'motivo', 'atencion', 'Descripcion Operacion'];
+
+  constructor(private turnoservice:TurnoService) { }
+
+  ngOnInit(): void {
+    this.loading=true;
+    this.turnoservice.get("turnoComponent").subscribe(result=>{this.turnos=result; this.loading=false;
+      this.dataSource = new MatTableDataSource(this.turnos);}
+      );
   }
-}
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
+  }
+
 }

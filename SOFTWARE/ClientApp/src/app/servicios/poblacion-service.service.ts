@@ -23,7 +23,7 @@ export class PoblacionServiceService {
 
   constructor(private http: HttpClient,
     private handleErrorService: HandleHttpErrorService) {
-      this.baseUrl='https://citasweb.azurewebsites.net/';
+      this.baseUrl='https://localhost:7240/';
 
   }
 

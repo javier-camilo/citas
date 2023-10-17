@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import {Component} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogoConfirmacionComponent } from '../../dialogo-confirmacion/dialogo-confirmacion.component';
 
@@ -20,11 +20,10 @@ export class CitasComponent implements OnInit {
     if (this.email.hasError('required')) {
       return 'digite un valor para la direccion de correo';
     }
-
     return this.email.hasError('email') ? 'no es un email valido' : '';
   }
 
-  constructor(public dialogo: MatDialog) { }
+  constructor(public dialogo: MatDialog,private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -34,9 +33,12 @@ export class CitasComponent implements OnInit {
     this.dialogo.open(DialogoConfirmacionComponent, {data: {name:"Señor Usuario", descripcion: "guardado exitoso", EsMensaje: "true"}});
   }
 
-
-
-
-
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  isLinear = false;
 
 }
