@@ -47,11 +47,10 @@ namespace SOFTWARE.Controllers
                 return NotFound();
             }
 
-            return motivo;
+            return Ok(motivo);
         }
 
         // PUT: api/Motivo/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMotivo(int id, Motivo motivo)
         {
@@ -86,14 +85,28 @@ namespace SOFTWARE.Controllers
         [HttpPost]
         public async Task<ActionResult<Motivo>> PostMotivo(Motivo motivo)
         {
+            
           if (_context.Motivo == null)
           {
               return Problem("Entity set 'TodoContext.Motivo'  is null.");
           }
-            _context.Motivo.Add(motivo);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMotivo", new { id = motivo.Id }, motivo);
+            try{
+                
+                _context.Motivo.Add(motivo);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetMotivo", new { id = motivo.Id }, motivo);
+
+            }catch (Exception e)
+            {
+                ModelState.AddModelError("Guardar motivo", e.Message);
+                var problemDetails = new ValidationProblemDetails(ModelState)
+                {
+                    Status = StatusCodes.Status400BadRequest,
+                };
+                return BadRequest(problemDetails);
+            }
         }
 
         // DELETE: api/Motivo/5
