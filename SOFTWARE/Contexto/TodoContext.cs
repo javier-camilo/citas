@@ -17,7 +17,6 @@ namespace SOFTWARE.Contexto
         public DbSet<Motivo> Motivo { get; set; } = null!;
         public DbSet<SOFTWARE.Models.Turno> Turno { get; set; } = default!;
         public DbSet<Tiempo> Tiempo { get; set; } = null!;
-
         public DbSet<Intervalo> Intervalo { get; set; } = null!;
 
     }

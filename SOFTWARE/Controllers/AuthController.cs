@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using SOFTWARE.Core.Dtos;
 using SOFTWARE.Core.OtherObjects;
 
@@ -69,7 +73,7 @@ namespace SOFTWARE.Controllers
 
             if (!createUserResult.Succeeded)
             {
-                var errorString = "User Creation Failed Beacause: ";
+                var errorString = "creacion de usuario fallida por: ";
                 foreach (var error in createUserResult.Errors)
                 {
                     errorString += " # " + error.Description;
@@ -80,8 +84,67 @@ namespace SOFTWARE.Controllers
             // Add a Default USER Role to all users
             await _userManager.AddToRoleAsync(newUser, StaticUserRoles.USER);
 
-            return Ok("User Created Successfully");
+            return Ok("usuario creado");
         }
+
+
+
+        // Route -> Login
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        {
+            var user = await _userManager.FindByNameAsync(loginDto.UserName);
+
+            if (user is null)
+                return Unauthorized("credenciales invalidas");
+
+            var isPasswordCorrect = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+
+            if (!isPasswordCorrect)
+                return Unauthorized("credenciales invalidas");
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            
+
+            var authClaims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim("JWTID", Guid.NewGuid().ToString()),
+            };
+
+            foreach (var userRole in userRoles)
+            {
+                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+            }
+
+            var token = GenerateNewJsonWebToken(authClaims);
+
+            return Ok(token);
+        }
+
+        private string GenerateNewJsonWebToken(List<Claim> claims)
+        {
+            var authSecret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+            var tokenObject = new JwtSecurityToken(
+                    issuer: _configuration["JWT:ValidIssuer"],
+                    audience: _configuration["JWT:ValidAudience"],
+                    expires: DateTime.Now.AddHours(1),
+                    claims: claims,
+                    signingCredentials: new SigningCredentials(authSecret, SecurityAlgorithms.HmacSha256)
+                );
+
+            string token = new JwtSecurityTokenHandler().WriteToken(tokenObject);
+
+            return token;
+        }
+
+
+
+
 
 
     }

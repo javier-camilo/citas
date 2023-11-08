@@ -9,10 +9,10 @@ namespace SOFTWARE.Core.Dtos
     public class LoginDto
     {
         
-        [Required(ErrorMessage = "UserName es requerido")]
+        [Required(ErrorMessage = "usuario es requerido")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Password es requerido")]
+        [Required(ErrorMessage = "contraseña es requerido")]
         public string Password { get; set; }
 
     }

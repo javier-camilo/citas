@@ -88,7 +88,7 @@ namespace SOFTWARE.Controllers
             
           if (_context.Motivo == null)
           {
-              return Problem("Entity set 'TodoContext.Motivo'  is null.");
+              return Problem("no existe base de datos de motivos");
           }
 
             try{

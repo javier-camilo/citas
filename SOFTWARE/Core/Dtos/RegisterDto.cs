@@ -9,13 +9,13 @@ namespace SOFTWARE.Core.Dtos
     public class RegisterDto
     {   
         
-        [Required(ErrorMessage = "UserName es requerido")]
+        [Required(ErrorMessage = "usuario es requerido")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Email es requerido")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Password es requerido")]
+        [Required(ErrorMessage = "contraseña es requerido")]
         public string Password { get; set; }
     }
 }
