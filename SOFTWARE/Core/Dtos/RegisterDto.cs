@@ -17,5 +17,20 @@ namespace SOFTWARE.Core.Dtos
 
         [Required(ErrorMessage = "contraseña es requerido")]
         public string Password { get; set; }
+
+        
+        [Required(ErrorMessage = "identificacion es requerido")]
+        public string Identificacion { get; set; }
+        
+        [Required(ErrorMessage = "nombre es requerido")]
+        public string Nombre { get; set; }
+
+        
+        [Required(ErrorMessage = "Apellido es requerido")]
+        public string Apellido { get; set; }
+
+        
+        [Required(ErrorMessage = "Telefono es requerido")]
+        public string Telefono { get; set; }
     }
 }

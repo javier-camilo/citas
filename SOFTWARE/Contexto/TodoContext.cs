@@ -5,7 +5,7 @@ using SOFTWARE.Models;
 namespace SOFTWARE.Contexto
 {
 
-        public class TodoContext : IdentityDbContext
+        public class TodoContext : IdentityDbContext<ApplicationUser>
     {
         public TodoContext(DbContextOptions<TodoContext> options)
             : base(options)

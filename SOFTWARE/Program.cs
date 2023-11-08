@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using SOFTWARE.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +20,7 @@ builder.Services.AddDbContext<TodoContext>(p=>p.UseSqlServer(connectionString));
 
 //agregar identity
 
-builder.Services.AddIdentity<IdentityUser,IdentityRole>().
+builder.Services.AddIdentity<ApplicationUser,IdentityRole>().
 AddEntityFrameworkStores<TodoContext>().
 AddDefaultTokenProviders();
 
