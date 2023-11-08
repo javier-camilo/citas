@@ -142,10 +142,36 @@ namespace SOFTWARE.Controllers
             return token;
         }
 
+        
+        // Route -> make user -> admin
+        [HttpPost]
+        [Route("make-admin")]
+        public async Task<IActionResult> MakeAdmin([FromBody] UpdatePermissionDto updatePermissionDto)
+        {
+            var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
 
+            if (user is null)
+                return BadRequest("usuario invalido!!!!!!!!");
 
+            await _userManager.AddToRoleAsync(user, StaticUserRoles.ADMIN);
 
+            return Ok("usuario es admin ahora");
+        }
 
+        // Route -> make user -> owner
+        [HttpPost]
+        [Route("make-owner")]
+        public async Task<IActionResult> MakeOwner([FromBody] UpdatePermissionDto updatePermissionDto)
+        {
+            var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
+
+            if (user is null)
+                return BadRequest("usuario invalido!!!!!!!!!");
+
+            await _userManager.AddToRoleAsync(user, StaticUserRoles.OWNER);
+
+            return Ok("el usuario es dueño ahora");
+        }
 
     }
 }

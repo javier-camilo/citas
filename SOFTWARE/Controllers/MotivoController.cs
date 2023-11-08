@@ -85,11 +85,12 @@ namespace SOFTWARE.Controllers
         [HttpPost]
         public async Task<ActionResult<Motivo>> PostMotivo(Motivo motivo)
         {
-            
+
           if (_context.Motivo == null)
-          {
-              return Problem("no existe base de datos de motivos");
-          }
+          return Problem("no existe base de datos de motivos");
+          
+          if (ValidarRegistro(motivo.Nombre))
+            return BadRequest(error("guardar motivo", "ya se encuentra registrado"));
 
             try{
                 
@@ -100,14 +101,12 @@ namespace SOFTWARE.Controllers
 
             }catch (Exception e)
             {
-                ModelState.AddModelError("Guardar motivo", e.Message);
-                var problemDetails = new ValidationProblemDetails(ModelState)
-                {
-                    Status = StatusCodes.Status400BadRequest,
-                };
-                return BadRequest(problemDetails);
+                
+                return BadRequest(error("guardar motivo", e.Message));
             }
         }
+
+
 
         // DELETE: api/Motivo/5
         [HttpDelete("{id}")]
@@ -133,5 +132,31 @@ namespace SOFTWARE.Controllers
         {
             return (_context.Motivo?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        private ValidationProblemDetails error(string servicio, string e){
+            
+                ModelState.AddModelError("Guardar motivo", e);
+                var problemDetails = new ValidationProblemDetails(ModelState)
+                {
+                    Status = StatusCodes.Status400BadRequest,
+                };
+
+                return problemDetails;
+        }
+
+        private bool ValidarRegistro(string nombre){
+
+            
+            var ListadoMotivo = _context.Motivo.ToList();
+            foreach (var item in ListadoMotivo)
+            {
+                if(item.Nombre.Equals(nombre)){
+                    return true;
+                }
+
+            }
+            return false;
+        }
+    
     }
 }

@@ -86,16 +86,14 @@ app.UseCors(Options =>{
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseSwagger();
 app.UseSwaggerUI();
-
-
 
 app.MapControllerRoute(
     name: "default",
