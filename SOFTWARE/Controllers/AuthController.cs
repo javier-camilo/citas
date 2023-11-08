@@ -158,6 +158,7 @@ namespace SOFTWARE.Controllers
             return Ok("usuario es admin ahora");
         }
 
+
         // Route -> make user -> owner
         [HttpPost]
         [Route("make-owner")]
@@ -169,7 +170,7 @@ namespace SOFTWARE.Controllers
                 return BadRequest("usuario invalido!!!!!!!!!");
 
             await _userManager.AddToRoleAsync(user, StaticUserRoles.OWNER);
-
+            
             return Ok("el usuario es dueño ahora");
         }
 
