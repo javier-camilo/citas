@@ -4,5 +4,11 @@ import { Component } from '@angular/core';
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
+
 export class HomeComponent {
+
+constructor(){
+
+}
+
 }

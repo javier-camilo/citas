@@ -46,6 +46,7 @@ import { FiltroMotivoPipe } from './pipes/filtro-motivo.pipe';
 import { FiltroEdadPipe } from './pipes/filtro-edad.pipe';
 import { LoginComponent } from './gestionUsuarios/login/login.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -100,23 +101,9 @@ import {MatStepperModule} from '@angular/material/stepper';
     FormsModule,
     MatCardModule,
     MatButtonModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'registroDatos', component: CitasComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'citas', component: RegsitroSolicitanteComponent },
-      { path: 'consultaSolicitante', component: ConsultaSolicitanteComponent},
-      { path: 'registrarPoblacion', component: RegistrarPoblacionComponent},
-      { path: 'consultarPoblacion', component: ConsultarPoblacionComponent},
-      { path: 'edicionPoblacion/:codigoPoblacion', component: EditarPoblacionComponent},
-      { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent},
-      { path: 'estadoCola', component: EstadoColaComponent},
-      { path: 'registrarMotivo', component: RegistrarMotivoComponent},
-      { path: 'consultarMotivo', component: ConsultarMotivoComponent},
-      { path: 'login', component: LoginComponent}
-    ]),
-    BrowserAnimationsModule
+    RouterModule.forRoot([]),
+    BrowserAnimationsModule,
+    AppRoutingModule
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
 
