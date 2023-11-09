@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SOFTWARE.Core.Dtos;
 using SOFTWARE.Core.OtherObjects;
+using SOFTWARE.Models;
 
 namespace SOFTWARE.Controllers
 {
@@ -17,13 +18,13 @@ namespace SOFTWARE.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
 
 
-        public AuthController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+        public AuthController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -62,8 +63,12 @@ namespace SOFTWARE.Controllers
             if (isExistsUser != null)
                 return BadRequest("nombre de usuario existe");
 
-            IdentityUser newUser = new IdentityUser()
+            ApplicationUser newUser = new ApplicationUser()
             {
+                Identificacion = registerDto.Identificacion,
+                Nombre = registerDto.Nombre,
+                Apellido = registerDto.Apellido,  
+                PhoneNumber = registerDto.Telefono,
                 Email = registerDto.Email,
                 UserName = registerDto.UserName,
                 SecurityStamp = Guid.NewGuid().ToString(),
@@ -113,6 +118,10 @@ namespace SOFTWARE.Controllers
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim("JWTID", Guid.NewGuid().ToString()),
+                new Claim("Identificacion",user.Identificacion),
+                new Claim("Nombre",user.Nombre),
+                new Claim("Apellido",user.Apellido),
+                new Claim("Telefono",user.PhoneNumber),
             };
 
             foreach (var userRole in userRoles)
