@@ -11,8 +11,8 @@ import { MotivoService } from 'src/app/servicios/motivo.service';
 export class ConsultarMotivoComponent implements OnInit {
 
 
-  
-  dataSource:any; 
+
+  dataSource:any;
   motivos:Motivo[];
   loading:boolean;
   displayedColumns: string[] = ['nombre', 'descripcion', 'editar/eliminar'];
@@ -29,7 +29,7 @@ export class ConsultarMotivoComponent implements OnInit {
   filtrar(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filtro.trim().toLowerCase();
-  }  
-  
+  }
+
 
 }

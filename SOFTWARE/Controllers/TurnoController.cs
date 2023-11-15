@@ -2,16 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SOFTWARE.Contexto;
+using SOFTWARE.Core.OtherObjects;
 using SOFTWARE.Models;
 
 namespace SOFTWARE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = StaticUserRoles.USER)]
+    
     public class TurnoController : ControllerBase
     {
         private readonly TodoContext _context;

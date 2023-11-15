@@ -13,8 +13,13 @@ namespace SOFTWARE.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+
+        
+        [Required(ErrorMessage="el nombre es requerido")]
         public string? Nombre { get; set; }
 
+        
+        [Required(ErrorMessage="la prioridad es requerida")]
         public int Prioridad { get; set; }
         
     }

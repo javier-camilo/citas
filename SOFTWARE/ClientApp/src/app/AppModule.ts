@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -18,8 +18,6 @@ import { MatCardModule } from '@angular/material/card';
 import { CitasComponent } from './Solicitante/citas/citas.component';
 import { EstadoColaComponent } from './Solicitante/estado-cola/estado-cola.component';
 import { TicketComponent } from './solicitante/ticket/ticket.component';
-import { CrearusuarioComponent } from './administrador/gestionUsuario/crearusuario/crearusuario.component';
-import { ConsultarusuarioComponent } from './administrador/gestionUsuario/consultarusuario/consultarusuario.component';
 import { CrearhorarioComponent } from './administrador/gestionhorario/crearhorario/crearhorario.component';
 import { ConsultarhorarioComponent } from './administrador/gestionhorario/consultarhorario/consultarhorario.component';
 import { GenrarreporteComponent } from './administrador/genrarreporte/genrarreporte.component';
@@ -45,6 +43,11 @@ import { FiltroEdadPipe } from './pipes/filtro-edad.pipe';
 import { LoginComponent } from './gestionUsuarios/login/login.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AppRoutingModule } from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatSelectModule} from '@angular/material/select';
+import { RegistroComponent } from './gestionUsuarios/registro/registro.component';
+import { LayoutComponent } from './gestionUsuarios/layout/layout.component';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 
 
@@ -60,8 +63,6 @@ import { AppRoutingModule } from './app-routing.module';
     DialogoConfirmacionComponent,
     EstadoColaComponent,
     TicketComponent,
-    CrearusuarioComponent,
-    ConsultarusuarioComponent,
     CrearhorarioComponent,
     ConsultarhorarioComponent,
     GenrarreporteComponent,
@@ -75,16 +76,19 @@ import { AppRoutingModule } from './app-routing.module';
     EditarPoblacionComponent,
     RegsitroSolicitanteComponent,
     ConsultaSolicitanteComponent,
+    RegistroComponent,
     FiltroPoblacionPipe,
     FiltroMotivoPipe,
     FiltroEdadPipe,
-    LoginComponent
+    LoginComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     MatToolbarModule,
     MatStepperModule,
+    MatSelectModule,
     MatSidenavModule,
     MatListModule,
     BrowserAnimationsModule,
@@ -102,10 +106,15 @@ import { AppRoutingModule } from './app-routing.module';
     MatButtonModule,
     RouterModule.forRoot([]),
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
-  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }
-
+  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass:AuthInterceptor,
+    multi:true
+  }
   ],
   bootstrap: [AppComponent],
   entryComponents: [

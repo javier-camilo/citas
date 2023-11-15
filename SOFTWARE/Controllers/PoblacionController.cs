@@ -2,16 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SOFTWARE.Contexto;
+using SOFTWARE.Core.OtherObjects;
 using SOFTWARE.Models;
 
 namespace SOFTWARE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = StaticUserRoles.ADMIN)]
     public class PoblacionController : ControllerBase
     {
         private readonly TodoContext _context;
@@ -88,12 +91,24 @@ namespace SOFTWARE.Controllers
         {
           if (_context.Poblacion == null)
           {
-              return Problem("Entity set 'TodoContext.Poblacion'  is null.");
+              return Problem("Eno hay base de datos registrada");
           }
+
+          try
+          {
+            
             _context.Poblacion.Add(poblacion);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPoblacion", new { id = poblacion.Id }, poblacion);
+
+          }
+          catch(Exception e)
+          {
+            
+                return BadRequest(error("guardar poblacion", e.Message));
+            
+          }
         }
 
         // DELETE: api/Poblacion/5
@@ -119,6 +134,17 @@ namespace SOFTWARE.Controllers
         private bool PoblacionExists(long id)
         {
             return (_context.Poblacion?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private ValidationProblemDetails error(string servicio, string e){
+            
+                ModelState.AddModelError("Guardar poblacion", e);
+                var problemDetails = new ValidationProblemDetails(ModelState)
+                {
+                    Status = StatusCodes.Status400BadRequest,
+                };
+
+                return problemDetails;
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using SOFTWARE.Contexto;
 using SOFTWARE.Core.Dtos;
 using SOFTWARE.Core.OtherObjects;
 using SOFTWARE.Models;
@@ -22,13 +23,17 @@ namespace SOFTWARE.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
+        private readonly TodoContext _context;
 
 
-        public AuthController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+
+        public AuthController(UserManager<ApplicationUser> userManager, 
+                RoleManager<IdentityRole> roleManager, IConfiguration configuration, TodoContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
+            _context=context;
         }
 
         [HttpPost]
@@ -54,15 +59,44 @@ namespace SOFTWARE.Controllers
         }
 
         
+        private bool ValidarRegistro(string identificacion){
+
+            
+            var ListadoUsuarios = _context.Users.ToList();
+            foreach (var item in ListadoUsuarios)
+            {
+                if(item.Identificacion.Equals(identificacion)){
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
+        
+        private ValidationProblemDetails error(string servicio, string e){
+            
+                ModelState.AddModelError(servicio, e);
+                var problemDetails = new ValidationProblemDetails(ModelState)
+                {
+                    Status = StatusCodes.Status400BadRequest,
+                };
+
+                return problemDetails;
+        }
+
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+        public async Task<ActionResult<ApplicationUser>> Register([FromBody] RegisterDto registerDto)
         {
             var isExistsUser = await _userManager.FindByNameAsync(registerDto.UserName);
 
             if (isExistsUser != null)
-                return BadRequest("nombre de usuario existe");
+                return BadRequest(error("Duplicado","el usuario ya se encuentra registrado"));
 
+            if(ValidarRegistro(registerDto.Identificacion))
+                return BadRequest(error("Duplicado","los datos del usuario ya se encuentran registrados"));
+            
             ApplicationUser newUser = new ApplicationUser()
             {
                 Identificacion = registerDto.Identificacion,
@@ -89,7 +123,7 @@ namespace SOFTWARE.Controllers
             // Add a Default USER Role to all users
             await _userManager.AddToRoleAsync(newUser, StaticUserRoles.USER);
 
-            return Ok("usuario creado");
+            return Ok(newUser);
         }
 
 
@@ -97,7 +131,7 @@ namespace SOFTWARE.Controllers
         // Route -> Login
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        public async Task<ActionResult<ApplicationUserViewModel>> Login([FromBody] LoginDto loginDto)
         {
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
 
@@ -110,8 +144,6 @@ namespace SOFTWARE.Controllers
                 return Unauthorized("credenciales invalidas");
 
             var userRoles = await _userManager.GetRolesAsync(user);
-
-            
 
             var authClaims = new List<Claim>
             {
@@ -131,7 +163,12 @@ namespace SOFTWARE.Controllers
 
             var token = GenerateNewJsonWebToken(authClaims);
 
-            return Ok(token);
+            return new ApplicationUserViewModel
+            {
+                result=true,
+                UserName=user.UserName,
+                Token = token
+            };
         }
 
         private string GenerateNewJsonWebToken(List<Claim> claims)

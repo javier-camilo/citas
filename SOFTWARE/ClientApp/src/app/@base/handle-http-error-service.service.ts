@@ -23,13 +23,19 @@ export class HandleHttpErrorService {
      if (error.status == '400') {
        this.mostrarError400(error);
      }
+    if (error.status == '401') {
+      this.log("Credenciales invalidas");
+    }
+    if (error.status == '403') {
+      this.log("no tines autorizacion para acceder a este recurso");
+    }
 
       return of(result as T);
     };
   }
 
   public log(message: string) {
-    this.dialog.open(DialogoConfirmacionComponent, {data: {name:"Señor Usuario", descripcion: message, EsMensaje: "true"}});
+    this.dialog.open(DialogoConfirmacionComponent, {data: {name:"Señor(a) usuario(a)", descripcion: message, EsMensaje: "true"}});
   }
 
   private mostrarError500(error: any) {

@@ -7,6 +7,7 @@ namespace SOFTWARE.Models
     public class Motivo 
     {
         
+        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
