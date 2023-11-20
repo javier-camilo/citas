@@ -21,6 +21,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminRoleGuard } from './guards/admin-role.guard';
 import { OwnerRoleGuard } from './guards/owner-role.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
 
 const routes: Routes = [
 
@@ -30,8 +32,9 @@ const routes: Routes = [
       path:'',
       component:NavMenuComponent,
       children:  [
-        { path: 'home', component: HomeComponent},
-        {path:'', redirectTo:'home', pathMatch:'full'},
+        { path: 'home', component: HomeComponent },
+        { path: 'perfil', component: PerfilComponent},
+        { path:'', redirectTo:'home', pathMatch:'full'},
         { path: 'counter', component: CounterComponent },
         { path: 'registroDatos', component: CitasComponent},
         { path: 'cola', component: FetchDataComponent},
@@ -47,8 +50,7 @@ const routes: Routes = [
     },
     {
       path:'**',
-      component:NavMenuComponent,
-      canActivate:[AuthGuard]
+      component:PageNotFoundComponent
     },
 ];
 

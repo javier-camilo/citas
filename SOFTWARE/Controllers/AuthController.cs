@@ -153,11 +153,12 @@ namespace SOFTWARE.Controllers
                 new Claim("Nombre",user.Nombre),
                 new Claim("Apellido",user.Apellido),
                 new Claim("Telefono",user.PhoneNumber),
+                new Claim("Email",user.Email),
+                new Claim("UserName",user.UserName),
             };
 
             foreach (var userRole in userRoles)
             {
-
                 authClaims.Add(new Claim("rol", userRole));
                 authClaims.Add(new Claim(ClaimTypes.Role, userRole));
             }

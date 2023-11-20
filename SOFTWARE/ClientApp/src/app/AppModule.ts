@@ -48,12 +48,17 @@ import {MatSelectModule} from '@angular/material/select';
 import { RegistroComponent } from './gestionUsuarios/registro/registro.component';
 import { LayoutComponent } from './gestionUsuarios/layout/layout.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
+
 
 
 
 
 @NgModule({
   declarations: [
+    PageNotFoundComponent,
+    PerfilComponent,
     AppComponent,
     NavMenuComponent,
     HomeComponent,

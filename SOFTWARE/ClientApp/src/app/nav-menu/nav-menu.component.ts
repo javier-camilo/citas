@@ -14,6 +14,7 @@ export class NavMenuComponent implements OnDestroy {
 
 
 
+  menu: Menu[];
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;
@@ -22,6 +23,8 @@ export class NavMenuComponent implements OnDestroy {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    this.menu = [];
+    this.cargarItem();
   }
 
   ngOnDestroy(): void {
@@ -32,4 +35,78 @@ export class NavMenuComponent implements OnDestroy {
     this.loginService.logoutUser();
   }
 
+  cargarItem() {
+
+    let contarUsuario=0;
+
+    if (this.loginService.HaveAccessAdmin()) {
+
+      this.menu = [];
+
+      let admin: Menu[];
+
+      admin = [
+        {name: "Digitador", route:"",icon:""},
+        { name: "Citas Ventanilla",  icon: "date_range",  route: "/citas"},
+        { name: "Datos Solicitante VT", icon: "search", route: "/consultaSolicitante" },
+        { name: "registrar Atencion", icon: "", route: "" }
+      ];
+
+      this.menu = admin;
+
+      contarUsuario = 1;
+
+    }
+
+    if (this.loginService.HaveAccessOwner()) {
+
+      this.menu = [];
+
+      let dueño: Menu[];
+
+      dueño = [
+        { name: "Dueño", route: "", icon: "" },
+        { name: "Listado de cola",  icon: "history",  route: "/cola"},
+        { name: "Citas Ventanilla",  icon: "date_range",  route: "/citas"},
+        { name: "Datos Solicitante VT", icon: "search", route: "/consultaSolicitante" },
+        { name: "registrar motivo", icon: "done", route: "/registrarMotivo" },
+        { name: "consultar Motivo", icon: "assignment", route: "/consultarMotivo" },
+        { name: "registrar Poblacion", icon: "accessible", route: "/registrarPoblacion" },
+        { name: "consultar Poblacion",  icon: "accessibility_new" , route: "/consultarPoblacion"}
+      ];
+
+      this.menu = dueño;
+
+      contarUsuario = 1;
+
+    }
+
+    if (contarUsuario==0) {
+
+        this.menu = [];
+
+        let dueño: Menu[];
+
+        dueño = [
+          { name: "User", route:"",icon:""},
+          { name: "Listado de cola",  icon: "history",  route: "/cola"},
+          { name: "Solicitar cita", icon: "search", route: "/registroDatos" },
+        ];
+
+        this.menu = dueño;
+    }
+
+
+
+
+
+  }
+
+}
+
+
+export class Menu {
+  route:string;
+  icon:string;
+  name:string;
 }

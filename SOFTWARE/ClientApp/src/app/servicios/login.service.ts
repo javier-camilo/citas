@@ -84,7 +84,6 @@ export class LoginService {
 
   HaveAccessAdmin() {
 
-
     var _finaldata = this.getDatosToken();
     console.log(_finaldata);
     let roles: string[] = [];
@@ -96,7 +95,6 @@ export class LoginService {
       roles.forEach(function (value) {
         if (value == 'OWNER' || value == 'ADMIN') {
           rol = value;
-          console.log(value);
         }
       });
 
@@ -123,7 +121,6 @@ export class LoginService {
       roles.forEach(function (value) {
         if (value == 'OWNER') {
           rol = value;
-          console.log(value);
         }
       });
 
@@ -139,10 +136,19 @@ export class LoginService {
   }
 
   GetInformacionUsuario() {
-    
+
     var _finaldata = this.getDatosToken();
 
+    let datosUsuario = new Register();
+    
+    datosUsuario.identificacion = _finaldata.Identificacion;
+    datosUsuario.nombre = _finaldata.Nombre;
+    datosUsuario.apellido = _finaldata.Apellido;
+    datosUsuario.telefono =_finaldata.Telefono;
+    datosUsuario.email = _finaldata.Email;
+    datosUsuario.userName = _finaldata.UserName;
 
+    return datosUsuario;
   }
 
 }
