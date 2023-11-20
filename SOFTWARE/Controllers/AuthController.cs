@@ -90,7 +90,6 @@ namespace SOFTWARE.Controllers
         public async Task<ActionResult<ApplicationUser>> Register([FromBody] RegisterDto registerDto)
         {
             var isExistsUser = await _userManager.FindByNameAsync(registerDto.UserName);
-
             if (isExistsUser != null)
                 return BadRequest(error("Duplicado","el usuario ya se encuentra registrado"));
 
@@ -158,6 +157,8 @@ namespace SOFTWARE.Controllers
 
             foreach (var userRole in userRoles)
             {
+
+                authClaims.Add(new Claim("rol", userRole));
                 authClaims.Add(new Claim(ClaimTypes.Role, userRole));
             }
 

@@ -30,9 +30,9 @@ export class RegistroComponent implements OnInit {
     dialogo.afterClosed().subscribe(result => {
       if(result=="true"){
         this.loginService.registrar(this.register).subscribe(result =>
-          {
-           this.router.navigateByUrl('/login');
-          }
+        {
+
+        }
           );
 
       }

@@ -34,7 +34,6 @@ export class LoginService {
     return this.http.post<string>(this.baseUrl + 'api/Auth/login', login)
         .pipe(
             tap((res:any)=>
-
             {
                 this.handleErrorService.log("se incio sesion correctamente");
 
@@ -52,6 +51,7 @@ export class LoginService {
 
               {
                   this.handleErrorService.log("el ussuario se registro correctamente");
+                  this.router.navigateByUrl('/login');
               }
               ),
             catchError(this.handleErrorService.handleError<Register>('usuario o contraseña invalidos',undefined))
@@ -67,9 +67,82 @@ export class LoginService {
     return localStorage.getItem('token')||'';
    }
 
-
   logoutUser(){
     localStorage.removeItem('token');
+  }
+
+  getDatosToken() {
+
+    var loggintoken = localStorage.getItem('token') || '';
+    var _extractedtoken = loggintoken.split('.')[1];
+    var _atobdata = atob(_extractedtoken);
+    var _finaldata = JSON.parse(_atobdata);
+
+    return _finaldata;
+
+  }
+
+  HaveAccessAdmin() {
+
+
+    var _finaldata = this.getDatosToken();
+    console.log(_finaldata);
+    let roles: string[] = [];
+    roles = _finaldata.rol;
+    let rol = "";
+
+    if (Array.isArray(roles)) {
+
+      roles.forEach(function (value) {
+        if (value == 'OWNER' || value == 'ADMIN') {
+          rol = value;
+          console.log(value);
+        }
+      });
+
+    }
+
+    if (rol == "OWNER" || rol == 'ADMIN') {
+      return true;
+    } else {
+      return false;
+    }
+
+
+  }
+
+  HaveAccessOwner() {
+
+    var _finaldata = this.getDatosToken();
+    let roles: string[] = [];
+    roles = _finaldata.rol;
+    let rol = "";
+
+    if (Array.isArray(roles)) {
+
+      roles.forEach(function (value) {
+        if (value == 'OWNER') {
+          rol = value;
+          console.log(value);
+        }
+      });
+
+    }
+
+    if (rol == "OWNER") {
+      return true;
+    } else {
+      return false;
+    }
+
+
+  }
+
+  GetInformacionUsuario() {
+    
+    var _finaldata = this.getDatosToken();
+
+
   }
 
 }

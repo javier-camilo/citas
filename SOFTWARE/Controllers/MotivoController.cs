@@ -14,7 +14,7 @@ namespace SOFTWARE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = StaticUserRoles.ADMIN)]
+    [Authorize(Roles = StaticUserRoles.OWNER)]
     public class MotivoController : ControllerBase
     {
         private readonly TodoContext _context;

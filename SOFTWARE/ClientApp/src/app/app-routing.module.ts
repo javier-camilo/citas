@@ -19,6 +19,8 @@ import { RegistroComponent } from './gestionUsuarios/registro/registro.component
 import { LayoutComponent } from './gestionUsuarios/layout/layout.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminRoleGuard } from './guards/admin-role.guard';
+import { OwnerRoleGuard } from './guards/owner-role.guard';
 
 const routes: Routes = [
 
@@ -31,17 +33,16 @@ const routes: Routes = [
         { path: 'home', component: HomeComponent},
         {path:'', redirectTo:'home', pathMatch:'full'},
         { path: 'counter', component: CounterComponent },
-        { path: 'registroDatos', component: CitasComponent },
-        { path: 'cola', component: FetchDataComponent },
+        { path: 'registroDatos', component: CitasComponent},
+        { path: 'cola', component: FetchDataComponent},
         { path: 'citas', component: RegsitroSolicitanteComponent },
         { path: 'consultaSolicitante', component: ConsultaSolicitanteComponent},
-        { path: 'registrarPoblacion', component: RegistrarPoblacionComponent},
-        { path: 'consultarPoblacion', component: ConsultarPoblacionComponent},
-        { path: 'edicionPoblacion/:codigoPoblacion', component: EditarPoblacionComponent},
-        { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent},
-        { path: 'estadoCola', component: EstadoColaComponent},
-        { path: 'registrarMotivo', component: RegistrarMotivoComponent},
-        { path: 'consultarMotivo', component: ConsultarMotivoComponent},
+        { path: 'registrarPoblacion', component: RegistrarPoblacionComponent, canActivate:[AdminRoleGuard]},
+        { path: 'consultarPoblacion', component: ConsultarPoblacionComponent, canActivate:[AdminRoleGuard]},
+        { path: 'edicionPoblacion/:codigoPoblacion', component: EditarPoblacionComponent, canActivate:[OwnerRoleGuard]},
+        { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent, canActivate:[OwnerRoleGuard]},
+        { path: 'registrarMotivo', component: RegistrarMotivoComponent, canActivate:[OwnerRoleGuard]},
+        { path: 'consultarMotivo', component: ConsultarMotivoComponent, canActivate:[OwnerRoleGuard]},
       ],canActivate:[AuthGuard]
     },
     {
