@@ -14,7 +14,6 @@ namespace SOFTWARE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = StaticUserRoles.USER)]
     
     public class TurnoController : ControllerBase
     {
@@ -94,6 +93,10 @@ namespace SOFTWARE.Controllers
           {
               return Problem("Entity set 'TodoContext.Turno'  is null.");
           }
+
+            turno.Asistencia = "no Atendido";
+            turno.ContratistaAtendio = "sin contratista";
+            
             _context.Turno.Add(turno);
             await _context.SaveChangesAsync();
 
@@ -124,5 +127,6 @@ namespace SOFTWARE.Controllers
         {
             return (_context.Turno?.Any(e => e.Numero == id)).GetValueOrDefault();
         }
+        
     }
 }

@@ -7,6 +7,7 @@ import { RegistroComponent } from './gestionUsuarios/registro/registro.component
 import { LayoutComponent } from './gestionUsuarios/layout/layout.component';
 import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.component';
 
 @NgModule({
     imports: [AppModule, ServerModule, ModuleMapLoaderModule],
@@ -15,7 +16,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
       RegistroComponent,
       LayoutComponent,
       PerfilComponent,
-      PageNotFoundComponent
+      PageNotFoundComponent,
+      ColaAtencionComponent
     ]
 })
 export class AppServerModule { }

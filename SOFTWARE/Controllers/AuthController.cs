@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -12,6 +13,9 @@ using SOFTWARE.Contexto;
 using SOFTWARE.Core.Dtos;
 using SOFTWARE.Core.OtherObjects;
 using SOFTWARE.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Diagnostics;
 
 namespace SOFTWARE.Controllers
 {
@@ -35,6 +39,7 @@ namespace SOFTWARE.Controllers
             _configuration = configuration;
             _context=context;
         }
+
 
         [HttpPost]
         [Route("seed-roles")]
@@ -111,12 +116,19 @@ namespace SOFTWARE.Controllers
 
             if (!createUserResult.Succeeded)
             {
+                
                 var errorString = "creacion de usuario fallida por: ";
                 foreach (var error in createUserResult.Errors)
                 {
-                    errorString += " # " + error.Description;
+                    ModelState.AddModelError(errorString, error.Description);
                 }
-                return BadRequest(errorString);
+
+                var problemDetails = new ValidationProblemDetails(ModelState)
+                {
+                    Status = StatusCodes.Status400BadRequest,
+                };
+
+                return BadRequest(problemDetails);
             }
 
             // Add a Default USER Role to all users
@@ -126,8 +138,35 @@ namespace SOFTWARE.Controllers
         }
 
 
+        [HttpGet]
+        [Route("traerUsuario/{id}")]
+        public async Task<ActionResult<ApplicationUser>> GetUser(string id)
+        {
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
 
-        // Route -> Login
+            ApplicationUser user;
+            user = null;
+
+            var listado = await _context.Users.ToListAsync();
+
+            foreach (var item in listado)
+            {
+                if (item.Identificacion.Equals(id)) {
+                    user = item;
+                }
+            }
+            
+            if(user==null){
+                return NotFound();
+            }
+            
+            return Ok(user);
+        }
+
+            // Route -> Login
         [HttpPost]
         [Route("login")]
         public async Task<ActionResult<ApplicationUserViewModel>> Login([FromBody] LoginDto loginDto)
@@ -221,6 +260,21 @@ namespace SOFTWARE.Controllers
             
             return Ok("el usuario es dueño ahora");
         }
+
+        [HttpGet]
+        [Route("Listado-usuarios")]
+        public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetMotivo()
+        {
+            if (_context.Users == null)
+            {
+                return NotFound();
+            }
+            return await _context.Users.ToListAsync();
+        }
+
+
+
+
 
     }
 }

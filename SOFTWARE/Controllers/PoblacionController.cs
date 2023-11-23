@@ -14,7 +14,6 @@ namespace SOFTWARE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = StaticUserRoles.OWNER)]
     public class PoblacionController : ControllerBase
     {
         private readonly TodoContext _context;
@@ -26,6 +25,7 @@ namespace SOFTWARE.Controllers
 
         // GET: api/Poblacion
         [HttpGet]
+        [Authorize(Roles = StaticUserRoles.USER)]
         public async Task<ActionResult<IEnumerable<Poblacion>>> GetPoblacion()
         {
           if (_context.Poblacion == null)
@@ -37,6 +37,7 @@ namespace SOFTWARE.Controllers
 
         // GET: api/Poblacion/5
         [HttpGet("{id}")]
+        [Authorize(Roles = StaticUserRoles.USER)]
         public async Task<ActionResult<Poblacion>> GetPoblacion(long id)
         {
           if (_context.Poblacion == null)
@@ -56,6 +57,7 @@ namespace SOFTWARE.Controllers
         // PUT: api/Poblacion/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = StaticUserRoles.OWNER)]
         public async Task<IActionResult> PutPoblacion(long id, Poblacion poblacion)
         {
             if (id != poblacion.Id)
@@ -87,6 +89,7 @@ namespace SOFTWARE.Controllers
         // POST: api/Poblacion
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = StaticUserRoles.OWNER)]
         public async Task<ActionResult<Poblacion>> PostPoblacion(Poblacion poblacion)
         {
           if (_context.Poblacion == null)
@@ -113,6 +116,7 @@ namespace SOFTWARE.Controllers
 
         // DELETE: api/Poblacion/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = StaticUserRoles.OWNER)]
         public async Task<IActionResult> DeletePoblacion(long id)
         {
             if (_context.Poblacion == null)

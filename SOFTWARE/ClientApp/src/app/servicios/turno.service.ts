@@ -44,5 +44,18 @@ export class TurnoService {
         );
   }
 
+  post(turno:Turno): Observable<Turno> {
+
+    return this.http.post<Turno>(this.baseUrl + 'api/Turno', turno)
+        .pipe(
+            tap(_ => this.handleErrorService.log('turno registrado con exito')),
+            catchError(this.handleErrorService.handleError<Turno>('Registrar turno',undefined))
+    );
+
+  }
+
+
+
+
 
 }

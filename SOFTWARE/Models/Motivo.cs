@@ -4,15 +4,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SOFTWARE.Models
 {
-    public class Motivo 
+    public class Motivo
     {
-        
-        
+
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required(ErrorMessage="el nombre es requerido")]
+        [Required(ErrorMessage = "el nombre es requerido")]
         public string? Nombre { get; set; }
 
         

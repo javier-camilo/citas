@@ -10,11 +10,15 @@ namespace SOFTWARE.Models
     public class Turno
     {
         
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Numero { get; set; }
 
+
+        [Required(ErrorMessage = "el motivo es requerido")]
         public string Motivo { get; set; }
+
 
         public string Asistencia { get; set; }
 
@@ -23,10 +27,15 @@ namespace SOFTWARE.Models
         public string ContratistaAtendio { get; set; }
 
         public string RefTiempo { get; set; }
+        public string FechaFinalizacion { get; set; }
 
+
+
+        [Required(ErrorMessage = "los datos del solicitante son requeridos")]
         public string RefSolicitante { get; set; }
 
-        public string FechaFinalizacion { get; set; }
-        
+        [Required(ErrorMessage = "la poblacion es requerida")]
+        public string Poblacion { get; set; }
+
     }
 }

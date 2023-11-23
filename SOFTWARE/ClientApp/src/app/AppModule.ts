@@ -35,8 +35,6 @@ import { MatTableModule } from '@angular/material/table';
 import { RegistrarPoblacionComponent } from './Administrador/gestionPoblacion/registrar-poblacion/registrar-poblacion.component';
 import { ConsultarPoblacionComponent } from './Administrador/gestionPoblacion/consultar-poblacion/consultar-poblacion.component';
 import { EditarPoblacionComponent } from './Administrador/gestionPoblacion/editar-poblacion/editar-poblacion.component';
-import { RegsitroSolicitanteComponent } from './Solicitante/gestionSolicitante/regsitro-solicitante/regsitro-solicitante.component';
-import { ConsultaSolicitanteComponent } from './Solicitante/gestionSolicitante/consulta-solicitante/consulta-solicitante.component';
 import { FiltroPoblacionPipe } from './pipes/filtro-poblacion.pipe';
 import { FiltroMotivoPipe } from './pipes/filtro-motivo.pipe';
 import { FiltroEdadPipe } from './pipes/filtro-edad.pipe';
@@ -50,6 +48,8 @@ import { LayoutComponent } from './gestionUsuarios/layout/layout.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
+import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.component';
+
 
 
 
@@ -58,6 +58,7 @@ import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
 @NgModule({
   declarations: [
     PageNotFoundComponent,
+    ColaAtencionComponent,
     PerfilComponent,
     AppComponent,
     NavMenuComponent,
@@ -79,8 +80,6 @@ import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
     RegistrarPoblacionComponent,
     ConsultarPoblacionComponent,
     EditarPoblacionComponent,
-    RegsitroSolicitanteComponent,
-    ConsultaSolicitanteComponent,
     RegistroComponent,
     FiltroPoblacionPipe,
     FiltroMotivoPipe,

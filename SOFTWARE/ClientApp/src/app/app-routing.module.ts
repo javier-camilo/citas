@@ -10,8 +10,6 @@ import { EditarPoblacionComponent } from './Administrador/gestionPoblacion/edita
 import { RegistrarPoblacionComponent } from './Administrador/gestionPoblacion/registrar-poblacion/registrar-poblacion.component';
 import { CitasComponent } from './Solicitante/citas/citas.component';
 import { EstadoColaComponent } from './Solicitante/estado-cola/estado-cola.component';
-import { ConsultaSolicitanteComponent } from './Solicitante/gestionSolicitante/consulta-solicitante/consulta-solicitante.component';
-import { RegsitroSolicitanteComponent } from './Solicitante/gestionSolicitante/regsitro-solicitante/regsitro-solicitante.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './gestionUsuarios/login/login.component';
@@ -35,11 +33,8 @@ const routes: Routes = [
         { path: 'home', component: HomeComponent },
         { path: 'perfil', component: PerfilComponent},
         { path:'', redirectTo:'home', pathMatch:'full'},
-        { path: 'counter', component: CounterComponent },
-        { path: 'registroDatos', component: CitasComponent},
+        { path: 'registroCita', component: CitasComponent},
         { path: 'cola', component: FetchDataComponent},
-        { path: 'citas', component: RegsitroSolicitanteComponent },
-        { path: 'consultaSolicitante', component: ConsultaSolicitanteComponent},
         { path: 'registrarPoblacion', component: RegistrarPoblacionComponent, canActivate:[AdminRoleGuard]},
         { path: 'consultarPoblacion', component: ConsultarPoblacionComponent, canActivate:[AdminRoleGuard]},
         { path: 'edicionPoblacion/:codigoPoblacion', component: EditarPoblacionComponent, canActivate:[OwnerRoleGuard]},

@@ -2,11 +2,11 @@ export class Turno {
 
   numero:number;
 
-  motivo:string;
+  motivo:string | null;
 
   asistencia:string;
 
-  descripcionOperacion:string;
+  descripcionOperacion:string | null;
 
   contratistaAtendio:string;
 
@@ -14,6 +14,8 @@ export class Turno {
 
   refSolicitante:string;
 
-  fechaFinalizacion:string;
+  fechaFinalizacion: string;
+
+  poblacion: string | null;
 
 }

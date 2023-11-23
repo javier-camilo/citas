@@ -14,7 +14,6 @@ namespace SOFTWARE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = StaticUserRoles.OWNER)]
     public class MotivoController : ControllerBase
     {
         private readonly TodoContext _context;
@@ -26,6 +25,7 @@ namespace SOFTWARE.Controllers
 
         // GET: api/Motivo
         [HttpGet]
+        [Authorize(Roles = StaticUserRoles.USER)]
         public async Task<ActionResult<IEnumerable<Motivo>>> GetMotivo()
         {
           if (_context.Motivo == null)
@@ -37,6 +37,7 @@ namespace SOFTWARE.Controllers
 
         // GET: api/Motivo/5
         [HttpGet("{id}")]
+        [Authorize(Roles = StaticUserRoles.USER)]
         public async Task<ActionResult<Motivo>> GetMotivo(int id)
         {
           if (_context.Motivo == null)
@@ -55,6 +56,7 @@ namespace SOFTWARE.Controllers
 
         // PUT: api/Motivo/5
         [HttpPut("{id}")]
+        [Authorize(Roles = StaticUserRoles.OWNER)]
         public async Task<IActionResult> PutMotivo(int id, Motivo motivo)
         {
             if (id != motivo.Id)
@@ -86,6 +88,7 @@ namespace SOFTWARE.Controllers
         // POST: api/Motivo
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = StaticUserRoles.OWNER)]
         public async Task<ActionResult<Motivo>> PostMotivo(Motivo motivo)
         {
 
@@ -113,6 +116,7 @@ namespace SOFTWARE.Controllers
 
         // DELETE: api/Motivo/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = StaticUserRoles.OWNER)]
         public async Task<IActionResult> DeleteMotivo(int id)
         {
             if (_context.Motivo == null)

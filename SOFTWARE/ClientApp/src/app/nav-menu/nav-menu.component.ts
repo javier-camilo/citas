@@ -37,7 +37,8 @@ export class NavMenuComponent implements OnDestroy {
 
   cargarItem() {
 
-    let contarUsuario=0;
+    let contarUsuario = 0;
+
 
     if (this.loginService.HaveAccessAdmin()) {
 
@@ -48,7 +49,6 @@ export class NavMenuComponent implements OnDestroy {
       admin = [
         {name: "Digitador", route:"",icon:""},
         { name: "Citas Ventanilla",  icon: "date_range",  route: "/citas"},
-        { name: "Datos Solicitante VT", icon: "search", route: "/consultaSolicitante" },
         { name: "registrar Atencion", icon: "", route: "" }
       ];
 
@@ -57,6 +57,7 @@ export class NavMenuComponent implements OnDestroy {
       contarUsuario = 1;
 
     }
+
 
     if (this.loginService.HaveAccessOwner()) {
 
@@ -68,7 +69,6 @@ export class NavMenuComponent implements OnDestroy {
         { name: "Dueño", route: "", icon: "" },
         { name: "Listado de cola",  icon: "history",  route: "/cola"},
         { name: "Citas Ventanilla",  icon: "date_range",  route: "/citas"},
-        { name: "Datos Solicitante VT", icon: "search", route: "/consultaSolicitante" },
         { name: "registrar motivo", icon: "done", route: "/registrarMotivo" },
         { name: "consultar Motivo", icon: "assignment", route: "/consultarMotivo" },
         { name: "registrar Poblacion", icon: "accessible", route: "/registrarPoblacion" },
@@ -90,7 +90,7 @@ export class NavMenuComponent implements OnDestroy {
         dueño = [
           { name: "User", route:"",icon:""},
           { name: "Listado de cola",  icon: "history",  route: "/cola"},
-          { name: "Solicitar cita", icon: "search", route: "/registroDatos" },
+          { name: "Solicitar cita", icon: "search", route: "/registroCita" },
         ];
 
         this.menu = dueño;
