@@ -49,6 +49,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
 import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.component';
+import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.component';
 
 
 
@@ -61,6 +62,7 @@ import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.co
     ColaAtencionComponent,
     PerfilComponent,
     AppComponent,
+    RolesComponent,
     NavMenuComponent,
     HomeComponent,
     CounterComponent,

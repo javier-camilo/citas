@@ -55,7 +55,6 @@ export class CitasComponent implements OnInit {
   });
 
   registrar() {
-
     let dialogo= this.dialogo.open(DialogoConfirmacionComponent, {data:{name:"Advertencia", descripcion:"¿esta seguro de realizar esta accion?"} } );
 
     dialogo.afterClosed().subscribe(result => {

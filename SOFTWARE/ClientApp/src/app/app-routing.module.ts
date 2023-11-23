@@ -21,6 +21,7 @@ import { AdminRoleGuard } from './guards/admin-role.guard';
 import { OwnerRoleGuard } from './guards/owner-role.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
+import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.component';
 
 const routes: Routes = [
 
@@ -40,7 +41,8 @@ const routes: Routes = [
         { path: 'edicionPoblacion/:codigoPoblacion', component: EditarPoblacionComponent, canActivate:[OwnerRoleGuard]},
         { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent, canActivate:[OwnerRoleGuard]},
         { path: 'registrarMotivo', component: RegistrarMotivoComponent, canActivate:[OwnerRoleGuard]},
-        { path: 'consultarMotivo', component: ConsultarMotivoComponent, canActivate:[OwnerRoleGuard]},
+        { path: 'consultarMotivo', component: ConsultarMotivoComponent, canActivate: [OwnerRoleGuard]},
+        { path: 'roles', component: RolesComponent, canActivate:[OwnerRoleGuard]},
       ],canActivate:[AuthGuard]
     },
     {

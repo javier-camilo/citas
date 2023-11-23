@@ -7,3 +7,11 @@ export class Register {
   apellido:string;
   telefono:string;
 }
+
+export class UserVista extends Register{
+
+}
+
+export class UpdatePermission {
+  userName: string;
+}

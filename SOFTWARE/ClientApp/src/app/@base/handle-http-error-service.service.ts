@@ -29,6 +29,9 @@ export class HandleHttpErrorService {
     if (error.status == '403') {
       this.log("no tines autorizacion para acceder a este recurso");
     }
+    if (error.status == '404') {
+      this.log("no se encontro la informacion");
+    }
 
       return of(result as T);
     };

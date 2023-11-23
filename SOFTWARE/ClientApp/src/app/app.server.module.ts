@@ -8,6 +8,8 @@ import { LayoutComponent } from './gestionUsuarios/layout/layout.component';
 import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.component';
+import { RoleComponent } from './Administrador/gestionPermiso/role/role.component';
+import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.component';
 
 @NgModule({
     imports: [AppModule, ServerModule, ModuleMapLoaderModule],
@@ -17,7 +19,9 @@ import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.co
       LayoutComponent,
       PerfilComponent,
       PageNotFoundComponent,
-      ColaAtencionComponent
+      ColaAtencionComponent,
+      RoleComponent,
+      RolesComponent
     ]
 })
 export class AppServerModule { }

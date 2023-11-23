@@ -6,7 +6,7 @@ import { HandleHttpErrorService } from '../@base/handle-http-error-service.servi
 import { Motivo } from '../Modelo/motivo';
 import { Login } from '../Modelo/login';
 import { Router } from '@angular/router';
-import { Register } from '../Modelo/register';
+import { Register, UserVista, UpdatePermission } from '../Modelo/register';
 
 
 
@@ -29,6 +29,56 @@ export class LoginService {
       this.baseUrl='https://localhost:7240/';
   }
 
+
+
+
+  makeAdmin(permission:UpdatePermission): Observable<UpdatePermission> {
+    return this.http.post<UpdatePermission>(this.baseUrl + 'api/Auth/make-admin', permission)
+        .pipe(
+            tap((res:any)=>
+            {
+                this.handleErrorService.log("se actualizo los permisos de usuario administrador");
+
+            }
+
+          ),
+            catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido',undefined))
+        );
+  }
+
+  makeOwner(permission:UpdatePermission): Observable<UpdatePermission> {
+    return this.http.post<UpdatePermission>(this.baseUrl + 'api/Auth/make-owner', permission)
+        .pipe(
+            tap((res:any)=>
+            {
+                this.handleErrorService.log("se actualizo los permisos de usuario a dueño");
+            }
+
+          ),
+            catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido',undefined))
+        );
+  }
+
+  getUserID(id: string, operacionLLamado?:string): Observable<UserVista> {
+    const url = `${this.baseUrl + 'api/Auth/traerUsuario'}/${id}`;
+      return this.http.get<UserVista>(url, httpOptions)
+      .pipe(
+        tap(_ =>
+
+          {
+
+              if(operacionLLamado==null){
+
+                  this.handleErrorService.log('se consulto el usuario con = '+ id)
+
+              }
+
+          }
+
+          ),
+        catchError(this.handleErrorService.handleError<UserVista>('error al consultar usuario ', undefined))
+      );
+  }
 
   post(login:Login): Observable<string> {
     return this.http.post<string>(this.baseUrl + 'api/Auth/login', login)
@@ -140,7 +190,7 @@ export class LoginService {
     var _finaldata = this.getDatosToken();
 
     let datosUsuario = new Register();
-    
+
     datosUsuario.identificacion = _finaldata.Identificacion;
     datosUsuario.nombre = _finaldata.Nombre;
     datosUsuario.apellido = _finaldata.Apellido;

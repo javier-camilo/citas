@@ -1,0 +1,53 @@
+<mat-card>
+
+  <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+
+      <div class="col-sm-8 border-center">
+
+            <div class="row mt-3" style="margin-bottom: 50px;">
+              <div class="col-md-6"><label class="labels">digite la identificacion</label><input class="form-control"
+                [(ngModel)]="identificacion"></div>
+              <div class="col-md-6" style="margin-top: 20px;"><button mat-raised-button color="primary" (click)="buscar()">buscar</button></div>
+            </div>
+
+            <span></span>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Datos del Usuario</h4>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-md-6"><label class="labels">identificacion</label><input type="text" class="form-control"
+                [(ngModel)]="datosUsuario.identificacion"disabled></div>
+              <div class="col-md-6"><label class="labels">Nombre Completo</label><input type="text" class="form-control"
+                 [(ngModel)]="datosUsuario.nombre" disabled></div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-12"><label class="labels">Apellidos</label><input class="form-control"
+                 [(ngModel)]="datosUsuario.apellido" disabled></div>
+
+              <div class="col-md-12"><label class="labels">Usuario</label><input type="text" class="form-control"
+                [(ngModel)]="datosUsuario.userName" disabled></div>
+            </div>
+
+            <div class="row mt-3" *ngIf="SeEncontro">
+
+              <div class="col-md-6" style="margin-top: 20px;"><button mat-raised-button color="primary"
+                  (click)="confirmacion('1')" style="min-width: 150px;">Administrador</button></div>
+              <div class="col-md-6" style="margin-top: 20px;"><button mat-raised-button color="primary"
+                  (click)="confirmacion('2')" style="min-width: 150px;">Dueño</button></div>
+
+
+            </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+</mat-card>

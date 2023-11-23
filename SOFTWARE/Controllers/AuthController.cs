@@ -45,7 +45,6 @@ namespace SOFTWARE.Controllers
         [Route("seed-roles")]
         public async Task<IActionResult> SeedRoles()
         {
-
             
             bool isOwnerRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.OWNER);
             bool isAdminRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.ADMIN);
@@ -162,7 +161,7 @@ namespace SOFTWARE.Controllers
             if(user==null){
                 return NotFound();
             }
-            
+
             return Ok(user);
         }
 
@@ -233,7 +232,7 @@ namespace SOFTWARE.Controllers
         // Route -> make user -> admin
         [HttpPost]
         [Route("make-admin")]
-        public async Task<IActionResult> MakeAdmin([FromBody] UpdatePermissionDto updatePermissionDto)
+        public async Task<ActionResult<ApplicationUserViewModel>> MakeAdmin([FromBody] UpdatePermissionDto updatePermissionDto)
         {
             var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
 
@@ -242,14 +241,19 @@ namespace SOFTWARE.Controllers
 
             await _userManager.AddToRoleAsync(user, StaticUserRoles.ADMIN);
 
-            return Ok("usuario es admin ahora");
+            return new ApplicationUserViewModel
+            {
+                result = true,
+                UserName = user.UserName
+            };
+
         }
 
 
         // Route -> make user -> owner
         [HttpPost]
         [Route("make-owner")]
-        public async Task<IActionResult> MakeOwner([FromBody] UpdatePermissionDto updatePermissionDto)
+        public async Task<ActionResult<ApplicationUserViewModel>> MakeOwner([FromBody] UpdatePermissionDto updatePermissionDto)
         {
             var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
 
@@ -257,8 +261,13 @@ namespace SOFTWARE.Controllers
                 return BadRequest("usuario invalido!!!!!!!!!");
 
             await _userManager.AddToRoleAsync(user, StaticUserRoles.OWNER);
+
+            return new ApplicationUserViewModel
+            {
+                result = true,
+                UserName = user.UserName
+            };
             
-            return Ok("el usuario es dueño ahora");
         }
 
         [HttpGet]

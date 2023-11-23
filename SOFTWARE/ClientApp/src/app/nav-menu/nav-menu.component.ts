@@ -48,8 +48,9 @@ export class NavMenuComponent implements OnDestroy {
 
       admin = [
         {name: "Digitador", route:"",icon:""},
-        { name: "Citas Ventanilla",  icon: "date_range",  route: "/citas"},
-        { name: "registrar Atencion", icon: "", route: "" }
+        { name: "Citas Ventanilla", icon: "date_range", route: "/" },
+        { name: "Registrar Atencion", icon: "save", route: "/cola" },
+        { name: "Reporte", icon: "history", route: "" }
       ];
 
       this.menu = admin;
@@ -72,7 +73,8 @@ export class NavMenuComponent implements OnDestroy {
         { name: "registrar motivo", icon: "done", route: "/registrarMotivo" },
         { name: "consultar Motivo", icon: "assignment", route: "/consultarMotivo" },
         { name: "registrar Poblacion", icon: "accessible", route: "/registrarPoblacion" },
-        { name: "consultar Poblacion",  icon: "accessibility_new" , route: "/consultarPoblacion"}
+        { name: "consultar Poblacion", icon: "accessibility_new", route: "/consultarPoblacion" },
+        { name: "gestionar permiso",  icon: "supervised_user_circle" , route: "/roles"}
       ];
 
       this.menu = dueño;
