@@ -69,7 +69,7 @@ export class NavMenuComponent implements OnDestroy {
       dueño = [
         { name: "Dueño", route: "", icon: "" },
         { name: "Listado de cola",  icon: "history",  route: "/cola"},
-        { name: "Citas Ventanilla",  icon: "date_range",  route: "/citas"},
+        { name: "Citas Ventanilla",  icon: "date_range",  route: "/"},
         { name: "registrar motivo", icon: "done", route: "/registrarMotivo" },
         { name: "consultar Motivo", icon: "assignment", route: "/consultarMotivo" },
         { name: "registrar Poblacion", icon: "accessible", route: "/registrarPoblacion" },

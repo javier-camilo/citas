@@ -32,7 +32,18 @@ namespace SOFTWARE.Controllers
           {
               return NotFound();
           }
-            return await _context.Turno.ToListAsync();
+
+            var listado = await _context.Turno.ToListAsync();
+            List<Turno> turnos = new List<Turno>();
+
+            foreach (var item in listado)
+            {
+                if(item.Asistencia == "no Atendido")
+                {
+                    turnos.Add(item);
+                }
+            }
+            return turnos;
         }
 
         // GET: api/Turno/5
