@@ -31,13 +31,13 @@ namespace SOFTWARE.Controllers
 
 
 
-        public AuthController(UserManager<ApplicationUser> userManager, 
+        public AuthController(UserManager<ApplicationUser> userManager,
                 RoleManager<IdentityRole> roleManager, IConfiguration configuration, TodoContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
-            _context=context;
+            _context = context;
         }
 
 
@@ -45,7 +45,7 @@ namespace SOFTWARE.Controllers
         [Route("seed-roles")]
         public async Task<IActionResult> SeedRoles()
         {
-            
+
             bool isOwnerRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.OWNER);
             bool isAdminRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.ADMIN);
             bool isUserRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.USER);
@@ -62,14 +62,14 @@ namespace SOFTWARE.Controllers
             return Ok("los roles se crearon correctamente");
         }
 
-        
-        private bool ValidarRegistro(string identificacion){
 
-            
+        private bool ValidarRegistro(string identificacion) {
+
+
             var ListadoUsuarios = _context.Users.ToList();
             foreach (var item in ListadoUsuarios)
             {
-                if(item.Identificacion.Equals(identificacion)){
+                if (item.Identificacion.Equals(identificacion)) {
                     return true;
                 }
 
@@ -77,16 +77,16 @@ namespace SOFTWARE.Controllers
             return false;
         }
 
-        
-        private ValidationProblemDetails error(string servicio, string e){
-            
-                ModelState.AddModelError(servicio, e);
-                var problemDetails = new ValidationProblemDetails(ModelState)
-                {
-                    Status = StatusCodes.Status400BadRequest,
-                };
 
-                return problemDetails;
+        private ValidationProblemDetails error(string servicio, string e) {
+
+            ModelState.AddModelError(servicio, e);
+            var problemDetails = new ValidationProblemDetails(ModelState)
+            {
+                Status = StatusCodes.Status400BadRequest,
+            };
+
+            return problemDetails;
         }
 
         [HttpPost]
@@ -95,16 +95,16 @@ namespace SOFTWARE.Controllers
         {
             var isExistsUser = await _userManager.FindByNameAsync(registerDto.UserName);
             if (isExistsUser != null)
-                return BadRequest(error("Duplicado","el usuario ya se encuentra registrado"));
+                return BadRequest(error("Duplicado", "el usuario ya se encuentra registrado"));
 
-            if(ValidarRegistro(registerDto.Identificacion))
-                return BadRequest(error("Duplicado","los datos del usuario ya se encuentran registrados"));
-            
+            if (ValidarRegistro(registerDto.Identificacion))
+                return BadRequest(error("Duplicado", "los datos del usuario ya se encuentran registrados"));
+
             ApplicationUser newUser = new ApplicationUser()
             {
                 Identificacion = registerDto.Identificacion,
                 Nombre = registerDto.Nombre,
-                Apellido = registerDto.Apellido,  
+                Apellido = registerDto.Apellido,
                 PhoneNumber = registerDto.Telefono,
                 Email = registerDto.Email,
                 UserName = registerDto.UserName,
@@ -115,7 +115,7 @@ namespace SOFTWARE.Controllers
 
             if (!createUserResult.Succeeded)
             {
-                
+
                 var errorString = "creacion de usuario fallida por: ";
                 foreach (var error in createUserResult.Errors)
                 {
@@ -157,15 +157,15 @@ namespace SOFTWARE.Controllers
                     user = item;
                 }
             }
-            
-            if(user==null){
+
+            if (user == null) {
                 return NotFound();
             }
 
             return Ok(user);
         }
 
-            // Route -> Login
+        // Route -> Login
         [HttpPost]
         [Route("login")]
         public async Task<ActionResult<ApplicationUserViewModel>> Login([FromBody] LoginDto loginDto)
@@ -205,8 +205,8 @@ namespace SOFTWARE.Controllers
 
             return new ApplicationUserViewModel
             {
-                result=true,
-                UserName=user.UserName,
+                result = true,
+                UserName = user.UserName,
                 Token = token
             };
         }
@@ -228,7 +228,7 @@ namespace SOFTWARE.Controllers
             return token;
         }
 
-        
+
         // Route -> make user -> admin
         [HttpPost]
         [Route("make-admin")]
@@ -240,6 +240,25 @@ namespace SOFTWARE.Controllers
                 return BadRequest("usuario invalido!!!!!!!!");
 
             await _userManager.AddToRoleAsync(user, StaticUserRoles.ADMIN);
+
+            return new ApplicationUserViewModel
+            {
+                result = true,
+                UserName = user.UserName
+            };
+
+        }
+
+        [HttpPost]
+        [Route("remove-admin")]
+        public async Task<ActionResult<ApplicationUserViewModel>> RemoveAdmin([FromBody] UpdatePermissionDto updatePermissionDto)
+        {
+            var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
+
+            if (user is null)
+                return BadRequest("usuario invalido!!!!!!!!");
+
+            await _userManager.RemoveFromRoleAsync(user, StaticUserRoles.ADMIN);
 
             return new ApplicationUserViewModel
             {
@@ -267,7 +286,26 @@ namespace SOFTWARE.Controllers
                 result = true,
                 UserName = user.UserName
             };
-            
+
+        }
+
+        [HttpPost]
+        [Route("remove-owner")]
+        public async Task<ActionResult<ApplicationUserViewModel>> RemoveOwner([FromBody] UpdatePermissionDto updatePermissionDto)
+        {
+            var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
+
+            if (user is null)
+                return BadRequest("usuario invalido!!!!!!!!!");
+
+            await _userManager.RemoveFromRoleAsync(user, StaticUserRoles.OWNER);
+
+            return new ApplicationUserViewModel
+            {
+                result = true,
+                UserName = user.UserName
+            };
+
         }
 
         [HttpGet]

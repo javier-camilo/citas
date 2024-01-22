@@ -6,18 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace SOFTWARE.Models
 {
-    
-    public class ApplicationUserInputModel
-    {
-        
-        public string Identificacion { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
 
-        public string  Rol { get; set; }
-    }
-
-    
     public class ApplicationUserViewModel
     {
         public bool result { get; set; }

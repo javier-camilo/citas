@@ -30,14 +30,26 @@ export class LoginService {
   }
 
 
-
-
   makeAdmin(permission:UpdatePermission): Observable<UpdatePermission> {
     return this.http.post<UpdatePermission>(this.baseUrl + 'api/Auth/make-admin', permission)
         .pipe(
             tap((res:any)=>
             {
-                this.handleErrorService.log("se actualizo los permisos de usuario administrador");
+                this.handleErrorService.log("se actualizo los permisos de usuario a contratista");
+
+            }
+
+          ),
+            catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido',undefined))
+        );
+  }
+
+  removeAdmin(permission:UpdatePermission): Observable<UpdatePermission> {
+    return this.http.post<UpdatePermission>(this.baseUrl + 'api/Auth/remove-admin', permission)
+        .pipe(
+            tap((res:any)=>
+            {
+                this.handleErrorService.log("se actualizo los permisos de usuario y se le retiro el rol");
 
             }
 
@@ -51,7 +63,20 @@ export class LoginService {
         .pipe(
             tap((res:any)=>
             {
-                this.handleErrorService.log("se actualizo los permisos de usuario a dueño");
+                this.handleErrorService.log("se actualizo los permisos de usuario a Administrador");
+            }
+
+          ),
+            catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido',undefined))
+        );
+  }
+
+  removeOwner(permission:UpdatePermission): Observable<UpdatePermission> {
+    return this.http.post<UpdatePermission>(this.baseUrl + 'api/Auth/remove-owner', permission)
+        .pipe(
+            tap((res:any)=>
+            {
+                this.handleErrorService.log("se le revoco el permiso de administrador de la aplicacion");
             }
 
           ),
@@ -66,7 +91,6 @@ export class LoginService {
         tap(_ =>
 
           {
-
               if(operacionLLamado==null){
 
                   this.handleErrorService.log('se consulto el usuario con = '+ id)
@@ -101,7 +125,7 @@ export class LoginService {
 
               {
                   this.handleErrorService.log("el ussuario se registro correctamente");
-                  this.router.navigateByUrl('/login');
+                  this.router.navigateByUrl('/home');
               }
               ),
             catchError(this.handleErrorService.handleError<Register>('usuario o contraseña invalidos',undefined))
@@ -111,7 +135,6 @@ export class LoginService {
   IsLoggedIn(){
     return localStorage.getItem('token')!=null;
   }
-
 
   GetToken(){
     return localStorage.getItem('token')||'';
@@ -200,5 +223,6 @@ export class LoginService {
 
     return datosUsuario;
   }
+
 
 }

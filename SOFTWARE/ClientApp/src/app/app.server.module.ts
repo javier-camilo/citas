@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.component';
 import { RoleComponent } from './Administrador/gestionPermiso/role/role.component';
 import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.component';
+import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/registrar-atencion.component';
 
 @NgModule({
     imports: [AppModule, ServerModule, ModuleMapLoaderModule],
@@ -21,7 +22,8 @@ import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.compo
       PageNotFoundComponent,
       ColaAtencionComponent,
       RoleComponent,
-      RolesComponent
+      RolesComponent,
+      RegistrarAtencionComponent
     ]
 })
 export class AppServerModule { }

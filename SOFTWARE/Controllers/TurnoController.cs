@@ -46,6 +46,20 @@ namespace SOFTWARE.Controllers
             return turnos;
         }
 
+        [HttpGet]
+        [Route("listadoTurno")]
+        public async Task<ActionResult<IEnumerable<Turno>>> GetListado()
+        {
+            if (_context.Turno == null)
+            {
+                return NotFound();
+            }
+
+            var listado = await _context.Turno.ToListAsync();
+
+            return listado;
+        }
+
         // GET: api/Turno/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Turno>> GetTurno(int id)

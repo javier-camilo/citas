@@ -26,9 +26,12 @@ namespace SOFTWARE.Models
 
         public string ContratistaAtendio { get; set; }
 
-        public string RefTiempo { get; set; }
-        public string FechaFinalizacion { get; set; }
 
+
+        //falta agregar funcion 
+        public string RefTiempo { get; set; }
+
+        public string FechaFinalizacion { get; set; }
 
 
         [Required(ErrorMessage = "los datos del solicitante son requeridos")]
@@ -36,6 +39,7 @@ namespace SOFTWARE.Models
 
         [Required(ErrorMessage = "la poblacion es requerida")]
         public string Poblacion { get; set; }
+
 
     }
 }

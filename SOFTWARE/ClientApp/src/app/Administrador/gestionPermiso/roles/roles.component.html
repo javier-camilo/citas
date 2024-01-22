@@ -34,10 +34,21 @@
 
             <div class="row mt-3" *ngIf="SeEncontro">
 
+
+              <mat-form-field>
+
+                  <mat-label>selecione el Rol</mat-label>
+                  <mat-select [(ngModel)]="operacion">
+                    <mat-option value="1">contratista</mat-option>
+                    <mat-option value="2">Administrador</mat-option>
+                  </mat-select>
+
+              </mat-form-field>
+
               <div class="col-md-6" style="margin-top: 20px;"><button mat-raised-button color="primary"
-                  (click)="confirmacion('1')" style="min-width: 150px;">hacer contratista</button></div>
-              <div class="col-md-6" style="margin-top: 20px;"><button mat-raised-button color="primary"
-                  (click)="confirmacion('2')" style="min-width: 150px;">hacer Dueño</button></div>
+                  (click)="confirmacion(operacion)" style="min-width: 150px;">Asignar rol</button></div>
+              <div class="col-md-6" style="margin-top: 20px;"><button mat-raised-button
+                  (click)="confirmacionEliminacion(operacion)" style="min-width: 150px;">Eliminar rol</button></div>
 
 
             </div>

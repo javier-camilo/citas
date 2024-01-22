@@ -12,7 +12,9 @@ namespace SOFTWARE.Core.Dtos
         [Required(ErrorMessage = "usuario es requerido")]
         public string UserName { get; set; }
 
+
         [Required(ErrorMessage = "Email es requerido")]
+        [EmailAddress(ErrorMessage = "debe digitar un email valido")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "contraseña es requerido")]

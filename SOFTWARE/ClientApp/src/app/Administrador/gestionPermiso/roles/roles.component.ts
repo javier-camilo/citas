@@ -17,6 +17,7 @@ export class RolesComponent implements OnInit {
   protected identificacion: string;
   protected SeEncontro: boolean;
   protected updatePermission: UpdatePermission;
+  protected operacion:string;
 
   constructor(private loginService: LoginService,public dialogo: MatDialog) {
   }
@@ -26,6 +27,7 @@ export class RolesComponent implements OnInit {
     this.identificacion = "";
     this.SeEncontro = false;
     this.updatePermission = new UpdatePermission();
+    this.operacion = "";
   }
 
   buscar() {
@@ -51,12 +53,32 @@ export class RolesComponent implements OnInit {
 
   }
 
+  removerAdministrador(respuesta: string) {
+
+    if (respuesta == "true") {
+      this.updatePermission.userName = this.datosUsuario.userName;
+      this.loginService.removeAdmin(this.updatePermission).subscribe();
+    }
+
+  }
+
   volverOwner(respuesta: string) {
 
     if (respuesta == "true") {
 
       this.updatePermission.userName = this.datosUsuario.userName;
       this.loginService.makeOwner(this.updatePermission).subscribe();
+
+    }
+
+  }
+
+  removerOwner(respuesta: string) {
+
+    if (respuesta == "true") {
+
+      this.updatePermission.userName = this.datosUsuario.userName;
+      this.loginService.removeOwner(this.updatePermission).subscribe();
 
     }
 
@@ -73,8 +95,27 @@ export class RolesComponent implements OnInit {
 
       if (operacion == "1") {
         this.volverAdministrador(respuesta);
-      } else {
+      } else if(operacion == "2"){
         this.volverOwner(respuesta);
+      }
+
+    })
+  }
+
+
+  confirmacionEliminacion(operacion: string) {
+
+    let respuesta;
+    let ref = this.dialogo.open(DialogoConfirmacionComponent, {data: {name:"Eliminar", descripcion:"¿Deseas eliminar el rol?"}});
+
+    ref.afterClosed().subscribe(result => {
+
+      respuesta = result;
+
+      if (operacion == "1") {
+        this.removerAdministrador(respuesta);
+      } else if(operacion == "2"){
+        this.removerOwner(respuesta);
       }
 
     })
