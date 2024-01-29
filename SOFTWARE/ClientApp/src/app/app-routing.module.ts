@@ -9,7 +9,6 @@ import { ConsultarPoblacionComponent } from './Administrador/gestionPoblacion/co
 import { EditarPoblacionComponent } from './Administrador/gestionPoblacion/editar-poblacion/editar-poblacion.component';
 import { RegistrarPoblacionComponent } from './Administrador/gestionPoblacion/registrar-poblacion/registrar-poblacion.component';
 import { CitasComponent } from './Solicitante/citas/citas.component';
-import { EstadoColaComponent } from './Solicitante/estado-cola/estado-cola.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './gestionUsuarios/login/login.component';
@@ -22,6 +21,8 @@ import { OwnerRoleGuard } from './guards/owner-role.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
 import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.component';
+import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.component';
+import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/registrar-atencion.component';
 
 const routes: Routes = [
 
@@ -41,8 +42,10 @@ const routes: Routes = [
         { path: 'edicionPoblacion/:codigoPoblacion', component: EditarPoblacionComponent, canActivate:[OwnerRoleGuard]},
         { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent, canActivate:[OwnerRoleGuard]},
         { path: 'registrarMotivo', component: RegistrarMotivoComponent, canActivate:[OwnerRoleGuard]},
-        { path: 'consultarMotivo', component: ConsultarMotivoComponent, canActivate: [OwnerRoleGuard]},
-        { path: 'roles', component: RolesComponent, canActivate:[OwnerRoleGuard]},
+        { path: 'consultarMotivo', component: ConsultarMotivoComponent, canActivate: [OwnerRoleGuard] },
+        { path: 'roles', component: RolesComponent, canActivate: [OwnerRoleGuard] },
+        { path: 'colaAtencion', component: ColaAtencionComponent},
+        { path: 'registrarAtencion/:codigoTurno', component: RegistrarAtencionComponent},
       ],canActivate:[AuthGuard]
     },
     {

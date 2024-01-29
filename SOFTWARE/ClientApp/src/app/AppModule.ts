@@ -16,7 +16,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { CitasComponent } from './Solicitante/citas/citas.component';
-import { EstadoColaComponent } from './Solicitante/estado-cola/estado-cola.component';
 import { TicketComponent } from './solicitante/ticket/ticket.component';
 import { CrearhorarioComponent } from './administrador/gestionhorario/crearhorario/crearhorario.component';
 import { ConsultarhorarioComponent } from './administrador/gestionhorario/consultarhorario/consultarhorario.component';
@@ -51,6 +50,7 @@ import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
 import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.component';
 import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.component';
 import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/registrar-atencion.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -67,7 +67,6 @@ import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/regist
     FetchDataComponent,
     CitasComponent,
     DialogoConfirmacionComponent,
-    EstadoColaComponent,
     TicketComponent,
     CrearhorarioComponent,
     ConsultarhorarioComponent,
@@ -105,6 +104,7 @@ import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/regist
     MatGridListModule,
     MatDialogModule,
     MatIconModule,
+    MatCheckboxModule,
     FormsModule,
     MatCardModule,
     MatButtonModule,

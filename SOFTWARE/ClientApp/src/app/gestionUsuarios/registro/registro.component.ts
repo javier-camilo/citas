@@ -13,6 +13,7 @@ import { DialogoConfirmacionComponent } from 'src/app/dialogo-confirmacion/dialo
 })
 export class RegistroComponent implements OnInit {
 
+  checked = false;
   hide = true;
   register:Register;
 
@@ -33,7 +34,7 @@ export class RegistroComponent implements OnInit {
         {
 
         }
-          );
+      );
 
       }
     });
