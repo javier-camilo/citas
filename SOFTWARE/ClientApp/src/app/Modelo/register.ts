@@ -9,7 +9,7 @@ export class Register {
 }
 
 export class UserVista extends Register{
-
+  phoneNumber: string;
 }
 
 export class UpdatePermission {

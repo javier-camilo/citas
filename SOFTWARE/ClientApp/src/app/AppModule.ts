@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -50,7 +49,8 @@ import { PerfilComponent } from './gestionUsuarios/perfil/perfil.component';
 import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.component';
 import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.component';
 import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/registrar-atencion.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -63,7 +63,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     RolesComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
     FetchDataComponent,
     CitasComponent,
     DialogoConfirmacionComponent,
@@ -107,6 +106,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCheckboxModule,
     FormsModule,
     MatCardModule,
+    MatTabsModule,
     MatButtonModule,
     RouterModule.forRoot([]),
     BrowserAnimationsModule,

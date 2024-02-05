@@ -9,7 +9,6 @@ import { ConsultarPoblacionComponent } from './Administrador/gestionPoblacion/co
 import { EditarPoblacionComponent } from './Administrador/gestionPoblacion/editar-poblacion/editar-poblacion.component';
 import { RegistrarPoblacionComponent } from './Administrador/gestionPoblacion/registrar-poblacion/registrar-poblacion.component';
 import { CitasComponent } from './Solicitante/citas/citas.component';
-import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './gestionUsuarios/login/login.component';
 import { RegistroComponent } from './gestionUsuarios/registro/registro.component';

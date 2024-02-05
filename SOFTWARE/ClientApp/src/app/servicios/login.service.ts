@@ -89,16 +89,14 @@ export class LoginService {
       return this.http.get<UserVista>(url, httpOptions)
       .pipe(
         tap(_ =>
-
           {
-              if(operacionLLamado==null){
+              if(operacionLLamado!=null){
 
                   this.handleErrorService.log('se consulto el usuario con = '+ id)
 
               }
 
           }
-
           ),
         catchError(this.handleErrorService.handleError<UserVista>('error al consultar usuario ', undefined))
       );

@@ -55,6 +55,39 @@ export class TurnoService {
   }
 
 
+  getId(id: string, operacionLLamado?:string): Observable<Turno> {
+    const url = `${this.baseUrl + 'api/Turno'}/${id}`;
+      return this.http.get<Turno>(url, httpOptions)
+      .pipe(
+        tap(_ =>
+
+          {
+
+              if(operacionLLamado==null){
+
+                  this.handleErrorService.log('se consulto el turno = '+ id)
+
+              }
+
+          }
+
+          ),
+        catchError(this.handleErrorService.handleError<Turno>('Buscar motivo', undefined))
+      );
+  }
+
+
+  put(turno: Turno): Observable<any> {
+    const url = `${this.baseUrl}api/Turno/${turno.numero}`;
+    return this.http.put(url, turno,  {responseType: 'text'} )
+    .pipe(
+      tap(_=> this.handleErrorService.log("se edito el motivo correctamente")),
+      catchError(this.handleErrorService.handleError<any>('Editar turno'))
+    );
+  }
+
+
+
 
 
 

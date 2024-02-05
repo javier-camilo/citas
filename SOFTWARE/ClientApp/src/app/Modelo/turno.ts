@@ -18,4 +18,6 @@ export class Turno {
 
   poblacion: string | null;
 
+  observacion: string | null;
+
 }

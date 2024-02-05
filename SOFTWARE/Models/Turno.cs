@@ -19,7 +19,6 @@ namespace SOFTWARE.Models
         [Required(ErrorMessage = "el motivo es requerido")]
         public string Motivo { get; set; }
 
-
         public string Asistencia { get; set; }
 
         public string DescripcionOperacion { get; set; }
@@ -33,6 +32,8 @@ namespace SOFTWARE.Models
 
         public string FechaFinalizacion { get; set; }
 
+        //
+
 
         [Required(ErrorMessage = "los datos del solicitante son requeridos")]
         public string RefSolicitante { get; set; }
@@ -40,6 +41,9 @@ namespace SOFTWARE.Models
         [Required(ErrorMessage = "la poblacion es requerida")]
         public string Poblacion { get; set; }
 
+
+
+        public string Observacion { get; set; }
 
     }
 }
