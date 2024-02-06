@@ -107,43 +107,45 @@
 
     <mat-tab label="registrar Atencion">
 
+      <form [formGroup]="firstFormGroup">
+          <mat-grid-list cols="1" rowHeight="6:1">
 
-      <mat-grid-list cols="1" rowHeight="6:1">
+            <mat-grid-tile>
 
-        <mat-grid-tile>
+              <div>
+                <mat-form-field>
 
-          <div>
-            <mat-form-field>
+                  <mat-label>selecione la Asistencia</mat-label>
 
-              <mat-label>selecione la Asistencia</mat-label>
+                  <mat-select>
 
-              <mat-select>
+                    <mat-option value="no asistio">No asistio</mat-option>
+                    <mat-option value="Atendido">Atendido</mat-option>
 
-                <mat-option value="no asistio">No asistio</mat-option>
-                <mat-option value="Atendido">Atendido</mat-option>
+                  </mat-select>
 
-              </mat-select>
+                </mat-form-field>
+              </div>
 
-            </mat-form-field>
-          </div>
+              <div>
+                <mat-form-field style="margin-left: 20px;">
+                  <mat-label>observacion</mat-label>
+                  <input matInput>
+                </mat-form-field>
+              </div>
 
-          <div>
-            <mat-form-field style="margin-left: 20px;">
-              <mat-label>observacion</mat-label>
-              <input matInput>
-            </mat-form-field>
-          </div>
+              <div style="margin-left: 20px; margin-bottom: 15px;">
 
-          <div style="margin-left: 20px; margin-bottom: 15px;">
+                <button mat-raised-button color="primary" style="height: 50px;">Guardar</button>
 
-            <button mat-raised-button color="primary" style="height: 50px;">Guardar</button>
+              </div>
 
-          </div>
-
-        </mat-grid-tile>
+            </mat-grid-tile>
 
 
-      </mat-grid-list>
+          </mat-grid-list>
+          
+        </form>
 
     </mat-tab>
 

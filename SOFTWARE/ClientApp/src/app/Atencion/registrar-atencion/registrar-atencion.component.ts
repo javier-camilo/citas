@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/servicios/login.service';
 import { Register, UserVista } from 'src/app/Modelo/register';
 import { DialogoConfirmacionComponent } from 'src/app/dialogo-confirmacion/dialogo-confirmacion.component';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registrar-atencion',
@@ -20,7 +21,14 @@ export class RegistrarAtencionComponent implements OnInit {
   turno: Turno;
 
   constructor(private rutaActiva: ActivatedRoute, private turnoServicio: TurnoService,
-    private dialog: MatDialog, private loginService:LoginService) { }
+    private dialog: MatDialog, private loginService:LoginService,private _formBuilder: FormBuilder) { }
+
+
+  firstFormGroup = this._formBuilder.group({
+    motivo: ['', Validators.required],
+    poblacion: ['', Validators.required]
+  });
+
 
   ngOnInit(): void {
     this.inicializarContratista();

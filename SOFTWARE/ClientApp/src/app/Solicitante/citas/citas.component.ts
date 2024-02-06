@@ -54,6 +54,7 @@ export class CitasComponent implements OnInit {
     poblacion: ['', Validators.required]
   });
 
+  
   registrar() {
     let dialogo= this.dialogo.open(DialogoConfirmacionComponent, {data:{name:"Advertencia", descripcion:"¿esta seguro de realizar esta accion?"} } );
 
