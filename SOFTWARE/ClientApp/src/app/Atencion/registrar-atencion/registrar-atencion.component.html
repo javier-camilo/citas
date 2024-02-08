@@ -1,8 +1,8 @@
 
 <mat-card class="contact-card">
 
-  <mat-tab-group>
 
+  <mat-tab-group *ngIf="turno!=null">
 
     <mat-tab label="Datos del turno">
       <div class="container rounded bg-white mt-5 mb-5">
@@ -107,7 +107,7 @@
 
     <mat-tab label="registrar Atencion">
 
-      <form [formGroup]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
           <mat-grid-list cols="1" rowHeight="6:1">
 
             <mat-grid-tile>
@@ -117,21 +117,35 @@
 
                   <mat-label>selecione la Asistencia</mat-label>
 
-                  <mat-select>
+                  <mat-select formControlName="asistencia">
 
                     <mat-option value="no asistio">No asistio</mat-option>
                     <mat-option value="Atendido">Atendido</mat-option>
 
                   </mat-select>
 
+                  <mat-error *ngIf="this.firstFormGroup.controls['asistencia'].hasError('required')">
+                    Es necesario que seleccion la asistencia
+                  </mat-error>
+
                 </mat-form-field>
               </div>
 
               <div>
                 <mat-form-field style="margin-left: 20px;">
+
                   <mat-label>observacion</mat-label>
-                  <input matInput>
+
+                  <input matInput formControlName="observacion">
+
+                  <mat-error *ngIf="this.firstFormGroup.controls['observacion'].hasError('required')">
+                    Es necesario digitar la observacion
+                  </mat-error>
+                  <mat-error *ngIf="this.firstFormGroup.controls['observacion'].hasError('minlength')">
+                    <br>debe digitar un minimo de 4 letras
+                  </mat-error>
                 </mat-form-field>
+
               </div>
 
               <div style="margin-left: 20px; margin-bottom: 15px;">
@@ -144,7 +158,7 @@
 
 
           </mat-grid-list>
-          
+
         </form>
 
     </mat-tab>

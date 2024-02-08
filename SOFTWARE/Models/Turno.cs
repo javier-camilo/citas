@@ -25,6 +25,7 @@ namespace SOFTWARE.Models
 
         public string ContratistaAtendio { get; set; }
 
+        public string Observacion { get; set; }
 
 
         //falta agregar funcion 
@@ -43,7 +44,6 @@ namespace SOFTWARE.Models
 
 
 
-        public string Observacion { get; set; }
 
     }
 }

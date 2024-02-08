@@ -81,7 +81,7 @@ export class TurnoService {
     const url = `${this.baseUrl}api/Turno/${turno.numero}`;
     return this.http.put(url, turno,  {responseType: 'text'} )
     .pipe(
-      tap(_=> this.handleErrorService.log("se edito el motivo correctamente")),
+      tap(_=> this.handleErrorService.log("se edito el turno correctamente")),
       catchError(this.handleErrorService.handleError<any>('Editar turno'))
     );
   }

@@ -54,7 +54,7 @@ export class CitasComponent implements OnInit {
     poblacion: ['', Validators.required]
   });
 
-  
+
   registrar() {
     let dialogo= this.dialogo.open(DialogoConfirmacionComponent, {data:{name:"Advertencia", descripcion:"¿esta seguro de realizar esta accion?"} } );
 
@@ -72,6 +72,7 @@ export class CitasComponent implements OnInit {
     this.turno.contratistaAtendio = "";
     this.turno.refTiempo = "";
     this.turno.asistencia = "";
+    this.turno.observacion= "";
     this.turno.motivo = this.firstFormGroup.controls["motivo"].value;
     this.turno.poblacion = this.firstFormGroup.controls["poblacion"].value;
     this.turno.refSolicitante = this.usuario.identificacion;

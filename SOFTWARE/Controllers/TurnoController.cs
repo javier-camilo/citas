@@ -72,7 +72,7 @@ namespace SOFTWARE.Controllers
 
             if (turno == null)
             {
-                return NotFound();
+                return BadRequest(error("Consultar turno", "no se encontro ningun turno con esos datos"));
             }
 
             return turno;
@@ -152,6 +152,20 @@ namespace SOFTWARE.Controllers
         {
             return (_context.Turno?.Any(e => e.Numero == id)).GetValueOrDefault();
         }
-        
+
+
+        private ValidationProblemDetails error(string servicio, string e)
+        {
+
+            ModelState.AddModelError(servicio, e);
+            var problemDetails = new ValidationProblemDetails(ModelState)
+            {
+                Status = StatusCodes.Status400BadRequest,
+            };
+
+            return problemDetails;
+        }
+
+
     }
 }

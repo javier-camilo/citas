@@ -4,7 +4,7 @@ export class Turno {
 
   motivo:string | null;
 
-  asistencia:string;
+  asistencia:string | null;
 
   descripcionOperacion:string | null;
 
