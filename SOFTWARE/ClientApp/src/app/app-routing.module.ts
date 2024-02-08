@@ -23,6 +23,7 @@ import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.compo
 import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.component';
 import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/registrar-atencion.component';
 import { GenrarreporteComponent } from './administrador/genrarreporte/genrarreporte.component';
+import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-admin/registro-admin.component';
 
 const routes: Routes = [
 
@@ -43,7 +44,8 @@ const routes: Routes = [
         { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent, canActivate:[OwnerRoleGuard]},
         { path: 'registrarMotivo', component: RegistrarMotivoComponent, canActivate:[OwnerRoleGuard]},
         { path: 'consultarMotivo', component: ConsultarMotivoComponent, canActivate: [OwnerRoleGuard] },
-        { path: 'reporteAdministrador', component: GenrarreporteComponent, canActivate: [OwnerRoleGuard]},
+        { path: 'reporteAdministrador', component: GenrarreporteComponent, canActivate: [OwnerRoleGuard] },
+        { path: 'registroAdministrador', component: RegistroAdminComponent, canActivate: [OwnerRoleGuard] },
         { path: 'roles', component: RolesComponent, canActivate: [OwnerRoleGuard] },
         { path: 'colaAtencion', component: ColaAtencionComponent},
         { path: 'registrarAtencion/:codigoTurno', component: RegistrarAtencionComponent},

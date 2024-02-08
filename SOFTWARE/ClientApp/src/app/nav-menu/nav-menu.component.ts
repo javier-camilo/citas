@@ -66,17 +66,17 @@ export class NavMenuComponent implements OnDestroy {
 
       let dueño: Menu[];
 
+
       dueño = [
         { name: "Dueño", route: "", icon: "" },
         { name: "Listado de cola",  icon: "history",  route: "/cola"},
-        { name: "Citas Ventanilla",  icon: "date_range",  route: "/"},
         { name: "registrar motivo", icon: "done", route: "/registrarMotivo" },
         { name: "consultar Motivo", icon: "assignment", route: "/consultarMotivo" },
         { name: "registrar Poblacion", icon: "accessible", route: "/registrarPoblacion" },
         { name: "consultar Poblacion", icon: "accessibility_new", route: "/consultarPoblacion" },
-        { name: "registrar Usuario", icon: "supervised_user_circle", route: "/registro" },
-        { name: "gestionar permisos", icon: "supervised_user_circle", route: "/roles" }
-
+        { name: "registrar Usuario", icon: "supervised_user_circle", route: "/registroAdministrador" },
+        { name: "gestionar permisos", icon: "supervised_user_circle", route: "/roles" },
+        { name: "reporte", icon: "receipt", route: "/reporteAdministrador" }
       ];
 
       this.menu = dueño;

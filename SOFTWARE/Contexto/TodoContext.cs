@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SOFTWARE.Models;
+using SOFTWARE.Pages;
+using SOFTWARE.Servicios;
 
 namespace SOFTWARE.Contexto
 {

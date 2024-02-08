@@ -18,17 +18,17 @@ export class ConsultarPoblacionComponent implements OnInit {
   constructor(private poblacionService:PoblacionServiceService) { }
 
   ngOnInit(): void {
-      
+
     this.loading=true;
-    this.poblacionService.get("poblacionComponent").subscribe(result=>{this.poblacion=result; this.loading=false;
+    this.poblacionService.get("").subscribe(result=>{this.poblacion=result; this.loading=false;
       this.dataSource = new MatTableDataSource(this.poblacion)}
       );
   }
 
-  
+
   filtrar(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filtro.trim().toLowerCase();
-  }  
+  }
 
 }

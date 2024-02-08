@@ -51,6 +51,7 @@ import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.compo
 import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/registrar-atencion.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
+import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-admin/registro-admin.component';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     RegistrarPoblacionComponent,
     ConsultarPoblacionComponent,
     EditarPoblacionComponent,
+    RegistroAdminComponent,
     RegistroComponent,
     FiltroPoblacionPipe,
     FiltroMotivoPipe,

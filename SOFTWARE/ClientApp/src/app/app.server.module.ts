@@ -11,6 +11,7 @@ import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.co
 import { RoleComponent } from './Administrador/gestionPermiso/role/role.component';
 import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.component';
 import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/registrar-atencion.component';
+import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-admin/registro-admin.component';
 
 @NgModule({
     imports: [AppModule, ServerModule, ModuleMapLoaderModule],
@@ -23,7 +24,8 @@ import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/regist
       ColaAtencionComponent,
       RoleComponent,
       RolesComponent,
-      RegistrarAtencionComponent
+      RegistrarAtencionComponent,
+      RegistroAdminComponent
     ]
 })
 export class AppServerModule { }

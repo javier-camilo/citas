@@ -21,7 +21,7 @@ export class ConsultarMotivoComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading=true;
-    this.motivoService.get("motivoComponent").subscribe(result=>{this.motivos=result; this.loading=false;
+    this.motivoService.get("").subscribe(result=>{this.motivos=result; this.loading=false;
       this.dataSource = new MatTableDataSource(this.motivos);}
       );
   }

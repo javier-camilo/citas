@@ -16,6 +16,7 @@ using SOFTWARE.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Diagnostics;
+using SOFTWARE.Servicios;
 
 namespace SOFTWARE.Controllers
 {
@@ -23,6 +24,7 @@ namespace SOFTWARE.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
+
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
@@ -60,6 +62,45 @@ namespace SOFTWARE.Controllers
             await _roleManager.CreateAsync(new IdentityRole(StaticUserRoles.OWNER));
 
             return Ok("los roles se crearon correctamente");
+        }
+
+        [HttpPost]
+        [Route("seed-Users")]
+        public async Task<IActionResult> SeedUsers()
+        {
+
+            var isOwnerExists = await _userManager.FindByNameAsync("Administrador");
+
+            if(isOwnerExists!=null){
+                return BadRequest(error("Duplicado", "los usuarios ya estan registrados"));
+            }
+
+            bool isOwnerRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.OWNER);
+            bool isAdminRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.ADMIN);
+            bool isUserRoleExists = await _roleManager.RoleExistsAsync(StaticUserRoles.USER);
+
+
+            if (!(isOwnerRoleExists && isAdminRoleExists && isUserRoleExists)){
+                return BadRequest(error("validacion", "no existen roles aun en el sistema"));
+            }
+
+            UserSeed userSeed = new UserSeed();
+
+            var owner = userSeed.owner();
+            await _userManager.CreateAsync(owner, "admin123");
+            await _userManager.AddToRoleAsync(owner, StaticUserRoles.USER);
+            await _userManager.AddToRoleAsync(owner, StaticUserRoles.OWNER);
+
+            var admin = userSeed.admin();
+            await _userManager.CreateAsync(admin, "contratista123");
+            await _userManager.AddToRoleAsync(admin, StaticUserRoles.USER);
+            await _userManager.AddToRoleAsync(admin, StaticUserRoles.ADMIN);
+
+            var user = userSeed.user();
+            await _userManager.CreateAsync(user, "user123");
+            await _userManager.AddToRoleAsync(user, StaticUserRoles.USER);
+
+            return Ok("los usuarios se crearon correctamente");
         }
 
 
@@ -165,6 +206,7 @@ namespace SOFTWARE.Controllers
             return Ok(user);
         }
 
+
         // Route -> Login
         [HttpPost]
         [Route("login")]
@@ -229,9 +271,11 @@ namespace SOFTWARE.Controllers
         }
 
 
+
         // Route -> make user -> admin
         [HttpPost]
         [Route("make-admin")]
+        [Authorize(Roles = StaticUserRoles.OWNER)]
         public async Task<ActionResult<ApplicationUserViewModel>> MakeAdmin([FromBody] UpdatePermissionDto updatePermissionDto)
         {
             var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
@@ -249,8 +293,10 @@ namespace SOFTWARE.Controllers
 
         }
 
+
         [HttpPost]
         [Route("remove-admin")]
+        [Authorize(Roles = StaticUserRoles.OWNER)]
         public async Task<ActionResult<ApplicationUserViewModel>> RemoveAdmin([FromBody] UpdatePermissionDto updatePermissionDto)
         {
             var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
@@ -272,6 +318,7 @@ namespace SOFTWARE.Controllers
         // Route -> make user -> owner
         [HttpPost]
         [Route("make-owner")]
+        [Authorize(Roles = StaticUserRoles.OWNER)]
         public async Task<ActionResult<ApplicationUserViewModel>> MakeOwner([FromBody] UpdatePermissionDto updatePermissionDto)
         {
             var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
@@ -291,6 +338,7 @@ namespace SOFTWARE.Controllers
 
         [HttpPost]
         [Route("remove-owner")]
+        [Authorize(Roles = StaticUserRoles.OWNER)]
         public async Task<ActionResult<ApplicationUserViewModel>> RemoveOwner([FromBody] UpdatePermissionDto updatePermissionDto)
         {
             var user = await _userManager.FindByNameAsync(updatePermissionDto.UserName);
@@ -307,6 +355,7 @@ namespace SOFTWARE.Controllers
             };
 
         }
+
 
         [HttpGet]
         [Route("Listado-usuarios")]

@@ -12,8 +12,8 @@ using SOFTWARE.Contexto;
 namespace SOFTWARE.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20231108191644_actualizacion-baseDatos")]
-    partial class actualizacionbaseDatos
+    [Migration("20240208212904_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -290,6 +290,7 @@ namespace SOFTWARE.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Prioridad")
@@ -298,38 +299,6 @@ namespace SOFTWARE.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Poblacion");
-                });
-
-            modelBuilder.Entity("SOFTWARE.Models.Solicitante", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("Consentimiento")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Correo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Identificacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Solicitantes");
                 });
 
             modelBuilder.Entity("SOFTWARE.Models.Tiempo", b =>
@@ -374,6 +343,14 @@ namespace SOFTWARE.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Motivo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Observacion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Poblacion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

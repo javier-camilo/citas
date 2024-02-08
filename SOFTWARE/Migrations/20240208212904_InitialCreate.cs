@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SOFTWARE.Migrations
 {
     /// <inheritdoc />
-    public partial class autorizacion : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,9 @@ namespace SOFTWARE.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Identificacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -72,8 +75,8 @@ namespace SOFTWARE.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,29 +89,12 @@ namespace SOFTWARE.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Prioridad = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Poblacion", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Solicitantes",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Identificacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Consentimiento = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Solicitantes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,9 +120,11 @@ namespace SOFTWARE.Migrations
                     Asistencia = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DescripcionOperacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContratistaAtendio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Observacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RefTiempo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaFinalizacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RefSolicitante = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FechaFinalizacion = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Poblacion = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -315,9 +303,6 @@ namespace SOFTWARE.Migrations
 
             migrationBuilder.DropTable(
                 name: "Poblacion");
-
-            migrationBuilder.DropTable(
-                name: "Solicitantes");
 
             migrationBuilder.DropTable(
                 name: "Tiempo");

@@ -30,12 +30,16 @@ export class LoginService {
   }
 
 
-  makeAdmin(permission:UpdatePermission): Observable<UpdatePermission> {
+  makeAdmin(permission:UpdatePermission,llamado?:string): Observable<UpdatePermission> {
     return this.http.post<UpdatePermission>(this.baseUrl + 'api/Auth/make-admin', permission)
         .pipe(
             tap((res:any)=>
             {
+              if (llamado == null) {
+
                 this.handleErrorService.log("se actualizo los permisos de usuario a contratista");
+
+              }
 
             }
 
@@ -49,7 +53,8 @@ export class LoginService {
         .pipe(
             tap((res:any)=>
             {
-                this.handleErrorService.log("se actualizo los permisos de usuario y se le retiro el rol");
+
+              this.handleErrorService.log("se actualizo los permisos de usuario y se le retiro el rol");
 
             }
 
@@ -58,12 +63,14 @@ export class LoginService {
         );
   }
 
-  makeOwner(permission:UpdatePermission): Observable<UpdatePermission> {
+  makeOwner(permission:UpdatePermission, llamado?:string): Observable<UpdatePermission> {
     return this.http.post<UpdatePermission>(this.baseUrl + 'api/Auth/make-owner', permission)
         .pipe(
             tap((res:any)=>
             {
+              if (llamado == null) {
                 this.handleErrorService.log("se actualizo los permisos de usuario a Administrador");
+              }
             }
 
           ),
@@ -119,9 +126,7 @@ export class LoginService {
   registrar(register:Register): Observable<Register> {
     return this.http.post<Register>(this.baseUrl + 'api/Auth/register', register)
         .pipe(
-            tap((res:any)=>
-
-              {
+          tap((res: any) => {
                   this.handleErrorService.log("el ussuario se registro correctamente");
                   this.router.navigateByUrl('/home');
               }
