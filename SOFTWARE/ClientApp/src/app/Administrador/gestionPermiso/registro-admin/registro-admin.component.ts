@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Register } from 'src/app/Modelo/register';
+import { Register, UpdatePermission } from 'src/app/Modelo/register';
 import { DialogoConfirmacionComponent } from 'src/app/dialogo-confirmacion/dialogo-confirmacion.component';
 import { LoginService } from 'src/app/servicios/login.service';
 
@@ -12,17 +12,20 @@ import { LoginService } from 'src/app/servicios/login.service';
 })
 export class RegistroAdminComponent implements OnInit {
 
-  operacion: string;
-  hide = true;
-  register: Register;
+  protected operacion: string;
+  protected hide = true;
+  protected register: Register;
+  protected updatePermission: UpdatePermission;
 
   constructor(private loginService:LoginService,private dialog:MatDialog, private router:Router) { }
 
   ngOnInit(): void {
-    this.register=new Register();
+    this.operacion = "0";
+    this.register = new Register();
+    this.updatePermission = new UpdatePermission();
   }
 
-   registrar(){
+   registrar():void{
 
 
     let dialogo= this.dialog.open(DialogoConfirmacionComponent, {data:{name:"Advertencia", descripcion:"¿Estan todo los datos correctos?"} } );
@@ -31,7 +34,7 @@ export class RegistroAdminComponent implements OnInit {
       if(result=="true"){
         this.loginService.registrar(this.register).subscribe(result =>
         {
-
+            this.asginarDatos();
         }
       );
 
@@ -39,6 +42,29 @@ export class RegistroAdminComponent implements OnInit {
     });
 
 
+
+
+   }
+
+
+  asginarDatos() {
+
+      if (this.operacion == "1") {
+        this.volverAdministrador();
+      } else if(this.operacion == "2"){
+        this.volverOwner();
+      }
+
+  }
+
+  volverOwner() {
+      this.updatePermission.userName = this.register.userName;
+      this.loginService.makeOwner(this.updatePermission," ").subscribe();
+  }
+
+  volverAdministrador() {
+      this.updatePermission.userName = this.register.userName;
+      this.loginService.makeAdmin(this.updatePermission," ").subscribe();
   }
 
 }
