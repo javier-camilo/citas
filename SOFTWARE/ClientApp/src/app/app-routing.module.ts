@@ -24,9 +24,9 @@ import { ColaAtencionComponent } from './Atencion/cola-atencion/cola-atencion.co
 import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/registrar-atencion.component';
 import { GenrarreporteComponent } from './administrador/genrarreporte/genrarreporte.component';
 import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-admin/registro-admin.component';
+import { ReportesComponent } from './atencion/reportes/reportes.component';
 
 const routes: Routes = [
-
     {path: 'registro', component: RegistroComponent },
     {path:'login',component: LoginComponent},
     {
@@ -39,13 +39,14 @@ const routes: Routes = [
         { path: 'registroCita', component: CitasComponent},
         { path: 'cola', component: FetchDataComponent},
         { path: 'registrarPoblacion', component: RegistrarPoblacionComponent, canActivate:[AdminRoleGuard]},
-        { path: 'consultarPoblacion', component: ConsultarPoblacionComponent, canActivate:[AdminRoleGuard]},
+        { path: 'consultarPoblacion', component: ConsultarPoblacionComponent, canActivate: [AdminRoleGuard] },
+        { path: 'reportesContratista', component: ReportesComponent, canActivate:[AdminRoleGuard]},
         { path: 'edicionPoblacion/:codigoPoblacion', component: EditarPoblacionComponent, canActivate:[OwnerRoleGuard]},
         { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent, canActivate:[OwnerRoleGuard]},
         { path: 'registrarMotivo', component: RegistrarMotivoComponent, canActivate:[OwnerRoleGuard]},
         { path: 'consultarMotivo', component: ConsultarMotivoComponent, canActivate: [OwnerRoleGuard] },
-        { path: 'reporteAdministrador', component: GenrarreporteComponent, canActivate: [OwnerRoleGuard] },
         { path: 'registroAdministrador', component: RegistroAdminComponent, canActivate: [OwnerRoleGuard] },
+        { path: 'reporteAdministrador', component: GenrarreporteComponent,canActivate: [OwnerRoleGuard] },
         { path: 'roles', component: RolesComponent, canActivate: [OwnerRoleGuard] },
         { path: 'colaAtencion', component: ColaAtencionComponent},
         { path: 'registrarAtencion/:codigoTurno', component: RegistrarAtencionComponent},

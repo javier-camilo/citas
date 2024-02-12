@@ -60,6 +60,53 @@ namespace SOFTWARE.Controllers
             return listado;
         }
 
+        [HttpGet]
+        [Route("reporteTurno")]
+        public async Task<ActionResult<IEnumerable<Reporte>>> GetReporte()
+        {
+
+            var turnoAtendido = 0;
+            var turnoNOAtendido = 0;
+            var turnoNOAsistio = 0;
+            List<Reporte> lista = new List<Reporte>();
+
+            if (_context.Turno == null)
+            {
+                return NotFound();
+            }
+
+            var listado = await _context.Turno.ToListAsync();
+
+            foreach (var item in listado)
+            {
+                if (item.Asistencia == "no Atendido")
+                {
+                    turnoNOAtendido += 1;
+                }
+
+                if (item.Asistencia == "no Asistio")
+                {
+                    turnoNOAsistio += 1;
+                }
+
+                if (item.Asistencia == "Atendido")
+                {
+                    turnoAtendido += 1;
+                }
+            }
+
+            var reporte = new Reporte("Atendido",turnoAtendido);
+            var reporteDos = new Reporte("no Atendido", turnoNOAtendido);
+            var reporteTres = new Reporte("no Asistio", turnoNOAsistio);
+
+            lista.Add(reporte);
+            lista.Add(reporteDos);
+            lista.Add(reporteTres);
+
+            return lista;
+
+        }
+
         // GET: api/Turno/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Turno>> GetTurno(int id)
@@ -109,6 +156,7 @@ namespace SOFTWARE.Controllers
             return NoContent();
         }
 
+
         // POST: api/Turno
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -127,6 +175,7 @@ namespace SOFTWARE.Controllers
 
             return CreatedAtAction("GetTurno", new { id = turno.Numero }, turno);
         }
+
 
         // DELETE: api/Turno/5
         [HttpDelete("{id}")]

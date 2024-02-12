@@ -7,6 +7,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HandleHttpErrorService } from '../@base/handle-http-error-service.service';
 import { Solicitante } from '../Modelo/solicitante';
 import { Turno } from '../Modelo/turno';
+import { ReporteTurno } from '../Modelo/reporte';
 
 
 
@@ -87,8 +88,20 @@ export class TurnoService {
   }
 
 
+  getReporte(operacion:string): Observable<ReporteTurno[]> {
+    return this.http.get<ReporteTurno[]>(this.baseUrl + 'api/Turno/reporteTurno')
+        .pipe(
+            tap(_ =>
+            {
 
+              if(operacion==="turnoComponent")
+              this.handleErrorService.log('Datos de reportes');
 
+            }
+          ),
+            catchError(this.handleErrorService.handleError<ReporteTurno[]>('Consulta solicitante', undefined))
+        );
+  }
 
 
 }

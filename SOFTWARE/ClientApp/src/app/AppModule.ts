@@ -52,6 +52,8 @@ import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/regist
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-admin/registro-admin.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 
 @NgModule({
@@ -95,6 +97,7 @@ import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-
     MatSelectModule,
     MatSidenavModule,
     MatListModule,
+    NgxChartsModule,
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
