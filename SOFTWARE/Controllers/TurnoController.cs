@@ -107,6 +107,83 @@ namespace SOFTWARE.Controllers
 
         }
 
+
+
+        private ApplicationUser? TraerUsuario(string identificacion, List<ApplicationUser> listado)
+        {
+
+            ApplicationUser usuario = new ApplicationUser();
+
+            foreach (var item in listado)
+            {
+
+                if (item.Identificacion == identificacion)
+                {
+                    usuario = item;
+                    return usuario;
+                }
+            }
+
+            return null;
+        }
+
+
+        [HttpGet]
+        [Route("reporteContratista/{identificacion}")]
+        public async Task<ActionResult<IEnumerable<Reporte>>> GetReporteContratista(string identificacion)
+        {
+
+            var turnoAtendido = 0;
+            var turnoAtendidoContratista = 0;
+            List<Reporte> lista = new List<Reporte>();
+
+            if (_context.Turno == null)
+            {
+            return BadRequest(error("Consultar turno", "no se encontro ningun listado de turnos")); 
+            }
+
+
+            var listadoUsuarios = await _context.Users.ToListAsync();
+
+            var usuario = TraerUsuario(identificacion,listadoUsuarios);
+
+            if(usuario==null){
+                return BadRequest(error("Consultar turno", "no se encontro ningunusuario con esos datos"));
+            }
+
+            var listado = await _context.Turno.ToListAsync();
+
+            foreach (var item in listado)
+            {
+                if(item.Asistencia== "Atendido" && item.ContratistaAtendio==identificacion)
+                {
+                    turnoAtendidoContratista += 1;
+                }
+
+                if (item.Asistencia == "no Asistio" && item.ContratistaAtendio == identificacion)
+                {
+                    turnoAtendidoContratista += 1;
+                }
+
+                if (item.Asistencia == "Atendido" || item.Asistencia == "no Asistio")
+                {
+                    turnoAtendido += 1;
+                }
+            }
+
+            var reporteContratista = new Reporte(usuario.Nombre, turnoAtendidoContratista);
+            var reporte = new Reporte("Atendido", turnoAtendido);
+
+            lista.Add(reporte);
+            lista.Add(reporteContratista);
+
+            return lista;
+
+        }
+
+
+  
+
         // GET: api/Turno/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Turno>> GetTurno(int id)

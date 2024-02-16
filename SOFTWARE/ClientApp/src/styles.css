@@ -88,22 +88,3 @@ h1.example-app-name {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
-
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-  border-radius: 40px;
-}
-
-.dashboard-card-content {
-  width: 100%;
-  height: calc(100% - 30px);
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-}

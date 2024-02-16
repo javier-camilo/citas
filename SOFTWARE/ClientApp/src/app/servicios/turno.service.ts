@@ -94,13 +94,34 @@ export class TurnoService {
             tap(_ =>
             {
 
-              if(operacion==="turnoComponent")
-              this.handleErrorService.log('Datos de reportes');
+              if(operacion==="reporte")
+              this.handleErrorService.log('Datos de reportes consultados');
 
             }
           ),
             catchError(this.handleErrorService.handleError<ReporteTurno[]>('Consulta solicitante', undefined))
         );
+  }
+
+  getReporteContratista(identificacion: string, operacionLLamado?:string): Observable<ReporteTurno[]> {
+    const url = `${this.baseUrl + 'api/Turno/reporteContratista'}/${identificacion}`;
+      return this.http.get<ReporteTurno[]>(url, httpOptions)
+      .pipe(
+        tap(_ =>
+
+          {
+
+              if(operacionLLamado==null){
+
+                  this.handleErrorService.log('se consultaron los reportes = '+ identificacion)
+
+              }
+
+          }
+
+          ),
+        catchError(this.handleErrorService.handleError<ReporteTurno[]>('Buscar reporte', undefined))
+      );
   }
 
 

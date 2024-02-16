@@ -25,6 +25,7 @@ import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/regist
 import { GenrarreporteComponent } from './administrador/genrarreporte/genrarreporte.component';
 import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-admin/registro-admin.component';
 import { ReportesComponent } from './atencion/reportes/reportes.component';
+import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-ventanilla.component';
 
 const routes: Routes = [
     {path: 'registro', component: RegistroComponent },
@@ -40,7 +41,8 @@ const routes: Routes = [
         { path: 'cola', component: FetchDataComponent},
         { path: 'registrarPoblacion', component: RegistrarPoblacionComponent, canActivate:[AdminRoleGuard]},
         { path: 'consultarPoblacion', component: ConsultarPoblacionComponent, canActivate: [AdminRoleGuard] },
-        { path: 'reportesContratista', component: ReportesComponent, canActivate:[AdminRoleGuard]},
+        { path: 'reportesContratista', component: ReportesComponent, canActivate: [AdminRoleGuard] },
+        { path: 'citasVentanilla', component: CitasVentanillaComponent, canActivate:[AdminRoleGuard]},
         { path: 'edicionPoblacion/:codigoPoblacion', component: EditarPoblacionComponent, canActivate:[OwnerRoleGuard]},
         { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent, canActivate:[OwnerRoleGuard]},
         { path: 'registrarMotivo', component: RegistrarMotivoComponent, canActivate:[OwnerRoleGuard]},

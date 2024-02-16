@@ -53,6 +53,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-admin/registro-admin.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-ventanilla.component';
 
 
 
@@ -76,6 +77,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     AtenderCitaComponent,
     ReportesComponent,
     RegistrarMotivoComponent,
+    CitasVentanillaComponent,
     ConsultarMotivoComponent,
     EdicionMotivoComponent,
     RegistrarPoblacionComponent,

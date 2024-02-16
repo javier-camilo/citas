@@ -12,6 +12,7 @@ import { RoleComponent } from './Administrador/gestionPermiso/role/role.componen
 import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.component';
 import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/registrar-atencion.component';
 import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-admin/registro-admin.component';
+import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-ventanilla.component';
 
 @NgModule({
     imports: [AppModule, ServerModule, ModuleMapLoaderModule],
@@ -25,7 +26,8 @@ import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-
       RoleComponent,
       RolesComponent,
       RegistrarAtencionComponent,
-      RegistroAdminComponent
+      RegistroAdminComponent,
+      CitasVentanillaComponent
     ]
 })
 export class AppServerModule { }

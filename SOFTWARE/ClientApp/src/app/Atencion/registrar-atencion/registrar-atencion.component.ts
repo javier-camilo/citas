@@ -39,7 +39,7 @@ export class RegistrarAtencionComponent implements OnInit {
         return this.error.log("Hubo errores al digitar los datos");
     }
 
-     this.turno.contratistaAtendio = this.datosUsuario.identificacion;
+     this.turno.contratistaAtendio = this.datosContratista.identificacion;
      this.turno.asistencia=this.firstFormGroup.controls["asistencia"].value;
      this.turno.observacion = this.firstFormGroup.controls["observacion"].value;
 

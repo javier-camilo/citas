@@ -184,7 +184,7 @@ namespace SOFTWARE.Controllers
         {
             if (_context.Users == null)
             {
-                return NotFound();
+                return BadRequest(error("Usuarios", "no existe base de datos de usuarios"));
             }
 
             ApplicationUser user;
@@ -200,7 +200,7 @@ namespace SOFTWARE.Controllers
             }
 
             if (user == null) {
-                return NotFound();
+                return BadRequest(error("Consultar usuario", "no se encontro ningun turno con esos datos"));
             }
 
             return Ok(user);
