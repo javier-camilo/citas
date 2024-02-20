@@ -161,7 +161,6 @@ export class LoginService {
   HaveAccessAdmin() {
 
     var _finaldata = this.getDatosToken();
-    console.log(_finaldata);
     let roles: string[] = [];
     roles = _finaldata.rol;
     let rol = "";

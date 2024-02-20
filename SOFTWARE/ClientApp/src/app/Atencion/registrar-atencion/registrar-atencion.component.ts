@@ -32,8 +32,7 @@ export class RegistrarAtencionComponent implements OnInit {
     observacion: ['', [Validators.required, Validators.minLength(4)]]
   });
 
-   onSubmit(){
-
+  onSubmit() {
 
     if (this.firstFormGroup.invalid) {
         return this.error.log("Hubo errores al digitar los datos");
