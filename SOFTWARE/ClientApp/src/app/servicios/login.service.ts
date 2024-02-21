@@ -26,72 +26,68 @@ export class LoginService {
   constructor(private http: HttpClient,
     private handleErrorService: HandleHttpErrorService, private router: Router) {
 
-      this.baseUrl='https://localhost:7240/';
+    this.baseUrl = 'https://localhost:7240/';
   }
 
 
-  makeAdmin(permission:UpdatePermission,llamado?:string): Observable<UpdatePermission> {
+  makeAdmin(permission: UpdatePermission, llamado?: string): Observable<UpdatePermission> {
     return this.http.post<UpdatePermission>(this.baseUrl + 'api/Auth/make-admin', permission)
-        .pipe(
-            tap((res:any)=>
-            {
-              if (llamado == null) {
+      .pipe(
+        tap((res: any) => {
+          if (llamado == null) {
 
-                this.handleErrorService.log("se actualizo los permisos de usuario a contratista");
+            this.handleErrorService.log("se actualizo los permisos de usuario a contratista");
 
-              }
+          }
 
-            }
+        }
 
-          ),
-            catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido',undefined))
-        );
+        ),
+        catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido', undefined))
+      );
   }
 
-  removeAdmin(permission:UpdatePermission): Observable<UpdatePermission> {
+  removeAdmin(permission: UpdatePermission): Observable<UpdatePermission> {
     return this.http.post<UpdatePermission>(this.baseUrl + 'api/Auth/remove-admin', permission)
-        .pipe(
-            tap((res:any)=>
-            {
+      .pipe(
+        tap((res: any) => {
 
-              this.handleErrorService.log("se actualizo los permisos de usuario y se le retiro el rol");
+          this.handleErrorService.log("se actualizo los permisos de usuario y se le retiro el rol");
 
-            }
+        }
 
-          ),
-            catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido',undefined))
-        );
+        ),
+        catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido', undefined))
+      );
   }
 
-  makeOwner(permission:UpdatePermission, llamado?:string): Observable<UpdatePermission> {
+  makeOwner(permission: UpdatePermission, llamado?: string): Observable<UpdatePermission> {
     return this.http.post<UpdatePermission>(this.baseUrl + 'api/Auth/make-owner', permission)
-        .pipe(
-            tap((res:any)=>
-            {
-              if (llamado == null) {
-                this.handleErrorService.log("se actualizo los permisos de usuario a Administrador");
-              }
-            }
+      .pipe(
+        tap((res: any) => {
+          if (llamado == null) {
+            this.handleErrorService.log("se actualizo los permisos de usuario a Administrador");
+          }
+        }
 
-          ),
-            catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido',undefined))
-        );
+        ),
+        catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido', undefined))
+      );
   }
 
-  removeOwner(permission:UpdatePermission): Observable<UpdatePermission> {
+  removeOwner(permission: UpdatePermission): Observable<UpdatePermission> {
     return this.http.post<UpdatePermission>(this.baseUrl + 'api/Auth/remove-owner', permission)
-        .pipe(
-            tap((res:any)=>
-            {
-                this.handleErrorService.log("se le revoco el permiso de administrador de la aplicacion");
-            }
+      .pipe(
+        tap((res: any) => {
+          this.handleErrorService.log("se le revoco el permiso de administrador de la aplicacion");
+        }
 
-          ),
-            catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido',undefined))
-        );
+        ),
+        catchError(this.handleErrorService.handleError<UpdatePermission>('usuario invalido', undefined))
+      );
   }
 
-  getUserID(id: string, operacionLLamado?:string): Observable<UserVista> {
+  getUserID(id: string | null, operacionLLamado?:string): Observable<UserVista> {
     const url = `${this.baseUrl + 'api/Auth/traerUsuario'}/${id}`;
       return this.http.get<UserVista>(url, httpOptions)
       .pipe(
@@ -123,14 +119,16 @@ export class LoginService {
         );
   }
 
-  registrar(register:Register): Observable<Register> {
+  registrar(register:Register, operacionLLamado?:string): Observable<Register> {
     return this.http.post<Register>(this.baseUrl + 'api/Auth/register', register)
         .pipe(
           tap((res: any) => {
-                  this.handleErrorService.log("el ussuario se registro correctamente");
+            
+            if (operacionLLamado == null) {
+                  this.handleErrorService.log("el usuario se registro correctamente");
                   this.router.navigateByUrl('/home');
-              }
-              ),
+            }
+              }),
             catchError(this.handleErrorService.handleError<Register>('usuario o contraseña invalidos',undefined))
         );
   }

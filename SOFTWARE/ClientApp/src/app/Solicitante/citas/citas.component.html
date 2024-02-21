@@ -9,45 +9,49 @@
 
       <form [formGroup]="firstFormGroup">
 
-        <mat-grid-list cols="2" rowHeight="4:1">
-          <mat-grid-tile>
 
-            <mat-form-field >
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
 
-              <mat-label>selecione el motivo</mat-label>
-              <mat-select formControlName="motivo">
+              <mat-form-field>
+                <mat-label>selecione el motivo</mat-label>
+                <mat-select formControlName="motivo">
 
-                <mat-option *ngFor="let nav of motivos" [value]="nav.nombre"
-                (click)="cargarDescripcion(nav.descripcion)">{{nav.nombre}}</mat-option>
+                  <mat-option *ngFor="let nav of motivos" [value]="nav.nombre"
+                    (click)="cargarDescripcion(nav.descripcion)">{{nav.nombre}}</mat-option>
 
-              </mat-select>
-              <mat-hint>descripción: {{desripcionMotivo}}</mat-hint>
-              <mat-error *ngIf="this.firstFormGroup.controls['motivo'].hasError('required')">
-                Es necesario que seleccione el motivo
-              </mat-error>
-            </mat-form-field>
+                </mat-select>
+                <mat-hint>descripción: {{desripcionMotivo}}</mat-hint>
+                <mat-error *ngIf="this.firstFormGroup.controls['motivo'].hasError('required')">
+                  Es necesario que seleccione el motivo
+                </mat-error>
+              </mat-form-field>
 
-          </mat-grid-tile>
+            </div>
 
-          <mat-grid-tile>
+            <div class="col-md-auto">
 
-            <mat-form-field>
-              <mat-label>selecione el la poblacion</mat-label>
-              <mat-select formControlName="poblacion">
+            </div>
 
-                <mat-option *ngFor="let nav of poblaciones" [value]="nav.nombre">{{nav.nombre}}</mat-option>
+            <div class="col col-lg-2">
+              <mat-form-field>
+                <mat-label>selecione el la poblacion</mat-label>
+                <mat-select formControlName="poblacion">
 
-              </mat-select>
+                  <mat-option *ngFor="let nav of poblaciones" [value]="nav.nombre">{{nav.nombre}}</mat-option>
 
-              <mat-error *ngIf="this.firstFormGroup.controls['poblacion'].hasError('required')">
-                Es necesario que seleccione la poblacion
-              </mat-error>
+                </mat-select>
 
-            </mat-form-field>
+                <mat-error *ngIf="this.firstFormGroup.controls['poblacion'].hasError('required')">
+                  Es necesario que seleccione la poblacion
+                </mat-error>
 
-          </mat-grid-tile>
+              </mat-form-field>
+            </div>
 
-        </mat-grid-list>
+          </div>
+        </div>
 
         <div>
           <button mat-button matStepperNext>siguiente</button>

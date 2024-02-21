@@ -103,7 +103,7 @@ export class TurnoService {
         );
   }
 
-  getReporteContratista(identificacion: string, operacionLLamado?:string): Observable<ReporteTurno[]> {
+  getReporteContratista(identificacion: string | null, operacionLLamado?:string): Observable<ReporteTurno[]> {
     const url = `${this.baseUrl + 'api/Turno/reporteContratista'}/${identificacion}`;
       return this.http.get<ReporteTurno[]>(url, httpOptions)
       .pipe(

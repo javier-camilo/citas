@@ -20,7 +20,7 @@ namespace SOFTWARE.Core.Dtos
         [Required(ErrorMessage = "contraseña es requerido")]
         public string Password { get; set; }
 
-        
+        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
         [Required(ErrorMessage = "identificacion es requerido")]
         public string Identificacion { get; set; }
         
@@ -31,7 +31,7 @@ namespace SOFTWARE.Core.Dtos
         [Required(ErrorMessage = "Apellido es requerido")]
         public string Apellido { get; set; }
 
-        
+        [RegularExpression("(^[0-9]+$)", ErrorMessage = "Solo se permiten números")]
         [Required(ErrorMessage = "Telefono es requerido")]
         public string Telefono { get; set; }
     }

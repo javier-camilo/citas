@@ -8,11 +8,11 @@ export class Turno {
 
   descripcionOperacion:string | null;
 
-  contratistaAtendio:string;
+  contratistaAtendio:string | null;
 
   refTiempo:string;
 
-  refSolicitante:string;
+  refSolicitante:string | null;
 
   fechaFinalizacion: string;
 

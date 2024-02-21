@@ -40,7 +40,7 @@
 
                       <mat-form-field>
                         <mat-label>telefono</mat-label>
-                        <input matInput [(ngModel)]="register.telefono">
+                        <input matInput [(ngModel)]="register.telefono" type="text" pattern="^[1-9]\d*$">
                       </mat-form-field>
 
                     </div>
@@ -48,7 +48,7 @@
 
                       <mat-form-field>
                         <mat-label>identificacion</mat-label>
-                        <input matInput [(ngModel)]="register.identificacion">
+                        <input matInput [(ngModel)]="register.identificacion" type="text" pattern="^[1-9]\d*$">
                       </mat-form-field>
 
                       <mat-form-field >

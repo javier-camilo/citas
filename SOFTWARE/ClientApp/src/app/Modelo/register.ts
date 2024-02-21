@@ -1,17 +1,17 @@
 export class Register {
-  userName:string;
-  email:string;
-  password:string;
-  identificacion:string;
-  nombre:string;
-  apellido:string;
+  userName:string | null;
+  email:string | null;
+  password:string | null;
+  identificacion:string | null;
+  nombre:string | null;
+  apellido:string | null;
   telefono:string;
 }
 
 export class UserVista extends Register{
-  phoneNumber: string;
+  phoneNumber: string | null;
 }
 
 export class UpdatePermission {
-  userName: string;
+  userName: string | null;
 }
