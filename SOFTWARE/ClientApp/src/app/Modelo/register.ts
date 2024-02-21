@@ -5,7 +5,7 @@ export class Register {
   identificacion:string | null;
   nombre:string | null;
   apellido:string | null;
-  telefono:string;
+  telefono:string | null;
 }
 
 export class UserVista extends Register{

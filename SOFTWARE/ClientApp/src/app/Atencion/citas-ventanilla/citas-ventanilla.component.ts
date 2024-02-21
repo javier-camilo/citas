@@ -10,6 +10,7 @@ import { Turno } from '../../Modelo/turno';
 import { MatDialog } from '@angular/material/dialog';
 import { HandleHttpErrorService } from 'src/app/@base/handle-http-error-service.service';
 import { DialogoConfirmacionComponent } from 'src/app/dialogo-confirmacion/dialogo-confirmacion.component';
+import { TurnoService } from 'src/app/servicios/turno.service';
 
 @Component({
   selector: 'app-citas-ventanilla',
@@ -34,28 +35,30 @@ export class CitasVentanillaComponent implements OnInit {
     userName: ['', Validators.required],
     email: ['', Validators.required],
     password: ['', Validators.required],
-    identificacion: ['', Validators.required],
+    identificacion: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     nombre: ['', Validators.required],
     apellido: ['', Validators.required],
-    phoneNumber: ['', Validators.required],
+    phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     motivo: ['', Validators.required],
     poblacion: ['', Validators.required]
   });
 
 
-  constructor(private loginservice: LoginService, private _formBuilder: FormBuilder, private motivoService: MotivoService,
-    private poblacionService: PoblacionServiceService,private dialog:MatDialog, private error:HandleHttpErrorService) { }
+  constructor(private loginService: LoginService, private _formBuilder: FormBuilder, private motivoService: MotivoService,
+    private poblacionService: PoblacionServiceService, private dialog: MatDialog, private error: HandleHttpErrorService,
+              private turnoService: TurnoService) { }
 
   ngOnInit(): void {
 
     this.cargarDatos();
-    //this.firstFormGroup.get('userName')?.patchValue("nuevo");
+
 
   }
 
 
-  confirmar(){
+  confirmar() {
 
+    this.firstFormGroup.markAllAsTouched();
 
     if (this.firstFormGroup.invalid)
       return this.error.log("debe verificar los campos");
@@ -72,22 +75,51 @@ export class CitasVentanillaComponent implements OnInit {
       }
     }
     );
-
   }
 
 
   guardarTurno() {
-
-    console.log("turno guardado");
-
+    this.cargarDatosTurno();
+    this.turnoService.post(this.turno).subscribe();
+    this.limpiar();
   }
-
 
   guardarTurnoUsuario() {
-
-    console.log("usuario guardado");
-
+    
+    this.obtenerDatosUsuario();
+    this.loginService.registrar(this.usuario," ").subscribe(result => {
+      if (result != null) {
+        this.guardarTurno();
+        this.limpiar();
+      }
+    });
   }
+
+  limpiar() {
+    this.usuario = new UserVista();
+    this.usuario.userName = "";
+    this.usuario.apellido = "";
+    this.usuario.email = "";
+    this.usuario.identificacion = "";
+    this.usuario.nombre = "";
+    this.usuario.phoneNumber = "";
+    this.usuario.password = "";
+    this.encontrado = false;
+    this.firstFormGroup.setErrors(null);
+    this.firstFormGroup.clearValidators();
+    this.firstFormGroup.reset();
+  }
+
+  obtenerDatosUsuario() {
+    this.usuario.identificacion = this.firstFormGroup.controls["identificacion"].value;
+    this.usuario.userName = this.firstFormGroup.controls["userName"].value;
+    this.usuario.apellido = this.firstFormGroup.controls["apellido"].value;
+    this.usuario.email = this.firstFormGroup.controls["email"].value;
+    this.usuario.nombre = this.firstFormGroup.controls["nombre"].value;
+    this.usuario.password = this.firstFormGroup.controls["password"].value;
+    this.usuario.telefono = this.firstFormGroup.controls["phoneNumber"].value;
+  }
+
 
 
   cargarDatos() {
@@ -107,7 +139,7 @@ export class CitasVentanillaComponent implements OnInit {
 
     var identificacion = this.firstFormGroup.controls["identificacion"].value;
 
-    this.loginservice.getUserID(identificacion, "").subscribe(result => {
+    this.loginService.getUserID(identificacion, "").subscribe(result => {
         if (result != null) {
           this.encontrado = true;
           this.cargarDatosUsuario(result);
@@ -126,7 +158,7 @@ export class CitasVentanillaComponent implements OnInit {
 
   cargarDatosTurno() {
     this.turno.fechaFinalizacion = "";
-    this.turno.descripcionOperacion = "";
+    this.turno.descripcionOperacion = this.descripcionMotivo;
     this.turno.contratistaAtendio = "";
     this.turno.refTiempo = "";
     this.turno.asistencia = "";

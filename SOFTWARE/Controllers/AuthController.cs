@@ -136,10 +136,10 @@ namespace SOFTWARE.Controllers
         {
             var isExistsUser = await _userManager.FindByNameAsync(registerDto.UserName);
             if (isExistsUser != null)
-                return BadRequest(error("Duplicado", "el usuario ya se encuentra registrado"));
+                return BadRequest(error("Duplicado", "el nombre de usuario  ya esta registrado"));
 
             if (ValidarRegistro(registerDto.Identificacion))
-                return BadRequest(error("Duplicado", "los datos del usuario ya se encuentran registrados"));
+                return BadRequest(error("Duplicado", "la identificacion ya pertenece a un usuario"));
 
             ApplicationUser newUser = new ApplicationUser()
             {

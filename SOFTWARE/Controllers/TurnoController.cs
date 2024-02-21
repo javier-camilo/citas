@@ -172,7 +172,7 @@ namespace SOFTWARE.Controllers
             }
 
             var reporteContratista = new Reporte(usuario.Nombre, turnoAtendidoContratista);
-            var reporte = new Reporte("Atendido", turnoAtendido);
+            var reporte = new Reporte("Atendido y no asistieron", turnoAtendido);
 
             lista.Add(reporte);
             lista.Add(reporteContratista);
