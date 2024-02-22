@@ -22,7 +22,7 @@ export class SolicitanteService {
 
   constructor(private http: HttpClient,
     private handleErrorService: HandleHttpErrorService) {
-      this.baseUrl='https://turno.azurewebsites.net/';
+      this.baseUrl='https://localhost:7240/';
 
   }
 

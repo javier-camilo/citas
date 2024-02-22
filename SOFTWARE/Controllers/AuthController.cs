@@ -370,6 +370,71 @@ namespace SOFTWARE.Controllers
 
 
 
+        [HttpDelete("{identificacion}")]
+        public async Task<IActionResult> DeleteUser(string identificacion)
+        {
+
+            if (_context.Users == null)
+            {
+                return BadRequest(error("vacio", "no existe base de datos"));
+            }
+
+            List<ApplicationUser> listado = await _context.Users.ToListAsync();
+            ApplicationUser usuario;
+            usuario = null;
+
+            foreach (var item in listado)
+            {
+                if(item.Identificacion==identificacion){
+                    usuario = item;
+                }
+            }
+
+            if (usuario==null)
+            {
+                return BadRequest(error("vacio", "el usuario no existe"));
+            }
+
+            var asociadoTurno = validarTurnoAsociado(identificacion);
+
+            if(asociadoTurno)
+            {
+                return BadRequest(error("vacio", "el usuario tiene turnos asoaciados"));
+            }
+
+            await _userManager.DeleteAsync(usuario);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+
+        }
+
+        private bool validarTurnoAsociado(string identificacion){
+
+            var contador = 0;
+            var listadoTurno = _context.Turno.ToList();
+
+            foreach (var item in listadoTurno)
+            {
+                if(item.RefSolicitante==identificacion){
+                    contador = contador + 1;
+                }
+
+                if (item.ContratistaAtendio==identificacion)
+                {
+                    contador = contador + 1;
+                }
+                
+            }
+
+            if(contador==0){
+                return false;
+            }else{
+                return true;
+            }
+
+
+        }
 
 
     }

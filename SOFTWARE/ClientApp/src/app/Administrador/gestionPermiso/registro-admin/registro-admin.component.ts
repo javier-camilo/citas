@@ -34,7 +34,9 @@ export class RegistroAdminComponent implements OnInit {
       if(result=="true"){
         this.loginService.registrar(this.register).subscribe(result =>
         {
+          if (result != null) {
             this.asginarDatos();
+          }
         }
       );
 

@@ -8,7 +8,9 @@
             <div class="row mt-3" style="margin-bottom: 50px;">
               <div class="col-md-6"><label class="labels">digite la identificacion</label><input class="form-control"
                 [(ngModel)]="identificacion"></div>
-              <div class="col-md-6" style="margin-top: 20px;"><button mat-raised-button color="primary" (click)="buscar()">buscar</button></div>
+              <div class="col-md-6" style="margin-top: 20px;"><button mat-raised-button color="primary" (click)="buscar()">buscar</button>
+              <button *ngIf="SeEncontro" mat-raised-button style="margin-left: 20px;">Eliminar usuario</button>
+              </div>
             </div>
 
             <span></span>
