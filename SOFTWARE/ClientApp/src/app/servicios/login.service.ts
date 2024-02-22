@@ -26,7 +26,7 @@ export class LoginService {
   constructor(private http: HttpClient,
     private handleErrorService: HandleHttpErrorService, private router: Router) {
 
-    this.baseUrl = 'https://localhost:7240/';
+    this.baseUrl = 'https://turno.azurewebsites.net/';
   }
 
 
@@ -123,7 +123,7 @@ export class LoginService {
     return this.http.post<Register>(this.baseUrl + 'api/Auth/register', register)
         .pipe(
           tap((res: any) => {
-            
+
             if (operacionLLamado == null) {
                   this.handleErrorService.log("el usuario se registro correctamente");
                   this.router.navigateByUrl('/home');
