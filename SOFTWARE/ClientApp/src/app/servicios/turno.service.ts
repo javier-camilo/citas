@@ -45,6 +45,19 @@ export class TurnoService {
         );
   }
 
+    getHistorico(operacion:string): Observable<Turno[]> {
+    return this.http.get<Turno[]>(this.baseUrl + 'api/Turno/listadoTurno')
+        .pipe(
+            tap(_ =>
+              {
+              if(operacion==="turnoComponent")
+              this.handleErrorService.log('Datos del historico recibido');
+              }
+          ),
+            catchError(this.handleErrorService.handleError<Turno[]>('Consulta solicitante', undefined))
+        );
+  }
+
   post(turno:Turno): Observable<Turno> {
 
     return this.http.post<Turno>(this.baseUrl + 'api/Turno', turno)

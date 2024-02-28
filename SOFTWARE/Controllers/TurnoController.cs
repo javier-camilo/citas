@@ -56,8 +56,18 @@ namespace SOFTWARE.Controllers
             }
 
             var listado = await _context.Turno.ToListAsync();
+            List<Turno> turnos = new List<Turno>();
 
-            return listado;
+            foreach (var item in listado)
+            {
+
+                if (item.Asistencia == "no Asistio" || item.Asistencia == "Atendido")
+                {
+                    turnos.Add(item);
+                }
+            }
+
+            return turnos;
         }
 
         [HttpGet]
@@ -201,6 +211,7 @@ namespace SOFTWARE.Controllers
 
             return turno;
         }
+
 
         // PUT: api/Turno/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

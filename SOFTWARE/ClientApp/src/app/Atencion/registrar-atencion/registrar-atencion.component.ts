@@ -20,7 +20,8 @@ export class RegistrarAtencionComponent implements OnInit {
   datosContratista: Register;
   datosUsuario: UserVista;
   turno: Turno;
-  message:string;
+  message: string;
+  turnoAtendido: Boolean;
 
   constructor(private rutaActiva: ActivatedRoute, private turnoServicio: TurnoService,
     private loginService: LoginService, private _formBuilder: FormBuilder,
@@ -53,7 +54,11 @@ export class RegistrarAtencionComponent implements OnInit {
     let dialogo = this.dialog.open(DialogoConfirmacionComponent, { data: { name: "Advertencia", descripcion: "¿esta seguro de realizar esta accion?" } });
 
     dialogo.afterClosed().subscribe(result => {
-      this.update(result);
+      if (this.turnoAtendido) {
+        return this.error.log("el turno ya ha sido atendido");
+      } else {
+        this.update(result);
+      }
     }
     );
   }
@@ -69,6 +74,7 @@ export class RegistrarAtencionComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.turnoAtendido = false;
     this.inicializarContratista();
     this.consultarTurno();
   }
@@ -88,7 +94,7 @@ export class RegistrarAtencionComponent implements OnInit {
 
     this.turnoServicio.getId(id).subscribe(resul => {
 
-      this.turno=resul;
+      this.turno = resul;
 
       this.turno != null ? this.incializarUsario() : this.inicializarError();
 
@@ -98,6 +104,10 @@ export class RegistrarAtencionComponent implements OnInit {
 
 
   incializarUsario() {
+
+    if (this.turno.asistencia === "Atendido" || this.turno.asistencia === "No asistio") {
+      this.turnoAtendido = true;
+    }
 
     this.datosUsuario = new UserVista();
 
