@@ -101,3 +101,7 @@ h1.example-app-name {
   border: currentColor;
   /* Agrega un borde negro al pasar el mouse */
 }
+
+.container{
+  margin-top: 20px;
+}

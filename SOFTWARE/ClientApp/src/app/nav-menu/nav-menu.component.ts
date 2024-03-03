@@ -1,6 +1,7 @@
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
 import { LoginService } from '../servicios/login.service';
+import { Register } from '../Modelo/register';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { LoginService } from '../servicios/login.service';
 export class NavMenuComponent implements OnDestroy {
 
 
-
+  datosUsuario: Register;
   menu: Menu[];
   mobileQuery: MediaQueryList;
 
@@ -24,6 +25,7 @@ export class NavMenuComponent implements OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
     this.menu = [];
+    this.datosUsuario=this.loginService.GetInformacionUsuario();
     this.cargarItem();
   }
 
@@ -47,7 +49,7 @@ export class NavMenuComponent implements OnDestroy {
       let admin: Menu[];
 
       admin = [
-        { name: "Digitador", route: "", icon: "" },
+        { name: this.datosUsuario.nombre, route: "", icon: "" },
         { name: "Historico", icon: "date_range", route: "/consultarHistorico" },
         { name: "Citas Ventanilla", icon: "date_range", route: "/citasVentanilla" },
         { name: "Registrar Atencion", icon: "save", route: "/colaAtencion" },
@@ -69,7 +71,7 @@ export class NavMenuComponent implements OnDestroy {
 
 
       dueño = [
-        { name: "Dueño", route: "", icon: "" },
+        { name: this.datosUsuario.nombre, route: "", icon: "" },
         { name: "Listado de cola",  icon: "history",  route: "/cola"},
         { name: "registrar motivo", icon: "done", route: "/registrarMotivo" },
         { name: "consultar Motivo", icon: "assignment", route: "/consultarMotivo" },
@@ -93,7 +95,7 @@ export class NavMenuComponent implements OnDestroy {
         let dueño: Menu[];
 
         dueño = [
-          { name: "User", route:"",icon:""},
+          { name: this.datosUsuario.nombre, route:"",icon:""},
           { name: "Listado de cola",  icon: "history",  route: "/cola"},
           { name: "Solicitar cita", icon: "search", route: "/registroCita" },
         ];
@@ -102,16 +104,13 @@ export class NavMenuComponent implements OnDestroy {
     }
 
 
-
-
-
   }
 
 }
 
 
 export class Menu {
-  route:string;
-  icon:string;
-  name:string;
+  route:string | null;
+  icon:string | null;
+  name:string | null;
 }
