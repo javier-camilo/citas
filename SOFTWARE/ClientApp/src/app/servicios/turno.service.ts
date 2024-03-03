@@ -27,7 +27,7 @@ export class TurnoService {
 
   constructor(private http: HttpClient,
     private handleErrorService: HandleHttpErrorService) {
-      this.baseUrl='https://turno.azurewebsites.net/';
+      this.baseUrl='https://sisbenturno.azurewebsites.net/';
 
   }
 
