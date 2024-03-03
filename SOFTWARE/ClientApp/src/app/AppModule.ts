@@ -54,6 +54,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-admin/registro-admin.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-ventanilla.component';
+import { ConsultarHistoricoComponent } from './Atencion/gestionarHistorico/consultar-historico/consultar-historico.component';
+import { HistoricoComponent } from './Atencion/gestionarHistorico/historico/historico.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -79,6 +82,8 @@ import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-vent
     RegistrarMotivoComponent,
     CitasVentanillaComponent,
     ConsultarMotivoComponent,
+    ConsultarHistoricoComponent,
+    HistoricoComponent,
     EdicionMotivoComponent,
     RegistrarPoblacionComponent,
     ConsultarPoblacionComponent,
@@ -97,6 +102,7 @@ import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-vent
     MatToolbarModule,
     MatStepperModule,
     MatSelectModule,
+    MatPaginatorModule,
     MatSidenavModule,
     MatListModule,
     NgxChartsModule,

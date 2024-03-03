@@ -47,7 +47,8 @@ export class NavMenuComponent implements OnDestroy {
       let admin: Menu[];
 
       admin = [
-        {name: "Digitador", route:"",icon:""},
+        { name: "Digitador", route: "", icon: "" },
+        { name: "Historico", icon: "date_range", route: "/consultarHistorico" },
         { name: "Citas Ventanilla", icon: "date_range", route: "/citasVentanilla" },
         { name: "Registrar Atencion", icon: "save", route: "/colaAtencion" },
         { name: "Reporte", icon: "history", route: "/reportesContratista" }

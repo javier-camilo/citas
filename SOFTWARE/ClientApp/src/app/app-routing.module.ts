@@ -26,6 +26,8 @@ import { GenrarreporteComponent } from './administrador/genrarreporte/genrarrepo
 import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-admin/registro-admin.component';
 import { ReportesComponent } from './atencion/reportes/reportes.component';
 import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-ventanilla.component';
+import { ConsultarHistoricoComponent } from './Atencion/gestionarHistorico/consultar-historico/consultar-historico.component';
+import { HistoricoComponent } from './Atencion/gestionarHistorico/historico/historico.component';
 
 const routes: Routes = [
     {path: 'registro', component: RegistroComponent },
@@ -42,6 +44,8 @@ const routes: Routes = [
         { path: 'registrarPoblacion', component: RegistrarPoblacionComponent, canActivate:[AdminRoleGuard]},
         { path: 'consultarPoblacion', component: ConsultarPoblacionComponent, canActivate: [AdminRoleGuard] },
         { path: 'reportesContratista', component: ReportesComponent, canActivate: [AdminRoleGuard] },
+        { path: 'consultarHistorico', component: ConsultarHistoricoComponent, canActivate: [AdminRoleGuard] },
+        { path: 'verHistorico/:codigoHistorico', component: HistoricoComponent, canActivate: [AdminRoleGuard]},
         { path: 'citasVentanilla', component: CitasVentanillaComponent, canActivate:[AdminRoleGuard]},
         { path: 'edicionPoblacion/:codigoPoblacion', component: EditarPoblacionComponent, canActivate:[OwnerRoleGuard]},
         { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent, canActivate:[OwnerRoleGuard]},
@@ -51,7 +55,7 @@ const routes: Routes = [
         { path: 'reporteAdministrador', component: GenrarreporteComponent,canActivate: [OwnerRoleGuard] },
         { path: 'roles', component: RolesComponent, canActivate: [OwnerRoleGuard] },
         { path: 'colaAtencion', component: ColaAtencionComponent},
-        { path: 'registrarAtencion/:codigoTurno', component: RegistrarAtencionComponent},
+        { path: 'registrarAtencion/:codigoTurno', component: RegistrarAtencionComponent,canActivate: [AdminRoleGuard]},
       ],canActivate:[AuthGuard]
     },
     {

@@ -14,7 +14,17 @@ namespace SOFTWARE.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string RefHorario { get; set; }
-        public DateTime fechaInicio { get; set; }
-        public DateTime FechaFinalizacion { get; set; }
+
+
+        [Required(ErrorMessage = "es requerido que digite la hora de inicio")]
+        public DateTime HoraInicio { get; set; }
+
+
+        [Required(ErrorMessage = "es requerido que digite la hora de fin")]
+        public DateTime HoraFinalizacion { get; set; }
+
+
+        [Required(ErrorMessage = "debe colocar la disponibilidad")]
+        public bool Disponibilidad { get; set; }
     }
 }

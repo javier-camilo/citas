@@ -88,3 +88,16 @@ h1.example-app-name {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
+
+
+.mat-row:nth-child(odd) {
+  background-color: #dddddd;
+  /* Color de fondo oscuro */
+}
+
+.mat-row:hover {
+  background-color: #f0f0f0;
+  /* Cambia el color de fondo al pasar el mouse */
+  border: currentColor;
+  /* Agrega un borde negro al pasar el mouse */
+}

@@ -21,3 +21,7 @@ export class Turno {
   observacion: string | null;
 
 }
+
+export class TurnoHistorico extends Turno{
+  nombreSolicitante: string | null;
+}

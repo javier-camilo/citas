@@ -43,7 +43,9 @@ namespace SOFTWARE.Models
         public string Poblacion { get; set; }
 
 
+    }
 
-
+    public class TurnoHistorico:Turno{
+        public string NombreSolicitante { get; set; }
     }
 }

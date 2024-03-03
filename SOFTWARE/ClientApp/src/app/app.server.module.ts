@@ -13,6 +13,9 @@ import { RolesComponent } from './Administrador/gestionPermiso/roles/roles.compo
 import { RegistrarAtencionComponent } from './Atencion/registrar-atencion/registrar-atencion.component';
 import { RegistroAdminComponent } from './Administrador/gestionPermiso/registro-admin/registro-admin.component';
 import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-ventanilla.component';
+import { GestionarHistoricoComponent } from './Atencion/gestionar-historico/gestionar-historico.component';
+import { ConsultarHistoricoComponent } from './Atencion/gestionarHistorico/consultar-historico/consultar-historico.component';
+import { HistoricoComponent } from './Atencion/gestionarHistorico/historico/historico.component';
 
 @NgModule({
     imports: [AppModule, ServerModule, ModuleMapLoaderModule],
@@ -27,7 +30,10 @@ import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-vent
       RolesComponent,
       RegistrarAtencionComponent,
       RegistroAdminComponent,
-      CitasVentanillaComponent
+      CitasVentanillaComponent,
+      GestionarHistoricoComponent,
+      ConsultarHistoricoComponent,
+      HistoricoComponent
     ]
 })
 export class AppServerModule { }

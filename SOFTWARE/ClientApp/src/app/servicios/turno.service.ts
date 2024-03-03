@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { HandleHttpErrorService } from '../@base/handle-http-error-service.service';
 import { Solicitante } from '../Modelo/solicitante';
-import { Turno } from '../Modelo/turno';
+import { Turno, TurnoHistorico } from '../Modelo/turno';
 import { ReporteTurno } from '../Modelo/reporte';
 
 
@@ -45,8 +45,8 @@ export class TurnoService {
         );
   }
 
-    getHistorico(operacion:string): Observable<Turno[]> {
-    return this.http.get<Turno[]>(this.baseUrl + 'api/Turno/listadoTurno')
+    getHistorico(operacion:string): Observable<TurnoHistorico[]> {
+    return this.http.get<TurnoHistorico[]>(this.baseUrl + 'api/Turno/listadoTurno')
         .pipe(
             tap(_ =>
               {
@@ -54,7 +54,7 @@ export class TurnoService {
               this.handleErrorService.log('Datos del historico recibido');
               }
           ),
-            catchError(this.handleErrorService.handleError<Turno[]>('Consulta solicitante', undefined))
+            catchError(this.handleErrorService.handleError<TurnoHistorico[]>('Consulta solicitante', undefined))
         );
   }
 

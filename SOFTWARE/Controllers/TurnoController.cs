@@ -48,8 +48,10 @@ namespace SOFTWARE.Controllers
 
         [HttpGet]
         [Route("listadoTurno")]
-        public async Task<ActionResult<IEnumerable<Turno>>> GetListado()
+        [Authorize(Roles = StaticUserRoles.OWNER+","+StaticUserRoles.ADMIN)]
+        public async Task<ActionResult<IEnumerable<TurnoHistorico>>> GetListado()
         {
+
             if (_context.Turno == null)
             {
                 return NotFound();
@@ -67,7 +69,52 @@ namespace SOFTWARE.Controllers
                 }
             }
 
-            return turnos;
+            List<TurnoHistorico> turnosHistorico = new List<TurnoHistorico>();
+
+            turnosHistorico = mapear(turnos);
+
+            return turnosHistorico;
+        }
+
+        private List<TurnoHistorico> mapear(List<Turno> listado)
+        {
+
+            List<TurnoHistorico> turnosHistorico = new List<TurnoHistorico>();
+
+            foreach (var item in listado)
+            {
+                TurnoHistorico turnoHistorico = new TurnoHistorico
+                {
+                    Numero = item.Numero,
+                    Motivo = item.Motivo,
+                    Asistencia = item.Asistencia,
+                    DescripcionOperacion = item.DescripcionOperacion,
+                    ContratistaAtendio = item.ContratistaAtendio,
+                    Observacion = item.Observacion,
+                    RefTiempo = item.RefTiempo,
+                    FechaFinalizacion = item.FechaFinalizacion,
+                    RefSolicitante= item.RefSolicitante,
+                    Poblacion=item.Poblacion,
+
+                    // Mapea más propiedades según sea necesario
+                };
+
+                turnosHistorico.Add(turnoHistorico);
+
+            }
+
+            var listadoUsuarios =  _context.Users.ToList();
+
+            foreach (var user in listadoUsuarios){
+                foreach (var turno in turnosHistorico)
+                {
+                    if(turno.RefSolicitante==user.Identificacion){
+                        turno.NombreSolicitante = user.Nombre;
+                    }
+                }
+            }
+
+            return turnosHistorico;
         }
 
         [HttpGet]
@@ -116,7 +163,6 @@ namespace SOFTWARE.Controllers
             return lista;
 
         }
-
 
 
         private ApplicationUser? TraerUsuario(string identificacion, List<ApplicationUser> listado)
@@ -193,7 +239,6 @@ namespace SOFTWARE.Controllers
 
 
   
-
         // GET: api/Turno/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Turno>> GetTurno(int id)
