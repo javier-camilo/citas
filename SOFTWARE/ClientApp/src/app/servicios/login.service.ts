@@ -26,7 +26,7 @@ export class LoginService {
   constructor(private http: HttpClient,
     private handleErrorService: HandleHttpErrorService, private router: Router) {
 
-    this.baseUrl = 'https://localhost:7240/';
+    this.baseUrl = 'https://turno.azurewebsites.net/';
   }
 
 
