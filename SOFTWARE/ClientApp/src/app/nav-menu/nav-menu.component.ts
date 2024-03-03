@@ -50,9 +50,9 @@ export class NavMenuComponent implements OnDestroy {
 
       admin = [
         { name: this.datosUsuario.nombre, route: "", icon: "" },
-        { name: "Historico", icon: "date_range", route: "/consultarHistorico" },
+        { name: "Histórico", icon: "date_range", route: "/consultarHistorico" },
         { name: "Citas Ventanilla", icon: "date_range", route: "/citasVentanilla" },
-        { name: "Registrar Atencion", icon: "save", route: "/colaAtencion" },
+        { name: "Registrar Atención", icon: "save", route: "/colaAtencion" },
         { name: "Reporte", icon: "history", route: "/reportesContratista" }
       ];
 
@@ -73,13 +73,13 @@ export class NavMenuComponent implements OnDestroy {
       dueño = [
         { name: this.datosUsuario.nombre, route: "", icon: "" },
         { name: "Listado de cola",  icon: "history",  route: "/cola"},
-        { name: "registrar motivo", icon: "done", route: "/registrarMotivo" },
-        { name: "consultar Motivo", icon: "assignment", route: "/consultarMotivo" },
-        { name: "registrar Poblacion", icon: "accessible", route: "/registrarPoblacion" },
-        { name: "consultar Poblacion", icon: "accessibility_new", route: "/consultarPoblacion" },
-        { name: "registrar Usuario", icon: "supervised_user_circle", route: "/registroAdministrador" },
-        { name: "gestionar permisos", icon: "supervised_user_circle", route: "/roles" },
-        { name: "reporte", icon: "receipt", route: "/reporteAdministrador" }
+        { name: "Registrar motivo", icon: "done", route: "/registrarMotivo" },
+        { name: "Consultar Motivo", icon: "assignment", route: "/consultarMotivo" },
+        { name: "Registrar Población", icon: "accessible", route: "/registrarPoblacion" },
+        { name: "Consultar Población", icon: "accessibility_new", route: "/consultarPoblacion" },
+        { name: "Registrar Usuario", icon: "supervised_user_circle", route: "/registroAdministrador" },
+        { name: "Gestionar permisos", icon: "supervised_user_circle", route: "/roles" },
+        { name: "Reporte", icon: "receipt", route: "/reporteAdministrador" }
       ];
 
       this.menu = dueño;

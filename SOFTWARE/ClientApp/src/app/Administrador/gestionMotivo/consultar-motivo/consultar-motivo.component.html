@@ -4,8 +4,8 @@
 <mat-card class="contact-card">
   <div class="contenedor">
     <mat-form-field>
-      <mat-label>filtrar por:</mat-label>
-      <input matInput (keyup)="filtrar($event)" placeholder="Nombre o descripcion">
+      <mat-label>Filtrar por:</mat-label>
+      <input matInput (keyup)="filtrar($event)" descripción="Nombre o descripcion">
     </mat-form-field>
   </div>
 </mat-card>
@@ -14,17 +14,17 @@
 
 
   <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef> nombre </th>
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
     <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
   </ng-container>
 
   <ng-container matColumnDef="descripcion">
-    <th mat-header-cell *matHeaderCellDef> descipcion </th>
+    <th mat-header-cell *matHeaderCellDef> Descripción </th>
     <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
   </ng-container>
 
   <ng-container matColumnDef="editar/eliminar">
-    <th mat-header-cell *matHeaderCellDef> editar/eliminar </th>
+    <th mat-header-cell *matHeaderCellDef> Editar/Eliminar </th>
     <td mat-cell *matCellDef="let element"> <a routerLink='/edicionMotivo/{{element.id}}'>Editar</a> </td>
   </ng-container>
 

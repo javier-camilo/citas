@@ -6,7 +6,7 @@
       <div class="col-sm-8 border-center">
 
             <div class="row mt-3" style="margin-bottom: 50px;">
-              <div class="col-md-6"><label class="labels">digite la identificacion</label><input class="form-control"
+              <div class="col-md-6"><label class="labels">Digite la identificación</label><input class="form-control"
                 [(ngModel)]="identificacion"></div>
               <div class="col-md-6" style="margin-top: 20px;"><button mat-raised-button color="primary" (click)="buscar()">buscar</button>
               <button *ngIf="SeEncontro" mat-raised-button style="margin-left: 20px;">Eliminar usuario</button>
@@ -20,7 +20,7 @@
             </div>
 
             <div class="row mt-2">
-              <div class="col-md-6"><label class="labels">identificacion</label><input type="text" class="form-control"
+              <div class="col-md-6"><label class="labels">Identificación</label><input type="text" class="form-control"
                 [(ngModel)]="datosUsuario.identificacion"disabled></div>
               <div class="col-md-6"><label class="labels">Nombre Completo</label><input type="text" class="form-control"
                  [(ngModel)]="datosUsuario.nombre" disabled></div>
@@ -39,7 +39,7 @@
 
               <mat-form-field>
 
-                  <mat-label>selecione el Rol</mat-label>
+                  <mat-label>seleccione el Rol</mat-label>
                   <mat-select [(ngModel)]="operacion">
                     <mat-option value="1">contratista</mat-option>
                     <mat-option value="2">Administrador</mat-option>

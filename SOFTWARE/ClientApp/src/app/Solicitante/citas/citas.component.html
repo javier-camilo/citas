@@ -15,7 +15,7 @@
             <div class="col col-lg-2" style="margin-right: 30px;">
 
               <mat-form-field>
-                <mat-label>selecione el motivo</mat-label>
+                <mat-label>Seleccione el motivo</mat-label>
                 <mat-select formControlName="motivo">
 
                   <mat-option *ngFor="let nav of motivos" [value]="nav.nombre"
@@ -36,7 +36,7 @@
 
             <div class="col col-lg-2">
               <mat-form-field>
-                <mat-label>selecione el la poblacion</mat-label>
+                <mat-label>Seleccione el la población</mat-label>
                 <mat-select formControlName="poblacion">
 
                   <mat-option *ngFor="let nav of poblaciones" [value]="nav.nombre">{{nav.nombre}}</mat-option>
@@ -44,7 +44,7 @@
                 </mat-select>
 
                 <mat-error *ngIf="this.firstFormGroup.controls['poblacion'].hasError('required')">
-                  Es necesario que seleccione la poblacion
+                  Es necesario que seleccione la población
                 </mat-error>
 
               </mat-form-field>
@@ -64,7 +64,7 @@
       <ng-template matStepLabel>terminado</ng-template>
 
       <div style="margin: 20px;">
-        <p>Datos obtenidos, si no requiere hacer algun cambio puede registrar el turno</p>
+        <p>Datos obtenidos, si no requiere hacer algún cambio puede registrar el turno</p>
       </div>
 
       <div>

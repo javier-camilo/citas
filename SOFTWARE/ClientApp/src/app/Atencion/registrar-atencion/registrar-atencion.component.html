@@ -24,7 +24,7 @@
             <div class="p-3 py-5">
 
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="text-right">Informacion</h4>
+                <h4 class="text-right">Información</h4>
               </div>
 
               <div class="row mt-2">
@@ -35,15 +35,15 @@
               </div>
 
               <div class="row mt-2">
-                <div class="col-md-6"><label class="labels">poblacion</label><input type="text" class="form-control" placeholder="{{turno.poblacion}}" disabled>
+                <div class="col-md-6"><label class="labels">Población</label><input type="text" class="form-control" placeholder="{{turno.poblacion}}" disabled>
                 </div>
-                <div class="col-md-6"><label class="labels">asistencia</label><input type="text" class="form-control" placeholder="{{turno.asistencia}}" disabled>
+                <div class="col-md-6"><label class="labels">Asistencia</label><input type="text" class="form-control" placeholder="{{turno.asistencia}}" disabled>
                 </div>
               </div>
 
               <div class="row mt-3">
 
-                <div class="col-md-12"><label class="labels">descripcion de la solicitud</label><input class="form-control" placeholder="{{turno.descripcionOperacion}}" disabled></div>
+                <div class="col-md-12"><label class="labels">Descripción de la solicitud</label><input class="form-control" placeholder="{{turno.descripcionOperacion}}" disabled></div>
 
               </div>
 
@@ -77,11 +77,11 @@
             <div class="p-3 py-5">
 
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="text-right">Informacion</h4>
+                <h4 class="text-right">Información</h4>
               </div>
 
               <div class="row mt-2">
-                <div class="col-md-6"><label class="labels">identificacion</label><input type="text" class="form-control" placeholder="{{datosUsuario.identificacion}}" disabled>
+                <div class="col-md-6"><label class="labels">Identificación</label><input type="text" class="form-control" placeholder="{{datosUsuario.identificacion}}" disabled>
                 </div>
                 <div class="col-md-6"><label class="labels">Nombre Completo</label><input type="text" class="form-control"  placeholder="{{datosUsuario.nombre}}" disabled>
                 </div>
@@ -90,7 +90,7 @@
               <div class="row mt-3">
                 <div class="col-md-12"><label class="labels">Apellidos</label><input class="form-control"  placeholder="{{datosUsuario.apellido}}" disabled></div>
 
-                <div class="col-md-12"><label class="labels">Telefono</label><input type="text" class="form-control"  placeholder="{{datosUsuario.phoneNumber}}" disabled></div>
+                <div class="col-md-12"><label class="labels">Teléfono</label><input type="text" class="form-control"  placeholder="{{datosUsuario.phoneNumber}}" disabled></div>
 
               </div>
 
@@ -106,7 +106,7 @@
 
     </mat-tab>
 
-    <mat-tab label="registrar Atencion">
+    <mat-tab label="registrar Atención">
 
       <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()">
 
@@ -117,7 +117,7 @@
               <div>
                 <mat-form-field>
 
-                  <mat-label>selecione la Asistencia</mat-label>
+                  <mat-label>Seleccione la Asistencia</mat-label>
 
                   <mat-select formControlName="asistencia">
 
@@ -127,7 +127,7 @@
                   </mat-select>
 
                   <mat-error *ngIf="this.firstFormGroup.controls['asistencia'].hasError('required')">
-                    Es necesario que seleccion la asistencia
+                    Es necesario que seleccione la asistencia
                   </mat-error>
 
                 </mat-form-field>
@@ -136,15 +136,15 @@
               <div>
                 <mat-form-field style="margin-left: 20px;">
 
-                  <mat-label>observacion</mat-label>
+                  <mat-label>Observación</mat-label>
 
                   <input matInput formControlName="observacion">
 
                   <mat-error *ngIf="this.firstFormGroup.controls['observacion'].hasError('required')">
-                    Es necesario digitar la observacion
+                    Es necesario digitar la observación
                   </mat-error>
                   <mat-error *ngIf="this.firstFormGroup.controls['observacion'].hasError('minlength')">
-                    <br>debe digitar un minimo de 4 letras
+                    <br>debe digitar un mínimo de 4 letras
                   </mat-error>
                 </mat-form-field>
 

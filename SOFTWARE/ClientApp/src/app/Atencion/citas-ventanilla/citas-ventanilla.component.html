@@ -40,13 +40,13 @@
                       <div class="col-6">
 
                         <mat-form-field style=" width: 250px;text-align: center;">
-                          <mat-label>digite su identificacion</mat-label>
+                          <mat-label>Digite su identificación</mat-label>
                           <input matInput formControlName="identificacion">
                           <mat-error *ngIf="this.firstFormGroup.controls['identificacion'].hasError('required')">
-                            deber digitar la identificacion
+                            Deber digitar la identificación
                           </mat-error>
                           <mat-error *ngIf="this.firstFormGroup.controls['identificacion'].hasError('pattern')">
-                            solo se permiten numeros
+                            Solo se permiten números
                           </mat-error>
                         </mat-form-field>
 
@@ -65,7 +65,7 @@
 
                       <div class="col-md-6">
                         <mat-form-field>
-                          <mat-label>digite su contraseña</mat-label>
+                          <mat-label>Digite su contraseña</mat-label>
                           <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
                           <mat-error *ngIf="this.firstFormGroup.controls['password'].hasError('required')">
                             deber digitar la contraseña
@@ -73,7 +73,7 @@
                         </mat-form-field>
 
                         <mat-form-field>
-                          <mat-label>digite su email</mat-label>
+                          <mat-label>Digite su email</mat-label>
                           <input matInput formControlName="email">
                           <mat-error *ngIf="this.firstFormGroup.controls['email'].hasError('required')">
                             debe digitar el email
@@ -81,13 +81,13 @@
                         </mat-form-field>
 
                         <mat-form-field>
-                          <mat-label>telefono</mat-label>
+                          <mat-label>Teléfono</mat-label>
                           <input matInput formControlName="phoneNumber">
                           <mat-error *ngIf="this.firstFormGroup.controls['phoneNumber'].hasError('required')">
-                            debe digitar el telefono
+                            Debe digitar el teléfono
                           </mat-error>
                           <mat-error *ngIf="this.firstFormGroup.controls['phoneNumber'].hasError('pattern')">
-                            solo se permiten numeros
+                            Solo se permiten números
                           </mat-error>
                         </mat-form-field>
 
@@ -95,18 +95,18 @@
 
                       <div class="col-md-6">
                         <mat-form-field>
-                          <mat-label>usuario</mat-label>
+                          <mat-label>Usuario</mat-label>
                           <input matInput formControlName="userName">
                           <mat-error *ngIf="this.firstFormGroup.controls['userName'].hasError('required')">
-                            es necesario el usuario
+                            Es necesario el usuario
                           </mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
-                          <mat-label>nombre</mat-label>
+                          <mat-label>Nombre</mat-label>
                           <input matInput formControlName="nombre">
                           <mat-error *ngIf="this.firstFormGroup.controls['nombre'].hasError('required')">
-                            es necesario colocar el nombre
+                            Es necesario colocar el nombre
                           </mat-error>
                         </mat-form-field>
 
@@ -114,7 +114,7 @@
                           <mat-label>Apellido</mat-label>
                           <input matInput formControlName="apellido">
                           <mat-error *ngIf="this.firstFormGroup.controls['apellido'].hasError('required')">
-                            debe digitar el apellido
+                            Debe digitar el apellido
                           </mat-error>
                         </mat-form-field>
 
@@ -123,7 +123,7 @@
                       <div class="col-md-6">
                         <mat-form-field>
 
-                          <mat-label>selecione el motivo</mat-label>
+                          <mat-label>seleccione el motivo</mat-label>
 
                           <mat-select formControlName="motivo">
 
@@ -142,7 +142,7 @@
 
                       <div class="col-md-6">
                         <mat-form-field>
-                          <mat-label>selecione el la poblacion</mat-label>
+                          <mat-label>Seleccione la población</mat-label>
                           <mat-select formControlName="poblacion">
 
                             <mat-option *ngFor="let nav of poblaciones" [value]="nav.nombre">{{nav.nombre}}</mat-option>
@@ -150,7 +150,7 @@
                           </mat-select>
 
                           <mat-error *ngIf="this.firstFormGroup.controls['poblacion'].hasError('required')">
-                            Es necesario que seleccione la poblacion
+                            Es necesario que seleccione la población
                           </mat-error>
 
                         </mat-form-field>
