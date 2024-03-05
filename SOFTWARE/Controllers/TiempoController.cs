@@ -21,14 +21,26 @@ namespace SOFTWARE.Controllers
             _context = context;
         }
 
+        private ValidationProblemDetails error(string servicio, string e)
+        {
+
+            ModelState.AddModelError(servicio, e);
+            var problemDetails = new ValidationProblemDetails(ModelState)
+            {
+                Status = StatusCodes.Status400BadRequest,
+            };
+
+            return problemDetails;
+        }
+
         // GET: api/Tiempo
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Tiempo>>> GetTiempo()
         {
-          if (_context.Tiempo == null)
-          {
-              return NotFound();
-          }
+            if (_context.Tiempo == null)
+            {
+                return NotFound();
+            }
             return await _context.Tiempo.ToListAsync();
         }
 
@@ -36,10 +48,10 @@ namespace SOFTWARE.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Tiempo>> GetTiempo(string id)
         {
-          if (_context.Tiempo == null)
-          {
-              return NotFound();
-          }
+            if (_context.Tiempo == null)
+            {
+                return NotFound();
+            }
             var tiempo = await _context.Tiempo.FindAsync(id);
 
             if (tiempo == null)
@@ -86,10 +98,10 @@ namespace SOFTWARE.Controllers
         [HttpPost]
         public async Task<ActionResult<Tiempo>> PostTiempo(Tiempo tiempo)
         {
-          if (_context.Tiempo == null)
-          {
-              return Problem("Entity set 'TodoContext.Tiempo'  is null.");
-          }
+            if (_context.Tiempo == null)
+            {
+                return Problem("Entity set 'TodoContext.Tiempo'  is null.");
+            }
             _context.Tiempo.Add(tiempo);
             await _context.SaveChangesAsync();
 

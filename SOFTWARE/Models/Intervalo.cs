@@ -19,5 +19,7 @@ namespace SOFTWARE.Models
         public DateTime HoraFinalizacion { get; set; }
 
         public string? Disponibilidad { get; set; }
+        
+        public Tiempo? Tiempo { get; set; }
     }
 }

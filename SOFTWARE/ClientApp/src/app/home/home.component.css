@@ -181,6 +181,7 @@ main .sobre-nosotros {
 /* Clients */
 
 .cards {
+
   display: flex;
   justify-content: space-evenly;
 }

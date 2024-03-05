@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SOFTWARE.Contexto;
 
@@ -11,9 +12,11 @@ using SOFTWARE.Contexto;
 namespace SOFTWARE.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    partial class TodoContextModelSnapshot : ModelSnapshot
+    [Migration("20240303230154_NuevaRelacion")]
+    partial class NuevaRelacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,12 +255,13 @@ namespace SOFTWARE.Migrations
                     b.Property<DateTime>("HoraInicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("TiempoRefHorario")
+                    b.Property<string>("TiempoId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("key");
 
-                    b.HasIndex("TiempoRefHorario");
+                    b.HasIndex("TiempoId");
 
                     b.ToTable("Intervalo");
                 });
@@ -311,6 +315,9 @@ namespace SOFTWARE.Migrations
 
                     b.Property<bool>("Disponibilidad")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("HoraFinalizacion")
                         .HasColumnType("datetime2");
@@ -427,7 +434,9 @@ namespace SOFTWARE.Migrations
                 {
                     b.HasOne("SOFTWARE.Models.Tiempo", "Tiempo")
                         .WithMany()
-                        .HasForeignKey("TiempoRefHorario");
+                        .HasForeignKey("TiempoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Tiempo");
                 });

@@ -295,10 +295,10 @@ namespace SOFTWARE.Controllers
         [HttpPost]
         public async Task<ActionResult<Turno>> PostTurno(Turno turno)
         {
-          if (_context.Turno == null)
-          {
-              return Problem("Entity set 'TodoContext.Turno'  is null.");
-          }
+            if (_context.Turno == null)
+            {
+                return Problem("Entity set 'TodoContext.Turno'  is null.");
+            }
 
             turno.Asistencia = "no Atendido";
             turno.ContratistaAtendio = "sin contratista";

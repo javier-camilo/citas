@@ -25,21 +25,21 @@ namespace SOFTWARE.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Intervalo>>> GetIntervalo()
         {
-          if (_context.Intervalo == null)
-          {
-              return NotFound();
-          }
-            return await _context.Intervalo.ToListAsync();
+            if (_context.Intervalo == null)
+            {
+                return NotFound();
+            }
+            return await _context.Intervalo.Include(t => t.Tiempo).ToListAsync();
         }
 
         // GET: api/Intervalo/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Intervalo>> GetIntervalo(int id)
         {
-          if (_context.Intervalo == null)
-          {
-              return NotFound();
-          }
+            if (_context.Intervalo == null)
+            {
+                return NotFound();
+            }
             var intervalo = await _context.Intervalo.FindAsync(id);
 
             if (intervalo == null)
@@ -60,8 +60,24 @@ namespace SOFTWARE.Controllers
                 return BadRequest();
             }
 
+            var horarioExistente = await _context.Tiempo.FindAsync(intervalo.Tiempo.RefHorario);
+
+            if (horarioExistente == null)
+            {
+                // Si el horario no existe, devuelve un error BadRequest
+                return BadRequest("El horario especificado no existe.");
+            }
+
+            // Actualiza el campo de disponibilidad del horario si es necesario
+            // Por ejemplo:
+            // horarioExistente.Disponible = false;
+
+            // Asigna el horario asociado al turno
+            intervalo.Tiempo = horarioExistente;
+
             _context.Entry(intervalo).State = EntityState.Modified;
 
+            
             try
             {
                 await _context.SaveChangesAsync();
@@ -86,10 +102,47 @@ namespace SOFTWARE.Controllers
         [HttpPost]
         public async Task<ActionResult<Intervalo>> PostIntervalo(Intervalo intervalo)
         {
-          if (_context.Intervalo == null)
-          {
-              return Problem("Entity set 'TodoContext.Intervalo'  is null.");
-          }
+
+            if(intervalo.Tiempo==null){
+
+                if (_context.Intervalo == null)
+                {
+                    return Problem("Entity set 'TodoContext.Intervalo'  is null.");
+                }
+
+                _context.Intervalo.Add(intervalo);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetIntervalo", new { id = intervalo.key }, intervalo);
+            }
+
+
+            if (!string.IsNullOrEmpty(intervalo.Tiempo.RefHorario))
+            { 
+                var horarioExistente = await _context.Tiempo.FindAsync(intervalo.Tiempo.RefHorario);
+                if (horarioExistente == null)
+                {
+                    // Si el horario no existe, devuelve un error 400 (BadRequest)
+                    return BadRequest("El horario especificado no existe.");
+                }
+
+                if (horarioExistente.Disponibilidad == false)
+                {
+                    // Si el horario no existe, devuelve un error 400 (BadRequest)
+                    return BadRequest("El horario especificado ya no esta disponible");
+                }
+
+                horarioExistente.Disponibilidad = false;
+
+                // Asigna el horario asociado al turno
+                intervalo.Tiempo = horarioExistente;
+            }
+
+            if (_context.Intervalo == null)
+                {
+                    return Problem("Entity set 'TodoContext.Intervalo'  is null.");
+                }
+
             _context.Intervalo.Add(intervalo);
             await _context.SaveChangesAsync();
 

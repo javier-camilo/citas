@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SOFTWARE.Contexto;
 
@@ -11,9 +12,11 @@ using SOFTWARE.Contexto;
 namespace SOFTWARE.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    partial class TodoContextModelSnapshot : ModelSnapshot
+    [Migration("20240303232951_Opcional")]
+    partial class Opcional
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,6 +256,7 @@ namespace SOFTWARE.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("TiempoRefHorario")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("key");
@@ -311,6 +315,9 @@ namespace SOFTWARE.Migrations
 
                     b.Property<bool>("Disponibilidad")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("HoraFinalizacion")
                         .HasColumnType("datetime2");
@@ -427,7 +434,9 @@ namespace SOFTWARE.Migrations
                 {
                     b.HasOne("SOFTWARE.Models.Tiempo", "Tiempo")
                         .WithMany()
-                        .HasForeignKey("TiempoRefHorario");
+                        .HasForeignKey("TiempoRefHorario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Tiempo");
                 });

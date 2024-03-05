@@ -28,10 +28,10 @@ namespace SOFTWARE.Controllers
         [Authorize(Roles = StaticUserRoles.USER)]
         public async Task<ActionResult<IEnumerable<Motivo>>> GetMotivo()
         {
-          if (_context.Motivo == null)
-          {
-              return NotFound();
-          }
+            if (_context.Motivo == null)
+            {
+                return NotFound();
+            }
             return await _context.Motivo.ToListAsync();
         }
 
