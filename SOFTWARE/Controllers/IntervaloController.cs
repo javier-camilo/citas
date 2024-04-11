@@ -40,7 +40,7 @@ namespace SOFTWARE.Controllers
             {
                 return NotFound();
             }
-            var intervalo = await _context.Intervalo.FindAsync(id);
+            var intervalo = await _context.Intervalo.Include(t => t.Tiempo).FirstOrDefaultAsync(t => t.key == id); 
 
             if (intervalo == null)
             {

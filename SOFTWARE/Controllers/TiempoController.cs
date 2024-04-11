@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SOFTWARE.Contexto;
+using SOFTWARE.Core.Dtos;
 using SOFTWARE.Models;
 
 namespace SOFTWARE.Controllers
@@ -96,16 +98,22 @@ namespace SOFTWARE.Controllers
         // POST: api/Tiempo
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Tiempo>> PostTiempo(Tiempo tiempo)
+        public async Task<ActionResult<IEnumerable<Tiempo>>> PostTiempo(HorarioInputModel inputModel)
         {
+
+            DateTime fechaInicio = inputModel.FechaInicio;
+            DateTime fechaFin = inputModel.FechaFin;
+            TimeSpan intervaloAtencion = TimeSpan.FromMinutes(inputModel.IntervaloAtencion);
+            int numeroMaximoAtencion = inputModel.NumeroMaximoTurnos;
+            
+                        
+
             if (_context.Tiempo == null)
             {
-                return Problem("Entity set 'TodoContext.Tiempo'  is null.");
+                return BadRequest(error("base de datos tiempo","no existe una base de datos registrada"));
             }
-            _context.Tiempo.Add(tiempo);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTiempo", new { id = tiempo.RefHorario }, tiempo);
+            return Ok();
         }
 
         // DELETE: api/Tiempo/5
@@ -116,6 +124,13 @@ namespace SOFTWARE.Controllers
             {
                 return NotFound();
             }
+
+            var turnoAsignado = await _context.Intervalo.AnyAsync(t => t.Tiempo.RefHorario == id);
+            if (turnoAsignado)
+            {
+                return BadRequest("No se puede borrar el horario porque está asignado a un turno.");
+            }
+
             var tiempo = await _context.Tiempo.FindAsync(id);
             if (tiempo == null)
             {
