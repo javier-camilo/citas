@@ -305,9 +305,31 @@ namespace SOFTWARE.Controllers
                 return Problem("Entity set 'TodoContext.Turno'  is null.");
             }
 
+            if (!string.IsNullOrEmpty(turno.Tiempo.RefHorario))
+            {
+                var horarioExistente = await _context.Tiempo.FindAsync(turno.Tiempo.RefHorario);
+                if (horarioExistente == null)
+                {
+                    // Si el horario no existe, devuelve un error 400 (BadRequest)
+                    return BadRequest(error("tiempo", "no existe el horario especificado"));
+                }
+
+                if (horarioExistente.Disponibilidad == false)
+                {
+                    // Si el horario no tiene dispinibilidad, devuelve un error 400 (BadRequest)
+                    return BadRequest(error("Usuarios", "el horario epecificado no esta disponible"));
+                }
+
+                horarioExistente.Disponibilidad = false;
+
+                // Asigna el horario asociado al turno
+                turno.Tiempo = horarioExistente;
+            }
+
+
             turno.Asistencia = "no Atendido";
             turno.ContratistaAtendio = "sin contratista";
-            
+
             _context.Turno.Add(turno);
             await _context.SaveChangesAsync();
 
