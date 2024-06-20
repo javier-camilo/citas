@@ -42,7 +42,7 @@ namespace SOFTWARE.Models
         [Required(ErrorMessage = "la poblacion es requerida")]
         public string Poblacion { get; set; }
 
-        public Tiempo Tiempo { get; set; }
+        public Tiempo? Tiempo { get; set; }
 
 
     }
