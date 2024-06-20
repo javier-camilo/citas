@@ -42,6 +42,8 @@ namespace SOFTWARE.Models
         [Required(ErrorMessage = "la poblacion es requerida")]
         public string Poblacion { get; set; }
 
+        
+
 
     }
 

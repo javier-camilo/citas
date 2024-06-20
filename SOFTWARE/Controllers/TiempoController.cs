@@ -37,14 +37,39 @@ namespace SOFTWARE.Controllers
 
         // GET: api/Tiempo
         [HttpGet]
+        public async Task<ActionResult<IEnumerable<Tiempo>>> GetTiempoHoy()
+        {
+            if (_context.Tiempo == null)
+            {
+                return NotFound();
+            }
+
+            var listado = _context.Tiempo
+            .Where(t => t.Disponibilidad == true && t.HoraInicio.Date == DateTime.Today)
+            .OrderBy(t => t.HoraInicio)
+            .ToListAsync();
+
+            return await listado;
+        }
+
+
+        [HttpGet]
+        [Route("listadoTiempo")]
         public async Task<ActionResult<IEnumerable<Tiempo>>> GetTiempo()
         {
             if (_context.Tiempo == null)
             {
                 return NotFound();
             }
-            return await _context.Tiempo.ToListAsync();
+
+            var listado = _context.Tiempo
+            .Where(t => t.Disponibilidad == true)
+            .OrderBy(t => t.HoraInicio)
+            .ToListAsync();
+
+            return await listado;
         }
+
 
         // GET: api/Tiempo/5
         [HttpGet("{id}")]
@@ -63,6 +88,7 @@ namespace SOFTWARE.Controllers
 
             return tiempo;
         }
+
 
         // PUT: api/Tiempo/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -95,25 +121,106 @@ namespace SOFTWARE.Controllers
             return NoContent();
         }
 
+
         // POST: api/Tiempo
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<IEnumerable<Tiempo>>> PostTiempo(HorarioInputModel inputModel)
         {
 
-            DateTime fechaInicio = inputModel.FechaInicio;
+            DateTime nuevaFechaHora = new DateTime(inputModel.FechaInicio.Year, inputModel.FechaInicio.Month, inputModel.FechaInicio.Day, 8, 00, 0);
+            DateTime fechaInicio = nuevaFechaHora;
             DateTime fechaFin = inputModel.FechaFin;
             TimeSpan intervaloAtencion = TimeSpan.FromMinutes(inputModel.IntervaloAtencion);
             int numeroMaximoAtencion = inputModel.NumeroMaximoTurnos;
-            
-            
+
+            // Define el horario laboral (de 8:00 AM a 6:00 PM)
+            TimeSpan horaInicioLaboral = new TimeSpan(8, 0, 0); // 8:00 AM
+            TimeSpan horaFinLaboral = new TimeSpan(18, 0, 0); // 6:00 PM
+
+            // Define el período de descanso (por ejemplo, de 12:00 PM a 2:00 PM)
+            TimeSpan horaInicioDescanso = new TimeSpan(12, 0, 0); // 12:00 PM
+            TimeSpan horaFinDescanso = new TimeSpan(14, 0, 0); // 2:00 PM
+
+            var horarios = new List<Tiempo>();
+
             if (_context.Tiempo == null)
             {
-                return BadRequest(error("base de datos tiempo","no existe una base de datos registrada"));
+                return BadRequest(error("base de datos tiempo", "no existe una base de datos registrada"));
             }
 
-            return Ok();
+            if (inputModel.FechaFin < inputModel.FechaInicio)
+            {
+                return BadRequest(error("base de datos tiempo", "la fecha de fin no puede ser menor que la fecha de inicio"));
+            }
+
+            // Verificar si existen horarios registrados para las fechas especificadas
+            bool horariosRegistrados = await _context.Tiempo.AnyAsync(h =>
+                (h.HoraInicio.Date >= inputModel.FechaInicio.Date && h.HoraInicio.Date <= inputModel.FechaFin.Date) ||
+                (h.HoraFinalizacion.Date >= inputModel.FechaInicio.Date && h.HoraFinalizacion.Date <= inputModel.FechaFin.Date));
+
+            // Si existen horarios registrados, mostrar una advertencia
+            if (horariosRegistrados)
+            {
+                return BadRequest(error("base de datos tiempo", "ya existe un horario registrado para esas fechas"));
+            }
+
+
+            while (fechaInicio <= fechaFin)
+            {
+                //excluir domingos
+                if (fechaInicio.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    for (int i = 0; i < numeroMaximoAtencion; i++)
+                    {
+
+                        var horaInicio = fechaInicio.Add(intervaloAtencion * i);
+                        var horaFin = horaInicio.Add(intervaloAtencion);
+
+                        if (horaInicio.TimeOfDay < horaFinDescanso && horaFin.TimeOfDay > horaInicioDescanso)
+                        {
+                            if (horaInicio.TimeOfDay < horaInicioDescanso)
+                            {
+                                horaInicio = new DateTime(horaInicio.Year, horaInicio.Month, horaInicio.Day, horaFinDescanso.Hours, horaFinDescanso.Minutes, horaFinDescanso.Seconds);
+                            }
+                            if (horaFin.TimeOfDay > horaFinDescanso)
+                            {
+                                horaFin = horaInicio.Add(intervaloAtencion);
+                            }
+                        }
+
+                        if (horaInicio.TimeOfDay < horaInicioLaboral || horaFin.TimeOfDay > horaFinLaboral)
+                        {
+                            continue;
+                        }
+
+                        if (horaFin <= fechaFin && horaInicio.TimeOfDay >= horaInicioLaboral && horaFin.TimeOfDay <= horaFinLaboral)
+                        {
+                            var horario = new Tiempo
+                            {
+                                HoraInicio = horaInicio,
+                                HoraFinalizacion = horaFin,
+                                Disponibilidad = true,
+                                // Otros campos del horario si los tienes
+                            };
+
+                            horarios.Add(horario);
+                        }
+
+
+                    }
+
+                }
+
+                fechaInicio = fechaInicio.AddDays(1);
+            }
+
+            _context.Tiempo.AddRange(horarios);
+            await _context.SaveChangesAsync();
+
+            return horarios;
         }
+
 
         // DELETE: api/Tiempo/5
         [HttpDelete("{id}")]
@@ -124,7 +231,8 @@ namespace SOFTWARE.Controllers
                 return NotFound();
             }
 
-            var turnoAsignado = await _context.Intervalo.AnyAsync(t => t.Tiempo.RefHorario == id);
+            var turnoAsignado = await _context.Turno.AnyAsync(t => t.Tiempo.RefHorario == id);
+
             if (turnoAsignado)
             {
                 return BadRequest("No se puede borrar el horario porque está asignado a un turno.");
@@ -142,9 +250,11 @@ namespace SOFTWARE.Controllers
             return NoContent();
         }
 
+
         private bool TiempoExists(string id)
         {
             return (_context.Tiempo?.Any(e => e.RefHorario == id)).GetValueOrDefault();
         }
+
     }
 }
