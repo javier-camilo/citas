@@ -10,6 +10,7 @@ import { TurnoService } from 'src/app/servicios/turno.service';
   templateUrl: './genrarreporte.component.html',
   styleUrls: ['./genrarreporte.component.css']
 })
+
 export class GenrarreporteComponent implements OnInit {
 
 
@@ -37,10 +38,12 @@ export class GenrarreporteComponent implements OnInit {
 
 
   //esquema de colores
-  colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  colorScheme: Color = {
+    name: 'myScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#f00', '#0f0', '#0ff'],
   };
-
   single: ReporteTurno[];
 
   constructor(private turnoServicio:TurnoService) {

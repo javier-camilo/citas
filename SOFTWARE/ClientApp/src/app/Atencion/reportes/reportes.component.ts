@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LegendPosition } from '@swimlane/ngx-charts';
+import { LegendPosition, Color, ScaleType } from '@swimlane/ngx-charts';
 import { Register } from 'src/app/Modelo/register';
 import { ReporteTurno } from 'src/app/Modelo/reporte';
 import { LoginService } from 'src/app/servicios/login.service';
@@ -41,9 +41,11 @@ export class ReportesComponent implements OnInit {
   public legendPosition: LegendPosition = LegendPosition.Below;
 
 
-  //esquema de colores
-  colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  colorScheme: Color = {
+    name: 'myScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#f00', '#0f0', '#0ff'],
   };
 
 
