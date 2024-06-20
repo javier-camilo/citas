@@ -19,6 +19,7 @@ import { Turno } from 'src/app/Modelo/turno';
 })
 export class CitasComponent implements OnInit {
 
+  protected selectedDate: Date | null = null;
   protected motivos: Motivo[];
   protected poblaciones: Poblacion[];
   protected usuario: Register;

@@ -106,8 +106,7 @@ namespace SOFTWARE.Controllers
             TimeSpan intervaloAtencion = TimeSpan.FromMinutes(inputModel.IntervaloAtencion);
             int numeroMaximoAtencion = inputModel.NumeroMaximoTurnos;
             
-                        
-
+            
             if (_context.Tiempo == null)
             {
                 return BadRequest(error("base de datos tiempo","no existe una base de datos registrada"));

@@ -56,7 +56,11 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-ventanilla.component';
 import { ConsultarHistoricoComponent } from './Atencion/gestionarHistorico/consultar-historico/consultar-historico.component';
 import { HistoricoComponent } from './Atencion/gestionarHistorico/historico/historico.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 
 
 
@@ -101,6 +105,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     HttpClientModule,
     MatToolbarModule,
     MatStepperModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatSelectModule,
     MatPaginatorModule,
     MatSidenavModule,
