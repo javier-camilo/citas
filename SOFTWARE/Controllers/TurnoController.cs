@@ -28,17 +28,22 @@ namespace SOFTWARE.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Turno>>> GetTurno()
         {
-          if (_context.Turno == null)
-          {
-              return NotFound();
-          }
+            if (_context.Turno == null)
+            {
+                return NotFound();
+            }
 
-            var listado = await _context.Turno.ToListAsync();
+            var listado = await _context.Turno
+            .Include(t => t.Tiempo)
+            .Where(t => t.Tiempo.HoraInicio.Date == DateTime.Today)
+            .OrderBy(t => t.Tiempo.HoraInicio)
+            .ToListAsync();
+
             List<Turno> turnos = new List<Turno>();
 
             foreach (var item in listado)
             {
-                if(item.Asistencia == "no Atendido")
+                if (item.Asistencia == "no Atendido")
                 {
                     turnos.Add(item);
                 }
