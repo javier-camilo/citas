@@ -92,12 +92,14 @@ export class NavMenuComponent implements OnDestroy {
 
         this.menu = [];
 
-        let dueño: Menu[];
+      let dueño: Menu[];
+
 
         dueño = [
           { name: this.datosUsuario.nombre, route:"",icon:""},
           { name: "Listado de cola",  icon: "history",  route: "/cola"},
           { name: "Solicitar cita", icon: "search", route: "/registroCita" },
+          { name: "Tu turno",  icon: "find_in_page",  route: "/consultaTurno"},
         ];
 
         this.menu = dueño;

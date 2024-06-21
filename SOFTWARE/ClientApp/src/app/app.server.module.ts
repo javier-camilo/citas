@@ -16,6 +16,8 @@ import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-vent
 import { GestionarHistoricoComponent } from './Atencion/gestionar-historico/gestionar-historico.component';
 import { ConsultarHistoricoComponent } from './Atencion/gestionarHistorico/consultar-historico/consultar-historico.component';
 import { HistoricoComponent } from './Atencion/gestionarHistorico/historico/historico.component';
+import { ConsultaTurnoComponent } from './Solicitante/consulta-turno/consulta-turno.component';
+import { InformacionTurnoUsuarioComponent } from './Solicitante/informacion-turno-usuario/informacion-turno-usuario.component';
 
 @NgModule({
     imports: [AppModule, ServerModule, ModuleMapLoaderModule],
@@ -33,7 +35,9 @@ import { HistoricoComponent } from './Atencion/gestionarHistorico/historico/hist
       CitasVentanillaComponent,
       GestionarHistoricoComponent,
       ConsultarHistoricoComponent,
-      HistoricoComponent
+      HistoricoComponent,
+      ConsultaTurnoComponent,
+      InformacionTurnoUsuarioComponent
     ]
 })
 export class AppServerModule { }

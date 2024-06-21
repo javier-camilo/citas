@@ -274,11 +274,12 @@ namespace SOFTWARE.Controllers
 
             var turno = await _context.Turno
                                     .Include(t => t.Tiempo)
-                                    .Where(t => t.RefSolicitante == identificacion && t.Tiempo.HoraInicio.Date == DateTime.Today)
+                                    .Where(t => t.RefSolicitante == identificacion && t.Tiempo.HoraInicio.Date == DateTime.Today 
+                                    && t.Asistencia == "no Atendido")
                                     .FirstOrDefaultAsync();
             if (turno == null)
             {
-                return BadRequest(error("Consultar turno", "no se encontro ningun turno con esos datos"));
+                return BadRequest(error("Consultar turno", "no tiene ningun turno agendado para hoy"));
             }
 
             return turno;

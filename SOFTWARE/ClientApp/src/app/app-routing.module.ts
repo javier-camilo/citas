@@ -28,6 +28,7 @@ import { ReportesComponent } from './atencion/reportes/reportes.component';
 import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-ventanilla.component';
 import { ConsultarHistoricoComponent } from './Atencion/gestionarHistorico/consultar-historico/consultar-historico.component';
 import { HistoricoComponent } from './Atencion/gestionarHistorico/historico/historico.component';
+import { ConsultaTurnoComponent } from './Solicitante/consulta-turno/consulta-turno.component';
 
 const routes: Routes = [
     {path: 'registro', component: RegistroComponent },
@@ -54,7 +55,8 @@ const routes: Routes = [
         { path: 'registroAdministrador', component: RegistroAdminComponent, canActivate: [OwnerRoleGuard] },
         { path: 'reporteAdministrador', component: GenrarreporteComponent,canActivate: [OwnerRoleGuard] },
         { path: 'roles', component: RolesComponent, canActivate: [OwnerRoleGuard] },
-        { path: 'colaAtencion', component: ColaAtencionComponent},
+        { path: 'colaAtencion', component: ColaAtencionComponent },
+        { path: 'consultaTurno', component: ConsultaTurnoComponent },
         { path: 'registrarAtencion/:codigoTurno', component: RegistrarAtencionComponent,canActivate: [AdminRoleGuard]},
       ],canActivate:[AuthGuard]
     },

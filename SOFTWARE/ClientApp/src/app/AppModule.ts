@@ -57,9 +57,10 @@ import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-vent
 import { ConsultarHistoricoComponent } from './Atencion/gestionarHistorico/consultar-historico/consultar-historico.component';
 import { HistoricoComponent } from './Atencion/gestionarHistorico/historico/historico.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ConsultaTurnoComponent } from './Solicitante/consulta-turno/consulta-turno.component';
+import { InformacionTurnoUsuarioComponent } from './Solicitante/informacion-turno-usuario/informacion-turno-usuario.component';
 
 
 
@@ -73,6 +74,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     AppComponent,
     RolesComponent,
     NavMenuComponent,
+    ConsultaTurnoComponent,
+    InformacionTurnoUsuarioComponent,
     HomeComponent,
     FetchDataComponent,
     CitasComponent,

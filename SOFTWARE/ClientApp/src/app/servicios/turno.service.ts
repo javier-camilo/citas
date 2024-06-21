@@ -90,6 +90,26 @@ export class TurnoService {
       );
   }
 
+  getTurnoUsuario(id: string | null, operacionLLamado?:string): Observable<Turno> {
+    const url = `${this.baseUrl + 'api/Turno/consultarTurnoUsuario'}/${id}`;
+      return this.http.get<Turno>(url, httpOptions)
+      .pipe(
+        tap(_ =>
+
+          {
+
+              if(operacionLLamado==null){
+
+                  this.handleErrorService.log('se consulto el turno = '+ id)
+
+              }
+
+          }
+
+          ),
+        catchError(this.handleErrorService.handleError<Turno>('Buscar motivo', undefined))
+      );
+  }
 
   put(turno: Turno): Observable<any> {
     const url = `${this.baseUrl}api/Turno/${turno.numero}`;
