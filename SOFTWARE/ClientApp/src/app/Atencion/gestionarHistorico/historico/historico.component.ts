@@ -82,7 +82,6 @@ export class HistoricoComponent implements OnInit {
   inicializarError() {
 
     this.turno = new Turno();
-
     this.turno.asistencia = "..";
     this.turno.contratistaAtendio = "..";
     this.turno.descripcionOperacion = "..";
@@ -93,8 +92,9 @@ export class HistoricoComponent implements OnInit {
     this.turno.poblacion = "..";
     this.turno.refSolicitante = "..";
     this.turno.refTiempo = "..";
-
+    
     this.errorUsuario();
+    this.errorUsuarioDos();
 
 
   }
