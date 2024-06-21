@@ -247,12 +247,35 @@ namespace SOFTWARE.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Turno>> GetTurno(int id)
         {
-          if (_context.Turno == null)
-          {
-              return NotFound();
-          }
+            if (_context.Turno == null)
+            {
+                return NotFound();
+            }
             var turno = await _context.Turno.Include(t => t.Tiempo).FirstOrDefaultAsync(turno=>turno.Numero == id);
 
+            if (turno == null)
+            {
+                return BadRequest(error("Consultar turno", "no se encontro ningun turno con esos datos"));
+            }
+
+            return turno;
+        }
+
+        
+        [HttpGet]
+        [Route("consultarTurnoUsuario/{identificacion}")]
+        public async Task<ActionResult<Turno>> GetTurnoActivo(string identificacion)
+        {
+            if (_context.Turno == null)
+            {
+                return NotFound();
+            }
+
+
+            var turno = await _context.Turno
+                                    .Include(t => t.Tiempo)
+                                    .Where(t => t.RefSolicitante == identificacion && t.Tiempo.HoraInicio.Date == DateTime.Today)
+                                    .FirstOrDefaultAsync();
             if (turno == null)
             {
                 return BadRequest(error("Consultar turno", "no se encontro ningun turno con esos datos"));
