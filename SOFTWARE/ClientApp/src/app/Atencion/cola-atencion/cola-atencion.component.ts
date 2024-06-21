@@ -14,28 +14,18 @@ export class ColaAtencionComponent implements OnInit {
   dataSource:any;
   turnos:Turno[];
   loading:boolean;
-  displayedColumns: string[] = ['numero', 'motivo', 'atencion', 'Descripcion Operacion','editar'];
+  displayedColumns: string[] = ['numero', 'motivo', 'atencion', 'Descripcion Operacion','Horario','editar'];
 
   constructor(private turnoservice:TurnoService) { }
 
   ngOnInit(): void {
-    this.turnoPrimero = 99999999999999999;
     this.loading=true;
     this.turnoservice.get("").subscribe(result=>{this.turnos=result; this.loading=false;
       this.dataSource = new MatTableDataSource(this.turnos);
-      this.obtenerTurnoMenor();
     }
       );
   }
-
-  obtenerTurnoMenor() {
-    this.turnos.forEach(element => {
-      let numero = element.numero;
-      if (numero < this.turnoPrimero) {
-        this.turnoPrimero = numero;
-      };
-    });
-  }
+  
 
   filtrar(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;

@@ -30,7 +30,22 @@
                 </mat-error>
               </mat-form-field>
 
+                <div class="col col-lg-2" style="margin-right: 30px;">
+                  <mat-form-field appearance="fill" style="width: 200px;">
+                    <mat-label>seleccione la fecha</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="selectedDate"
+                    (dateChange)="onDateChange($event)" [min]="minDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="this.firstFormGroup.controls['selectedDate'].hasError('required')">
+                      Es necesario que seleccione la fecha de los horarios
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
             </div>
+
+
 
             <div class="col-md-auto">
 
@@ -50,6 +65,20 @@
                 </mat-error>
 
               </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Seleccione el horario</mat-label>
+                <mat-select formControlName="horario">
+
+                  <mat-option *ngFor="let nav of filteredHorarios" [value]="nav.refHorario">{{ nav.horaInicio | date: 'shortTime' }} -
+                    {{ nav.horaFinalizacion | date: 'shortTime' }}</mat-option>
+
+                </mat-select>
+                <mat-error *ngIf="this.firstFormGroup.controls['horario'].hasError('required')">
+                  Es necesario que seleccione el horario para continuar
+                </mat-error>
+              </mat-form-field>
+
             </div>
 
           </div>
@@ -78,5 +107,18 @@
 
   </mat-stepper>
 
+  <h1></h1>
 
 </mat-card>
+
+
+
+
+<ul>
+  <li *ngFor="let hero of filteredHorarios">
+    <span style="color: black;">{{ hero.horaInicio | date: 'shortTime' }} - {{ hero.horaFinalizacion | date: 'shortTime' }} -
+      {{ hero.disponibilidad }} </span>
+  </li>
+</ul>
+
+

@@ -14,7 +14,7 @@ export class FetchDataComponent {
   dataSource:any;
   turnos:Turno[];
   loading:boolean;
-  displayedColumns: string[] = ['numero', 'motivo', 'atencion', 'Descripcion Operacion'];
+  displayedColumns: string[] = ['numero', 'motivo', 'atencion', 'Descripcion Operacion','Horario'];
 
   constructor(private turnoservice:TurnoService) { }
 
@@ -28,6 +28,7 @@ export class FetchDataComponent {
   filtrar(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filtro.trim().toLowerCase();
+    let turnos = new Turno();
   }
 
 }

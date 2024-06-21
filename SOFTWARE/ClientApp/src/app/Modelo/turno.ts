@@ -1,3 +1,4 @@
+import { Tiempo } from './tiempo';
 export class Turno {
 
   numero:number;
@@ -19,6 +20,8 @@ export class Turno {
   poblacion: string | null;
 
   observacion: string | null;
+
+  tiempo: Tiempo;
 
 }
 

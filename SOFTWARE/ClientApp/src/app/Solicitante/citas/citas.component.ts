@@ -11,6 +11,8 @@ import { Poblacion } from 'src/app/Modelo/poblacion';
 import { Register } from '../../Modelo/register';
 import { TurnoService } from 'src/app/servicios/turno.service';
 import { Turno } from 'src/app/Modelo/turno';
+import { TiempoService } from 'src/app/servicios/tiempo.service';
+import { Tiempo } from 'src/app/Modelo/tiempo';
 
 @Component({
   selector: 'app-citas',
@@ -20,6 +22,9 @@ import { Turno } from 'src/app/Modelo/turno';
 export class CitasComponent implements OnInit {
 
   protected selectedDate: Date | null = null;
+  protected minDate: Date;
+  protected listadoHorario: Tiempo[];
+  protected filteredHorarios: Tiempo[] = [];
   protected motivos: Motivo[];
   protected poblaciones: Poblacion[];
   protected usuario: Register;
@@ -27,12 +32,17 @@ export class CitasComponent implements OnInit {
 
   desripcionMotivo:string | null;
 
-  constructor(public dialogo: MatDialog, private _formBuilder: FormBuilder,
+  constructor(public dialogo: MatDialog, private _formBuilder: FormBuilder,private tiempoService:TiempoService,
     private motivoService: MotivoService, private loginservice: LoginService,
-    private poblacionService:PoblacionServiceService, private turnoService: TurnoService ) { }
+    private poblacionService:PoblacionServiceService, private turnoService: TurnoService) { }
 
   ngOnInit(): void {
     this.caragandoDatos();
+  }
+
+  onDateChange(event: any) {
+    this.selectedDate = event.value;
+    this.filterAndSortHorarios(this.selectedDate);
   }
 
   caragandoDatos() {
@@ -42,8 +52,9 @@ export class CitasComponent implements OnInit {
     this.poblaciones = [];
     this.usuario = this.loginservice.GetInformacionUsuario();
     this.motivoService.get("").subscribe(result => this.motivos = result);
-    this.poblacionService.get("").subscribe(result=>this.poblaciones=result);
-
+    this.poblacionService.get("").subscribe(result => this.poblaciones = result);
+    this.tiempoService.getTiempo("").subscribe(_ => this.listadoHorario = _);
+    this.minDate = new Date();
   }
 
   cargarDescripcion(descripcion: string) {
@@ -52,7 +63,9 @@ export class CitasComponent implements OnInit {
 
   firstFormGroup = this._formBuilder.group({
     motivo: ['', Validators.required],
-    poblacion: ['', Validators.required]
+    poblacion: ['', Validators.required],
+    selectedDate: [null, Validators.required],
+    horario: ['', Validators.required]
   });
 
 
@@ -77,8 +90,40 @@ export class CitasComponent implements OnInit {
     this.turno.motivo = this.firstFormGroup.controls["motivo"].value;
     this.turno.poblacion = this.firstFormGroup.controls["poblacion"].value;
     this.turno.refSolicitante = this.usuario.identificacion;
+    this.cargarHorario();
+  }
+
+  cargarHorario() {
+    var referencia = this.firstFormGroup.controls["horario"].value;
+    this.listadoHorario.forEach(element => {
+
+      if (element.refHorario == referencia) {
+        this.turno.tiempo = element;
+      }
+
+    });
   }
 
   isLinear = true;
+
+  filterAndSortHorarios(selectedDate: Date | null) {
+
+    if (this.selectedDate) {
+      const selectedDay = this.selectedDate.getDate();
+      const selectedMonth = this.selectedDate.getMonth();
+      const selectedYear = this.selectedDate.getFullYear();
+
+      this.filteredHorarios = this.listadoHorario.filter(horario => {
+        const horarioDate = new Date(horario.horaInicio);
+        return horarioDate.getDate() === selectedDay &&
+              horarioDate.getMonth() === selectedMonth &&
+              horarioDate.getFullYear() === selectedYear;
+      });
+
+      this.filteredHorarios.sort((a, b) => {
+        return a.horaInicio.getTime() - b.horaInicio.getTime();
+      });
+    }
+  }
 
 }

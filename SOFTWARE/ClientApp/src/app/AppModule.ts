@@ -58,7 +58,7 @@ import { ConsultarHistoricoComponent } from './Atencion/gestionarHistorico/consu
 import { HistoricoComponent } from './Atencion/gestionarHistorico/historico/historico.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
@@ -137,7 +137,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     provide: HTTP_INTERCEPTORS,
     useClass:AuthInterceptor,
     multi:true
-  }
+    },
+  { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }
   ],
   bootstrap: [AppComponent],
   entryComponents: [

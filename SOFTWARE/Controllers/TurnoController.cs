@@ -243,7 +243,6 @@ namespace SOFTWARE.Controllers
         }
 
 
-  
         // GET: api/Turno/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Turno>> GetTurno(int id)
@@ -252,7 +251,7 @@ namespace SOFTWARE.Controllers
           {
               return NotFound();
           }
-            var turno = await _context.Turno.FindAsync(id);
+            var turno = await _context.Turno.Include(t => t.Tiempo).FirstOrDefaultAsync(turno=>turno.Numero == id);
 
             if (turno == null)
             {
@@ -320,8 +319,16 @@ namespace SOFTWARE.Controllers
                     return BadRequest(error("Usuarios", "el horario epecificado no esta disponible"));
                 }
 
-                horarioExistente.Disponibilidad = false;
+                bool existeTurno = await _context.Turno
+                        .AnyAsync(t => t.Tiempo.HoraInicio.Date == turno.Tiempo.HoraInicio.Date &&
+                            turno.RefSolicitante == t.RefSolicitante);
 
+                if (existeTurno)
+                {
+                    return BadRequest(error("tiempo", "no puede solicitar mas de un turno por dia"));
+                }
+
+                horarioExistente.Disponibilidad = false;
                 // Asigna el horario asociado al turno
                 turno.Tiempo = horarioExistente;
             }
