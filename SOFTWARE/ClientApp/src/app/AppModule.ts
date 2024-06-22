@@ -15,12 +15,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { CitasComponent } from './Solicitante/citas/citas.component';
-import { TicketComponent } from './solicitante/ticket/ticket.component';
-import { CrearhorarioComponent } from './administrador/gestionhorario/crearhorario/crearhorario.component';
-import { ConsultarhorarioComponent } from './administrador/gestionhorario/consultarhorario/consultarhorario.component';
-import { GenrarreporteComponent } from './administrador/genrarreporte/genrarreporte.component';
-import { AtenderCitaComponent } from './atencion/atender-cita/atender-cita.component';
-import { ReportesComponent } from './atencion/reportes/reportes.component';
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -61,6 +55,12 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ConsultaTurnoComponent } from './Solicitante/consulta-turno/consulta-turno.component';
 import { InformacionTurnoUsuarioComponent } from './Solicitante/informacion-turno-usuario/informacion-turno-usuario.component';
+import { ConsultarhorarioComponent } from './Administrador/gestionhorario/consultarhorario/consultarhorario.component';
+import { CrearhorarioComponent } from './Administrador/gestionhorario/crearhorario/crearhorario.component';
+import { TicketComponent } from './Solicitante/ticket/ticket.component';
+import { GenrarreporteComponent } from './administrador/genrarreporte/genrarreporte.component';
+import { AtenderCitaComponent } from './Atencion/atender-cita/atender-cita.component';
+import { ReportesComponent } from './atencion/reportes/reportes.component';
 
 
 
@@ -73,6 +73,7 @@ import { InformacionTurnoUsuarioComponent } from './Solicitante/informacion-turn
     RegistrarAtencionComponent,
     AppComponent,
     RolesComponent,
+    ConsultarhorarioComponent,
     NavMenuComponent,
     ConsultaTurnoComponent,
     InformacionTurnoUsuarioComponent,
@@ -82,7 +83,6 @@ import { InformacionTurnoUsuarioComponent } from './Solicitante/informacion-turn
     DialogoConfirmacionComponent,
     TicketComponent,
     CrearhorarioComponent,
-    ConsultarhorarioComponent,
     GenrarreporteComponent,
     AtenderCitaComponent,
     ReportesComponent,
