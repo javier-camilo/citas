@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { HandleHttpErrorService } from 'src/app/@base/handle-http-error-service.service';
 import { DialogoConfirmacionComponent } from 'src/app/dialogo-confirmacion/dialogo-confirmacion.component';
 import { TurnoService } from 'src/app/servicios/turno.service';
+import { TiempoService } from 'src/app/servicios/tiempo.service';
+import { Tiempo } from 'src/app/Modelo/tiempo';
 
 @Component({
   selector: 'app-citas-ventanilla',
@@ -31,6 +33,12 @@ export class CitasVentanillaComponent implements OnInit {
   protected encontrado: boolean;
   protected hide = true;
 
+  protected selectedDate: Date | null = null;
+  protected minDate: Date;
+  protected listadoHorario: Tiempo[];
+  protected filteredHorarios: Tiempo[] = [];
+
+
   firstFormGroup = this._formBuilder.group({
     userName: ['', Validators.required],
     email: ['', Validators.required],
@@ -40,19 +48,56 @@ export class CitasVentanillaComponent implements OnInit {
     apellido: ['', Validators.required],
     phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
     motivo: ['', Validators.required],
-    poblacion: ['', Validators.required]
+    poblacion: ['', Validators.required],
+    selectedDate: [null, Validators.required],
+    horario: ['', Validators.required]
   });
 
 
   constructor(private loginService: LoginService, private _formBuilder: FormBuilder, private motivoService: MotivoService,
     private poblacionService: PoblacionServiceService, private dialog: MatDialog, private error: HandleHttpErrorService,
-              private turnoService: TurnoService) { }
+              private turnoService: TurnoService, private tiempoService:TiempoService) { }
 
   ngOnInit(): void {
 
     this.cargarDatos();
 
+  }
 
+  onDateChange(event: any) {
+    this.selectedDate = event.value;
+    this.filterAndSortHorarios(this.selectedDate);
+  }
+
+  filterAndSortHorarios(selectedDate: Date | null) {
+
+    if (this.selectedDate) {
+      const selectedDay = this.selectedDate.getDate();
+      const selectedMonth = this.selectedDate.getMonth();
+      const selectedYear = this.selectedDate.getFullYear();
+
+      this.filteredHorarios = this.listadoHorario.filter(horario => {
+        const horarioDate = new Date(horario.horaInicio);
+        return horarioDate.getDate() === selectedDay &&
+              horarioDate.getMonth() === selectedMonth &&
+              horarioDate.getFullYear() === selectedYear;
+      });
+
+      this.filteredHorarios.sort((a, b) => {
+        return a.horaInicio.getTime() - b.horaInicio.getTime();
+      });
+    }
+  }
+
+  cargarHorario() {
+    var referencia = this.firstFormGroup.controls["horario"].value;
+    this.listadoHorario.forEach(element => {
+
+      if (element.refHorario == referencia) {
+        this.turno.tiempo = element;
+      }
+
+    });
   }
 
 
@@ -85,7 +130,7 @@ export class CitasVentanillaComponent implements OnInit {
   }
 
   guardarTurnoUsuario() {
-    
+
     this.obtenerDatosUsuario();
     this.loginService.registrar(this.usuario," ").subscribe(result => {
       if (result != null) {
@@ -128,6 +173,8 @@ export class CitasVentanillaComponent implements OnInit {
     this.encontrado = false;
     this.motivoService.get("").subscribe(result => this.motivos = result);
     this.poblacionService.get("").subscribe(result => this.poblaciones = result);
+    this.tiempoService.getTiempo("").subscribe(_ => this.listadoHorario = _);
+    this.minDate = new Date();
   }
 
 
@@ -166,6 +213,7 @@ export class CitasVentanillaComponent implements OnInit {
     this.turno.motivo = this.firstFormGroup.controls["motivo"].value;
     this.turno.poblacion = this.firstFormGroup.controls["poblacion"].value;
     this.turno.refSolicitante = this.usuario.identificacion;
+    this.cargarHorario();
   }
 
   cargarDatosUsuario(usuarioDto: UserVista) {
