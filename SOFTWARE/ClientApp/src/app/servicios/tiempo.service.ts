@@ -39,6 +39,19 @@ export class TiempoService {
         );
   }
 
+  getTiempoAdministrador(operacion:string): Observable<Tiempo[]> {
+    return this.http.get<Tiempo[]>(this.baseUrl + 'api/Tiempo/listadoTiempoAdminsitrador')
+        .pipe(
+            tap(_ =>
+              {
+              if(operacion==="TiempoComponent")
+              this.handleErrorService.log('Datos del tiempo recibido');
+              }
+          ),
+            catchError(this.handleErrorService.handleError<Tiempo[]>('Consulta tiempo', undefined))
+        );
+  }
+
   post(horarioInput:HorarioInputModel): Observable<HorarioInputModel> {
 
     return this.http.post<HorarioInputModel>(this.baseUrl + 'api/Tiempo', horarioInput)

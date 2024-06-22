@@ -77,9 +77,12 @@ export class NavMenuComponent implements OnDestroy {
         { name: "Consultar Motivo", icon: "assignment", route: "/consultarMotivo" },
         { name: "Registrar Población", icon: "accessible", route: "/registrarPoblacion" },
         { name: "Consultar Población", icon: "accessibility_new", route: "/consultarPoblacion" },
+        { name: "Crear Horario", icon: "flip_to_back", route: "/crearHorario" },
+        { name: "consultar Horario", icon: "flip_to_front", route: "/consultarHorario"},
         { name: "Registrar Usuario", icon: "supervised_user_circle", route: "/registroAdministrador" },
         { name: "Gestionar permisos", icon: "supervised_user_circle", route: "/roles" },
-        { name: "Reporte", icon: "receipt", route: "/reporteAdministrador" }
+        { name: "Reporte", icon: "receipt", route: "/reporteAdministrador" },
+
       ];
 
       this.menu = dueño;

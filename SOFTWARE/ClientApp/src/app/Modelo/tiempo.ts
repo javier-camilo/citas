@@ -6,10 +6,10 @@ export class Tiempo {
 }
 
 export class HorarioInputModel{
-  fechaInicio: Date;
-  fechaFin: Date;
-  intervaloAtencion: number;
-  numeroMaximoTurnos: number;
+  fechaInicio: Date | null;
+  fechaFin: Date | null;
+  intervaloAtencion: number | null;
+  numeroMaximoTurnos: number | null;
 }
 
 

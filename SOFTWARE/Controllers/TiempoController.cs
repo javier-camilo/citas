@@ -70,6 +70,21 @@ namespace SOFTWARE.Controllers
             return await listado;
         }
 
+        [HttpGet]
+        [Route("listadoTiempoAdminsitrador")]
+        public async Task<ActionResult<IEnumerable<Tiempo>>> GetTiempoAdminsitrador()
+        {
+            if (_context.Tiempo == null)
+            {
+                return NotFound();
+            }
+
+            var listado = _context.Tiempo
+            .OrderBy(t => t.HoraInicio)
+            .ToListAsync();
+
+            return await listado;
+        }
 
         // GET: api/Tiempo/5
         [HttpGet("{id}")]

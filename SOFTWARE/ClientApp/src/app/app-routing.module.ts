@@ -29,6 +29,8 @@ import { CitasVentanillaComponent } from './Atencion/citas-ventanilla/citas-vent
 import { ConsultarHistoricoComponent } from './Atencion/gestionarHistorico/consultar-historico/consultar-historico.component';
 import { HistoricoComponent } from './Atencion/gestionarHistorico/historico/historico.component';
 import { ConsultaTurnoComponent } from './Solicitante/consulta-turno/consulta-turno.component';
+import { CrearhorarioComponent } from './Administrador/gestionhorario/crearhorario/crearhorario.component';
+import { ConsultarhorarioComponent } from './Administrador/gestionhorario/consultarhorario/consultarhorario.component';
 
 const routes: Routes = [
     {path: 'registro', component: RegistroComponent },
@@ -52,6 +54,8 @@ const routes: Routes = [
         { path: 'edicionMotivo/:codigoMotivo', component: EdicionMotivoComponent, canActivate:[OwnerRoleGuard]},
         { path: 'registrarMotivo', component: RegistrarMotivoComponent, canActivate:[OwnerRoleGuard]},
         { path: 'consultarMotivo', component: ConsultarMotivoComponent, canActivate: [OwnerRoleGuard] },
+        { path: 'crearHorario', component: CrearhorarioComponent, canActivate: [OwnerRoleGuard] },
+        { path: 'consultarHorario', component: ConsultarhorarioComponent, canActivate:[OwnerRoleGuard]},
         { path: 'registroAdministrador', component: RegistroAdminComponent, canActivate: [OwnerRoleGuard] },
         { path: 'reporteAdministrador', component: GenrarreporteComponent,canActivate: [OwnerRoleGuard] },
         { path: 'roles', component: RolesComponent, canActivate: [OwnerRoleGuard] },
