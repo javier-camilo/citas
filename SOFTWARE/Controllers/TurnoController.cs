@@ -349,7 +349,7 @@ namespace SOFTWARE.Controllers
 
                 if (existeTurno)
                 {
-                    return BadRequest(error("tiempo", "no puede solicitar mas de un turno por dia"));
+                    return BadRequest(error("tiempo", "el usuario ya ha solicitado turnos para este dia, no puede solicitar mas de un turno por dia"));
                 }
 
                 horarioExistente.Disponibilidad = false;
