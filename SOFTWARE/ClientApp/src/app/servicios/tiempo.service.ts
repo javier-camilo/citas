@@ -52,12 +52,12 @@ export class TiempoService {
         );
   }
 
-  post(horarioInput:HorarioInputModel): Observable<HorarioInputModel> {
+  post(horarioInput:HorarioInputModel): Observable<Tiempo[]> {
 
-    return this.http.post<HorarioInputModel>(this.baseUrl + 'api/Tiempo', horarioInput)
+    return this.http.post<Tiempo[]>(this.baseUrl + 'api/Tiempo', horarioInput)
         .pipe(
             tap(_ => this.handleErrorService.log('Guardado con exito')),
-            catchError(this.handleErrorService.handleError<HorarioInputModel>('Registrar tiempo',undefined))
+            catchError(this.handleErrorService.handleError<Tiempo[]>('Registrar tiempo',undefined))
         );
   }
 

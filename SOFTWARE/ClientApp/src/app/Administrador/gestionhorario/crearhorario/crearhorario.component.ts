@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { HandleHttpErrorService } from 'src/app/@base/handle-http-error-service.service';
-import { HorarioInputModel } from 'src/app/Modelo/tiempo';
+import { HorarioInputModel, Tiempo } from 'src/app/Modelo/tiempo';
 import { DialogoConfirmacionComponent } from 'src/app/dialogo-confirmacion/dialogo-confirmacion.component';
 import { TiempoService } from 'src/app/servicios/tiempo.service';
 
@@ -31,9 +31,7 @@ export class CrearhorarioComponent implements OnInit {
     numeroMaximoTurnos: [null, [Validators.required, Validators.pattern('^[0-9]+$')]]
   });
 
-  onDateChange(event: any) {
 
-  }
 
   caragandoDatos() {
     this.horarioInputModel = new HorarioInputModel();
@@ -51,9 +49,9 @@ export class CrearhorarioComponent implements OnInit {
 
     dialogo.afterClosed().subscribe(result => {
       if (result) {
+        console.log('Datos a enviar:', this.horarioInputModel);
         this.cargarDatosHorario();
         this.tiempoService.post(this.horarioInputModel).subscribe();
-        this.limpiar();
       }
     }
     );
@@ -61,8 +59,13 @@ export class CrearhorarioComponent implements OnInit {
   }
 
   cargarDatosHorario() {
-    this.horarioInputModel.fechaInicio = this.firstFormGroup.controls["fechaInicio"].value;
-    this.horarioInputModel.fechaFin = this.firstFormGroup.controls["fechaFin"].value;
+
+      this.horarioInputModel = {
+        fechaInicio: this.firstFormGroup.controls['fechaInicio'].value,
+        fechaFin: this.firstFormGroup.controls['fechaFin'].value,
+        intervaloAtencion: this.firstFormGroup.controls['intervaloAtencion'].value,
+        numeroMaximoTurnos: this.firstFormGroup.controls['numeroMaximoTurnos'].value
+      };
     this.horarioInputModel.numeroMaximoTurnos = this.firstFormGroup.controls["numeroMaximoTurnos"].value;
     this.horarioInputModel.intervaloAtencion = this.firstFormGroup.controls["intervaloAtencion"].value;
   }

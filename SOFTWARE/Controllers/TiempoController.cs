@@ -143,6 +143,11 @@ namespace SOFTWARE.Controllers
         public async Task<ActionResult<IEnumerable<Tiempo>>> PostTiempo(HorarioInputModel inputModel)
         {
 
+            Console.WriteLine($"Received FechaInicio: {inputModel.FechaInicio}");
+            Console.WriteLine($"Received FechaFin: {inputModel.FechaFin}");
+            Console.WriteLine($"Received IntervaloAtencion: {inputModel.IntervaloAtencion}");
+            Console.WriteLine($"Received NumeroMaximoTurnos: {inputModel.NumeroMaximoTurnos}");
+            
             DateTime nuevaFechaHora = new DateTime(inputModel.FechaInicio.Year, inputModel.FechaInicio.Month, inputModel.FechaInicio.Day, 8, 00, 0);
             DateTime fechaInicio = nuevaFechaHora;
             DateTime fechaFin = inputModel.FechaFin;
@@ -181,7 +186,7 @@ namespace SOFTWARE.Controllers
             }
 
 
-            while (fechaInicio <= fechaFin)
+            while (fechaInicio.Date <= fechaFin.Date)
             {
                 //excluir domingos
                 if (fechaInicio.DayOfWeek != DayOfWeek.Sunday)
