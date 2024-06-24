@@ -142,17 +142,13 @@ namespace SOFTWARE.Controllers
         [HttpPost]
         public async Task<ActionResult<IEnumerable<Tiempo>>> PostTiempo(HorarioInputModel inputModel)
         {
-
-            Console.WriteLine($"Received FechaInicio: {inputModel.FechaInicio}");
-            Console.WriteLine($"Received FechaFin: {inputModel.FechaFin}");
-            Console.WriteLine($"Received IntervaloAtencion: {inputModel.IntervaloAtencion}");
-            Console.WriteLine($"Received NumeroMaximoTurnos: {inputModel.NumeroMaximoTurnos}");
             
             DateTime nuevaFechaHora = new DateTime(inputModel.FechaInicio.Year, inputModel.FechaInicio.Month, inputModel.FechaInicio.Day, 8, 00, 0);
             DateTime fechaInicio = nuevaFechaHora;
-            DateTime fechaFin = inputModel.FechaFin;
+            DateTime fechaFin = inputModel.FechaFin.AddDays(1);
             TimeSpan intervaloAtencion = TimeSpan.FromMinutes(inputModel.IntervaloAtencion);
             int numeroMaximoAtencion = inputModel.NumeroMaximoTurnos;
+
 
             // Define el horario laboral (de 8:00 AM a 6:00 PM)
             TimeSpan horaInicioLaboral = new TimeSpan(8, 0, 0); // 8:00 AM
@@ -188,9 +184,11 @@ namespace SOFTWARE.Controllers
 
             while (fechaInicio.Date <= fechaFin.Date)
             {
+                Console.WriteLine($"entro");
                 //excluir domingos
                 if (fechaInicio.DayOfWeek != DayOfWeek.Sunday)
                 {
+
                     for (int i = 0; i < numeroMaximoAtencion; i++)
                     {
 
@@ -216,12 +214,12 @@ namespace SOFTWARE.Controllers
 
                         if (horaFin <= fechaFin && horaInicio.TimeOfDay >= horaInicioLaboral && horaFin.TimeOfDay <= horaFinLaboral)
                         {
+                            Console.WriteLine($"entro al registro");
                             var horario = new Tiempo
                             {
                                 HoraInicio = horaInicio,
                                 HoraFinalizacion = horaFin,
                                 Disponibilidad = true,
-                                // Otros campos del horario si los tienes
                             };
 
                             horarios.Add(horario);
