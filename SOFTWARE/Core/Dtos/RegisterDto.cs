@@ -15,6 +15,7 @@ namespace SOFTWARE.Core.Dtos
 
         [Required(ErrorMessage = "Email es requerido")]
         [EmailAddress(ErrorMessage = "debe digitar un email valido")]
+        [MinLength(4, ErrorMessage = "El nombre debe tener al menos 4 caracteres")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "contraseña es requerido")]

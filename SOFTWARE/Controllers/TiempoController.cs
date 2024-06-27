@@ -184,7 +184,7 @@ namespace SOFTWARE.Controllers
 
             while (fechaInicio.Date <= fechaFin.Date)
             {
-                Console.WriteLine($"entro");
+
                 //excluir domingos
                 if (fechaInicio.DayOfWeek != DayOfWeek.Sunday)
                 {
@@ -214,7 +214,7 @@ namespace SOFTWARE.Controllers
 
                         if (horaFin <= fechaFin && horaInicio.TimeOfDay >= horaInicioLaboral && horaFin.TimeOfDay <= horaFinLaboral)
                         {
-                            Console.WriteLine($"entro al registro");
+                            
                             var horario = new Tiempo
                             {
                                 HoraInicio = horaInicio,
